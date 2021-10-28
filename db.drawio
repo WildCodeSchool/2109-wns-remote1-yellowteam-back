@@ -1,0 +1,31 @@
+<mxfile host="65bd71144e">
+    <diagram id="ERd-wVXzLQdruX_8pRjZ" name="Page-1">
+        <mxGraphModel dx="883" dy="628" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="6" value="User" style="swimlane;" vertex="1" parent="1">
+                    <mxGeometry x="200" y="160" width="270" height="290" as="geometry"/>
+                </mxCell>
+                <mxCell id="26" value="id&#10;&#10;uuid&#10;&#10;name&#10;&#10;email&#10;&#10;password&#10;&#10;role_admin&#10;&#10;role_dev&#10;&#10;role_cto&#10;&#10;createdAt            " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="6">
+                    <mxGeometry x="10" y="40" width="70" height="360" as="geometry"/>
+                </mxCell>
+                <mxCell id="28" value="number&#10;&#10;string&#10;&#10;string&#10;&#10;string&#10;&#10;string&#10;&#10;boolean&#10;&#10;boolean&#10;&#10;boolean&#10;&#10;datetime" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="6">
+                    <mxGeometry x="180" y="40" width="80" height="260" as="geometry"/>
+                </mxCell>
+                <mxCell id="27" value="PrimaryKey&#10;           " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="1">
+                    <mxGeometry x="290" y="200" width="80" height="220" as="geometry"/>
+                </mxCell>
+                <mxCell id="29" value="Project" style="swimlane;" vertex="1" parent="1">
+                    <mxGeometry x="540" y="160" width="270" height="280" as="geometry"/>
+                </mxCell>
+                <mxCell id="30" value="id&#10;&#10;uuid&#10;&#10;name&#10;&#10;email&#10;&#10;password&#10;&#10;role_admin&#10;&#10;role_dev&#10;&#10;role_cto            " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="29">
+                    <mxGeometry x="10" y="40" width="70" height="360" as="geometry"/>
+                </mxCell>
+                <mxCell id="31" value="number&#10;&#10;string&#10;&#10;string&#10;&#10;string&#10;&#10;string&#10;&#10;boolean&#10;&#10;boolean&#10;&#10;boolean" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="29">
+                    <mxGeometry x="180" y="40" width="80" height="220" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
