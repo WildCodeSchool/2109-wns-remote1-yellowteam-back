@@ -1,0 +1,135 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String         @id @default(uuid())
+  name          String
+  email         String
+  password      String
+  isDisabled    Boolean
+  role          Role[]
+  projects      Project[]
+  task          Task[]
+  files         File[]
+  comments      Comment[]
+  invitation    Invitation[]
+  notifications Notification[]
+}
+
+model Project {
+  id                         String         @id @default(uuid())
+  title                      String
+  description                String
+  private                    Boolean
+  enable                     Boolean
+  status_project             Status
+  initial_time_spent_estimee DateTime
+  total_time_spent           DateTime
+  start_date                 DateTime
+  end_date                   DateTime
+  users                      User[]
+  tasks                      Task[]
+  files                      File[]
+  comments                   Comment[]
+  invitations                Invitation[]
+  notifications              Notification[]
+}
+
+model Task {
+  id                         String         @id @default(uuid())
+  title                      String
+  description                String
+  private                    Boolean
+  enable                     Boolean
+  status_task                Status
+  initial_time_spent_estimee DateTime
+  total_time_spent           DateTime
+  start_date                 DateTime
+  end_date                   DateTime
+  due_date                   DateTime
+  user                       User           @relation(fields: [userId], references: [id])
+  userId                     String
+  project                    Project        @relation(fields: [projectId], references: [id])
+  projectId                  String
+  files                      File[]
+  comments                   Comment[]
+  notifications              Notification[]
+}
+
+model File {
+  id        String  @id @default(uuid())
+  name      String
+  path      String
+  size      Int
+  type      String
+  user      User    @relation(fields: [userId], references: [id])
+  userId    String
+  project   Project @relation(fields: [projectId], references: [id])
+  projectId String
+  task      Task    @relation(fields: [taskId], references: [id])
+  taskId    String
+  enable    Boolean
+}
+
+model Comment {
+  id        String  @id @default(uuid())
+  enable    Boolean
+  content   String
+  user      User    @relation(fields: [userId], references: [id])
+  userId    String
+  project   Project @relation(fields: [projectId], references: [id])
+  projectId String
+  task      Task    @relation(fields: [taskId], references: [id])
+  taskId    String
+}
+
+model Invitation {
+  id        String            @id @default(uuid())
+  status    Status_Invitation
+  email     String
+  project   Project           @relation(fields: [projectId], references: [id])
+  projectId String
+  user      User              @relation(fields: [userId], references: [id])
+  userId    String
+}
+
+model Notification {
+  id        String  @id @default(uuid())
+  enable    Boolean
+  title     String
+  content   String
+  user      User    @relation(fields: [userId], references: [id])
+  userId    String
+  project   Project @relation(fields: [projectId], references: [id])
+  projectId String
+  task      Task    @relation(fields: [taskId], references: [id])
+  taskId    String
+}
+
+enum Status_Invitation {
+  PENDING
+  ACCEPTED
+  REJECTED
+}
+
+enum Status {
+  IN_PROGRESS
+  NOT_STARTED
+  FIHISHED
+}
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  MANAGER
+  USER
+}
