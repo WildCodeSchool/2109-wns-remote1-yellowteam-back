@@ -22,7 +22,7 @@ services:
 
   ytask:
     build:
-      context: ./src
+      context: ./
     ports:
       - '3000:3000'
 
@@ -35,3 +35,4 @@ services:
 
 volumes:
   postgres:
+  

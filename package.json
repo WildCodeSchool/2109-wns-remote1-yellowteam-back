@@ -1,10 +1,10 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.ts",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev src/index",
+    "dev": "ts-node-dev ./src/index",
     "lint": "eslint --ext .ts,.tsx --fix src/",
     "prettify": "prettier --write src/",
     "fmt-lint": "yarn run prettify && yarn run lint",
