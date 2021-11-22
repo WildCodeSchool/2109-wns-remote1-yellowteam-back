@@ -1,9 +1,14 @@
-import dotenv from 'dotenv';
+import server from './server';
 import app from './app';
-
-dotenv.config();
 
 const { PORT } = process.env;
 
-// eslint-disable-next-line no-console
-app.listen(PORT, () => console.log(`listening on ${PORT || 3000}`));
+(async () => {
+  await server.start();
+  server.applyMiddleware({ app });
+  app.listen(PORT || 4000, () => {
+    console.log(`Server running on ${PORT || 4000}.`);
+  });
+
+  console.log(`GraphQL running on ${server.graphqlPath}.`);
+})();
