@@ -4,6 +4,10 @@ import { User } from '.prisma/client';
 type UserWithoutPassword = Omit<User, 'password'>;
 
 export default interface UserHandlers {
-  getAll: RequestHandler<Record<string, never>, UserWithoutPassword[], null>;
+  getAll: RequestHandler<
+    Record<string, never>,
+    UserWithoutPassword[] | API_ERROR,
+    null
+  >;
   getOne: RequestHandler<{ id: string }, UserWithoutPassword, null>;
 }

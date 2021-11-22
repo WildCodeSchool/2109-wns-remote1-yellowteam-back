@@ -1,24 +1,23 @@
+/* eslint-disable no-console */
 import prisma from '../../../prisma/prismaClient';
 import UserHandlers from './interfaces';
 
-/**
- * GET /users
- * @summary View all users
- * @tags users
- * @return {array<DisplayUser>} 200 - User list successfully retrieved
- */
 const getAll: UserHandlers['getAll'] = async (req, res, next) => {
   try {
     const users = await prisma.user.findMany();
-    // res.setHeader("*");
-    res.status(200).json(
-      users.map((user) => {
-        const { password, ...rest } = user;
-        return rest;
-      })
-    );
+
+    const usersWithoutPassword = users.map((user) => {
+      const { password, ...rest } = user;
+      return rest;
+    });
+
+    res.status(200).json(usersWithoutPassword);
   } catch (error) {
-    res.status(500).json({error});
+    console.log(error);
+    res.status(500).json({
+      message: 'unknown error caused by a request in user handler',
+      type: 'INTERNAL_SERVER_ERROR',
+    });
     next(error);
   }
 };
