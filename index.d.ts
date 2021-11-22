@@ -1,4 +1,4 @@
-interface API_ERROR {
+interface ApiError {
   message: string;
   type: string;
 }
