@@ -6,7 +6,7 @@ type UserWithoutPassword = Omit<User, 'password'>;
 export default interface UserHandlers {
   getAll: RequestHandler<
     Record<string, never>,
-    UserWithoutPassword[] | API_ERROR,
+    UserWithoutPassword[] | ApiError,
     null
   >;
   getOne: RequestHandler<{ id: string }, UserWithoutPassword, null>;
