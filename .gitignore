@@ -6,3 +6,4 @@ tmp/
 temp/
 dev.sqlite3
 .env
+.TODO
