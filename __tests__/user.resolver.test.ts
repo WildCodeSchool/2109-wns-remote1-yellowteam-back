@@ -61,8 +61,6 @@ describe('server start and return correct values from queries', () => {
 
     expect(AllUsersResult.errors).toBeUndefined();
     expect(AllUsersResult.data!.users).toEqual(allPrismaUsers);
-
-    console.log('test passed successfully 👍');
   });
 
   test('query GET_USER return one user from database', async () => {
@@ -79,4 +77,5 @@ describe('server start and return correct values from queries', () => {
     expect(OneUserResult.errors).toBeUndefined();
     expect(OneUserResult.data!.user).toEqual(user);
   });
+  console.log('user test successfull 👍');
 });
