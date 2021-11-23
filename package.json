@@ -9,8 +9,9 @@
     "prettify": "prettier --write src/",
     "fmt-lint": "yarn run prettify && yarn run lint",
     "start": "ts-node ./src/index.ts",
-    "test": "dotenv -e .env.test jest --watch ",
-    "migrate:postgres": "dotenv -e .env.test -- npx prisma migrate dev --name postgres-init && dotenv -e .env -- npx prisma migrate dev --name postgres-init"
+    "test": "dotenv -e .env.test jest --watch && dotenv -e .env.test -- npx prisma migrate reset -f",
+    "migrate:postgres": "dotenv -e .env.test -- npx prisma migrate dev --name postgres-init && dotenv -e .env -- npx prisma migrate dev --name postgres-init",
+    "reset:postgres": "dotenv -e .env.test -- npx prisma migrate reset && dotenv -e .env -- npx prisma migrate reset"
   },
   "dependencies": {
     "@prisma/client": "^3.4.1",
