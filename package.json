@@ -8,7 +8,7 @@
     "lint": "eslint --ext .ts,.tsx --fix src/",
     "prettify": "prettier --write src/",
     "fmt-lint": "yarn run prettify && yarn run lint",
-    "start": "ts-node ./src/index.ts",
+    "start": "npx prisma generate && ts-node ./src/index.ts",
     "test": "dotenv -e .env.test jest --watch && dotenv -e .env.test -- npx prisma migrate reset -f",
     "migrate:postgres": "dotenv -e .env.test -- npx prisma migrate dev --name postgres-init && dotenv -e .env -- npx prisma migrate dev --name postgres-init",
     "reset:postgres": "dotenv -e .env.test -- npx prisma migrate reset && dotenv -e .env -- npx prisma migrate reset"
@@ -25,7 +25,6 @@
     "express": "^4.17.1",
     "faker": "^5.5.3",
     "graphql": "^16.0.1",
-    "graphql-import": "^1.0.2",
     "prisma": "^3.4.1",
     "ts-jest": "^27.0.7"
   },
