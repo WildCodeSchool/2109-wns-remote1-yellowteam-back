@@ -7,3 +7,4 @@ temp/
 dev.sqlite3
 .env
 .TODO
+package-lock.json

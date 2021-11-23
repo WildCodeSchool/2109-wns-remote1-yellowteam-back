@@ -1,15 +1,30 @@
-import express from 'express';
-import cors from 'cors';
-import { port } from './settings';
+/* eslint-disable no-console */
+import dotenv from 'dotenv';
+import server from './server';
+import app from './app';
 
-const app = express();
-app.use(cors());
-app.use(express.json());
+dotenv.config();
+const { PORT } = process.env;
 
-app.get('/api/dummy-endpoint', (req, res) =>
-  res.send({
-    message: 'Hello from the backend',
-  })
-);
+(async () => {
+  await server.start();
+  server.applyMiddleware({
+    app,
+    cors: {
+      origin: '*',
+    },
+  });
 
-app.listen(port, () => console.log(`listening on ${port}`));
+  const serverStartLogs = () => {
+    console.log(`Server running on http://localhost:${PORT || 4000}/ 🪐🌶️. `);
+    console.log(
+      `GraphQL running on http://localhost:5000${server.graphqlPath}. 👍🐉`
+    );
+  };
+
+  await new Promise((resolve) =>
+    app.listen(PORT || 4000, () => {
+      resolve(serverStartLogs());
+    })
+  );
+})();
