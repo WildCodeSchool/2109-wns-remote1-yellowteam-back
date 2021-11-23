@@ -29,30 +29,32 @@ query oneUser($id: ID!){
   }
 }`;
 
+const fakeUser = {
+  email: faker.internet.email(),
+  name: faker.name.findName(),
+  password: faker.internet.password(),
+  isDisabled: false,
+  role: ['USER'] as Role[],
+};
+
+const fakeUsers = new Array(20).fill('').map(() => fakeUser);
+
 describe('server start and return correct values from queries', () => {
   server.start();
 
-  test('server start and return an array of users', async () => {
-    const fakeUsers = new Array(20).fill('').map(() => ({
-      name: faker.name.findName(),
-      email: faker.internet.email(),
-      password: faker.internet.password(),
-      isDisabled: false,
-      role: ['USER', 'ADMIN', 'MANAGER', 'SUPER_ADMIN'][
-        Math.floor(Math.random() * 4)
-      ] as Role,
-    }));
-
+  test('query GET_USERS return an array with all users from database', async () => {
+    // create new users in database
     await Promise.all(
-      fakeUsers.map((user) =>
+      fakeUsers.map((newuser) =>
         prismaClient.user.create({
-          data: user,
+          data: newuser,
         })
       )
     );
-
+    // get all users from database
     const allPrismaUsers = await prismaClient.user.findMany();
 
+    // execute GET_USERS query and get response
     const AllUsersResult = await server.executeOperation({
       query: GET_USERS,
     });
@@ -63,15 +65,10 @@ describe('server start and return correct values from queries', () => {
     console.log('test passed successfully 👍');
   });
 
-  test('server start and return one user', async () => {
+  test('query GET_USER return one user from database', async () => {
+    // create one user in database
     const user = await prismaClient.user.create({
-      data: {
-        email: faker.internet.email(),
-        name: faker.name.findName(),
-        password: faker.internet.password(),
-        isDisabled: false,
-        role: ['USER'],
-      },
+      data: fakeUser,
     });
 
     const OneUserResult = await server.executeOperation({
@@ -80,15 +77,6 @@ describe('server start and return correct values from queries', () => {
     });
 
     expect(OneUserResult.errors).toBeUndefined();
-    expect(OneUserResult.data).toEqual({
-      user: {
-        email: user.email,
-        name: user.name,
-        id: user.id,
-        password: user.password,
-        isDisabled: user.isDisabled,
-        role: user.role,
-      },
-    });
+    expect(OneUserResult.data!.user).toEqual(user);
   });
 });
