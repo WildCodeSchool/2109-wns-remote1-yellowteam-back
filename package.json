@@ -19,7 +19,6 @@
     "apollo-server": "^3.5.0",
     "apollo-server-core": "^3.5.0",
     "apollo-server-express": "^3.5.0",
-    "apollo-server-testing": "^2.25.3",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "dotenv-cli": "^4.1.0",
