@@ -1,13 +1,17 @@
 /* eslint-disable no-console */
+import 'reflect-metadata';
 import dotenv from 'dotenv';
-import server from './server';
+import createServer from './server';
 import app from './app';
 
 dotenv.config();
 const { PORT } = process.env;
 
 (async () => {
+  const server = await createServer();
+
   await server.start();
+
   server.applyMiddleware({
     app,
     cors: {

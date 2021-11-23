@@ -5,6 +5,10 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator typegraphql {
+  provider = "typegraphql-prisma"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -13,8 +17,8 @@ datasource db {
 
 model User {
   id            String         @id @default(uuid())
-  name          String
-  email         String
+  name          String         @unique
+  email         String         @unique
   password      String
   isDisabled    Boolean
   role          Role[]

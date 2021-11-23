@@ -1,8 +1,10 @@
 /* eslint-disable no-console */
+import 'reflect-metadata';
 import faker from 'faker';
+import { ApolloServer } from 'apollo-server-express';
 import { Role } from '.prisma/client';
 import prismaClient from '../prisma/prismaClient';
-import server from '../src/server';
+import createServer from '../src/server';
 
 const GET_USERS = `
 query getUsers{
@@ -18,8 +20,8 @@ query getUsers{
 `;
 
 const GET_USER = `
-query oneUser($id: ID!){
-  user(id: $id){
+query oneUser($where: UserWhereUniqueInput!){
+  user(where: $where){
     id
     name
     email
@@ -40,7 +42,11 @@ const fakeUser = {
 const fakeUsers = new Array(20).fill('').map(() => fakeUser);
 
 describe('server start and return correct values from queries', () => {
-  server.start();
+  let server: ApolloServer;
+  beforeAll(async () => {
+    server = await createServer();
+    await server.start();
+  });
 
   it('should execute the query GET_USERS return an array with all users from database', async () => {
     // create new users in database
@@ -71,7 +77,7 @@ describe('server start and return correct values from queries', () => {
 
     const OneUserResult = await server.executeOperation({
       query: GET_USER,
-      variables: { id: user.id },
+      variables: { where: { id: user.id } },
     });
 
     expect(OneUserResult.errors).toBeUndefined();
