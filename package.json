@@ -8,7 +8,9 @@
     "lint": "eslint --ext .ts,.tsx --fix src/",
     "prettify": "prettier --write src/",
     "fmt-lint": "yarn run prettify && yarn run lint",
-    "start": "ts-node ./src/index.ts"
+    "start": "ts-node ./src/index.ts",
+    "test": "dotenv -e .env.test jest --watch ",
+    "migrate:postgres": "dotenv -e .env.test -- npx prisma migrate dev --name postgres-init && dotenv -e .env -- npx prisma migrate dev --name postgres-init"
   },
   "dependencies": {
     "@prisma/client": "^3.4.1",
@@ -16,14 +18,20 @@
     "apollo-server": "^3.5.0",
     "apollo-server-core": "^3.5.0",
     "apollo-server-express": "^3.5.0",
+    "apollo-server-testing": "^2.25.3",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
+    "dotenv-cli": "^4.1.0",
     "express": "^4.17.1",
+    "faker": "^5.5.3",
     "graphql": "^16.0.1",
     "graphql-import": "^1.0.2",
-    "prisma": "^3.4.1"
+    "prisma": "^3.4.1",
+    "ts-jest": "^27.0.7"
   },
   "devDependencies": {
+    "@types/faker": "^5.5.9",
+    "@types/jest": "^27.0.3",
     "@types/node": "^16.11.6",
     "@typescript-eslint/eslint-plugin": "^4.29.3",
     "@typescript-eslint/parser": "^4.29.3",
@@ -33,6 +41,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^27.3.1",
     "prettier": "^2.3.2",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.4.4"

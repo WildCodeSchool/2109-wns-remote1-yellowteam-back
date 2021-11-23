@@ -1,7 +1,9 @@
 /* eslint-disable no-console */
+import dotenv from 'dotenv';
 import server from './server';
 import app from './app';
 
+dotenv.config();
 const { PORT } = process.env;
 
 (async () => {

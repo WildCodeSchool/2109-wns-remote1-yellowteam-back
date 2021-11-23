@@ -7,6 +7,13 @@ const userTypedef = gql`
     email: String!
     password: String!
     isDisabled: Boolean!
+    role: [UserRole]
+  }
+  enum UserRole {
+    SUPER_ADMIN
+    ADMIN
+    MANAGER
+    USER
   }
   input UserInput {
     name: String!
