@@ -42,7 +42,7 @@ const fakeUsers = new Array(20).fill('').map(() => fakeUser);
 describe('server start and return correct values from queries', () => {
   server.start();
 
-  test('query GET_USERS return an array with all users from database', async () => {
+  it('should execute the query GET_USERS return an array with all users from database', async () => {
     // create new users in database
     await Promise.all(
       fakeUsers.map((newuser) =>
@@ -63,7 +63,7 @@ describe('server start and return correct values from queries', () => {
     expect(AllUsersResult.data!.users).toEqual(allPrismaUsers);
   });
 
-  test('query GET_USER return one user from database', async () => {
+  it('should execute the query GET_USER return one user from database', async () => {
     // create one user in database
     const user = await prismaClient.user.create({
       data: fakeUser,
