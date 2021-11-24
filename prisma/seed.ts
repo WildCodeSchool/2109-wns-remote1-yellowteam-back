@@ -160,6 +160,36 @@ const seed = async () => {
     name: 'Notification Tasks',
   });
 
+
+    // PROJECT NOTIFICATIONS
+    console.log('🌱 Generate 10 Notifications ...');
+    const createdProjectNotification = await Promise.all(
+      fakeUserNotifications.map((newNotificationData) =>
+        prisma.notification.create({
+          data: {
+            ...newNotificationData,
+            senderId:
+              createdManagers[Math.floor(Math.random() * createdManagers.length)]
+                .id,
+            type: 'PROJECT',
+            status: randomNotificationStatus(),
+            reference_id:
+              createdProjects[Math.floor(Math.random() * createdProjects.length)].id,
+            user: {
+              connect: {
+                id: createdUsers[Math.floor(Math.random() * createdUsers.length)]
+                  .id,
+              },
+            },
+          },
+        })
+      )
+    );
+    logGenerated({
+      entity: createdProjectNotification,
+      name: 'Notification Tasks',
+    });
+
   // TASKS COMMENTS
   console.log('🌱 Generate 200 Comments in Tasks ...');
   const createdTasksComments = await Promise.all(
