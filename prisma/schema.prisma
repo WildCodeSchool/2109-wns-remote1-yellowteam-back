@@ -28,8 +28,7 @@ model User {
   task_comments    Task_Comment[]
   project_comments Project_Comment[]
   invitations      Invitation[]
-  task_notifications    Task_Notification[]
-  project_notifications Project_Notification[]
+  notifications    Notification[]
 }
 
 model Project {
@@ -49,7 +48,6 @@ model Project {
   files            File[]
   comments         Project_Comment[]
   invitations      Invitation[]
-  notifications    Project_Notification[]
 }
 
 model Task {
@@ -68,7 +66,6 @@ model Task {
   projectId        String
   files            File[]
   comments         Task_Comment[]
-  notifications    Task_Notification[]
 }
 
 model Task_Comment {
@@ -116,26 +113,17 @@ model Invitation {
   userId    String
 }
 
-model Task_Notification {
+model Notification {
   id         String  @id @default(uuid())
   is_disabled Boolean
   title      String
   content    String
   user       User    @relation(fields: [userId], references: [id])
   userId     String
-  task       Task    @relation(fields: [taskId], references: [id])
-  taskId     String
-}
-
-model Project_Notification {
-  id         String  @id @default(uuid())
-  is_disabled Boolean
-  title      String
-  content    String
-  user       User    @relation(fields: [userId], references: [id])
-  userId     String
-  project    Project @relation(fields: [projectId], references: [id])
-  projectId  String
+  type       Type_Notification
+  status     Status_Notification
+  reference_id String
+  senderId   String
 }
 
 enum Status_Invitation {
@@ -148,9 +136,17 @@ enum Status {
   NOT_STARTED
   FIHISHED
 }
+enum Status_Notification {
+  READ
+  UNREAD
+}
 enum Role {
   SUPER_ADMIN
   ADMIN
   MANAGER
   USER
+}
+enum Type_Notification {
+  PROJECT 
+  TASK
 }

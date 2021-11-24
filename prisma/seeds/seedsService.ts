@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon';
 import { Status } from '.prisma/client';
+import { Status_Notification } from '@prisma/client';
 
 /* eslint-disable no-console */
 export const startDate = () => {
@@ -27,6 +28,12 @@ export const dueDate = (end: DateTime) => {
 export const randomStatus = () => {
   const status: Status[] = ['IN_PROGRESS', 'NOT_STARTED', 'FIHISHED'];
   return status[Math.floor(Math.random() * status.length)] as Status;
+};
+export const randomNotificationStatus = () => {
+  const status: Status_Notification[] = ['READ', 'UNREAD'];
+  return status[
+    Math.floor(Math.random() * status.length)
+  ] as Status_Notification;
 };
 
 export const logGenerated = ({

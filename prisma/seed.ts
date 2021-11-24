@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { PrismaClient } from '@prisma/client';
-import { logGenerated } from './seeds/seedsService';
+import { logGenerated, randomNotificationStatus } from './seeds/seedsService';
 import newProject from './seeds/createProjectSeed';
 import newUser from './seeds/createUserSeed';
 import newTask from './seeds/createTaskSeed';
@@ -8,7 +8,7 @@ import { newAdmin, newSuperAdmin } from './seeds/createAdmins';
 import newManager from './seeds/createManagerSeed';
 import newTaskComment from './seeds/createTaskCommentSeed';
 import newProjectComment from './seeds/createProjectCommentSeed';
-import newTaskNotification from './seeds/createTaskNotificationSeed';
+import newNotification from './seeds/createUserNotification';
 
 const prisma = new PrismaClient();
 
@@ -21,6 +21,10 @@ const seed = async () => {
   const fakeProjectsComments = new Array(200)
     .fill('')
     .map(() => newProjectComment());
+
+  const fakeUserNotifications = new Array(200)
+    .fill('')
+    .map(() => newNotification());
 
   console.log('🌱 Generate 1 admin ...');
   await prisma.user.create({
@@ -126,6 +130,37 @@ const seed = async () => {
   );
 
   logGenerated({ entity: createdTasks, name: 'Tasks' });
+
+  // TASKS NOTIFICATIONS
+  console.log('🌱 Generate 10 Notifications ...');
+  const createdUserTaskNotifications = await Promise.all(
+    fakeUserNotifications.map((newNotificationData) =>
+      prisma.notification.create({
+        data: {
+          ...newNotificationData,
+          senderId:
+            createdManagers[Math.floor(Math.random() * createdManagers.length)]
+              .id,
+          type: 'TASK',
+          status: randomNotificationStatus(), 
+            ,
+          
+          reference_id:
+            createdTasks[Math.floor(Math.random() * createdTasks.length)].id,
+          user: {
+            connect: {
+              id: createdUsers[Math.floor(Math.random() * createdUsers.length)]
+                .id,
+            },
+          },
+        },
+      })
+    )
+  );
+  logGenerated({
+    entity: createdUserTaskNotifications,
+    name: 'Notification Tasks',
+  });
 
   // TASKS COMMENTS
   console.log('🌱 Generate 200 Comments in Tasks ...');
