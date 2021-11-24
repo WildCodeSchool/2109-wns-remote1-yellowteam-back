@@ -1,95 +1,26 @@
 /* eslint-disable no-console */
-import { PrismaClient, Role } from '@prisma/client';
-import faker from 'faker';
-import bcrypt from 'bcrypt';
-import {
-  dueDate,
-  endDate,
-  logGenerated,
-  randomStatus,
-  startDate,
-} from './seedsService';
+import { PrismaClient } from '@prisma/client';
+import { logGenerated } from './seeds/seedsService';
+import newProject from './seeds/createProjectSeed';
+import newUser from './seeds/createUserSeed';
+import newTask from './seeds/createTaskSeed';
+import { newAdmin, newSuperAdmin } from './seeds/createAdmins';
+import newManager from './seeds/createManagerSeed';
+import newTaskComment from './seeds/createTaskCommentSeed';
+import newProjectComment from './seeds/createProjectCommentSeed';
+import newTaskNotification from './seeds/createTaskNotificationSeed';
 
 const prisma = new PrismaClient();
 
 const seed = async () => {
-  const newAdmin = {
-    firstName: process.env.ADMIN_NAME as string,
-    lastName: process.env.ADMIN_NAME as string,
-    email: process.env.ADMIN_EMAIL as string,
-    password: bcrypt.hashSync(process.env.ADMIN_PASSWORD as string, 10),
-    isDisabled: false,
-    role: ['ADMIN'] as Role[],
-  };
-
-  const newSuperAdmin = {
-    firstName: process.env.SUPER_ADMIN_NAME as string,
-    lastName: process.env.SUPER_ADMIN_NAME as string,
-    email: process.env.SUPER_ADMIN_EMAIL as string,
-    password: bcrypt.hashSync(process.env.SUPER_ADMIN_PASSWORD as string, 10),
-    isDisabled: false,
-    role: ['SUPER_ADMIN'] as Role[],
-  };
-
-  const newManager = () => ({
-    firstName: faker.name.findName(),
-    lastName: faker.name.lastName(),
-    email: faker.internet.email(),
-    password: bcrypt.hashSync('password', 10),
-    isDisabled: false,
-    role: ['MANAGER'] as Role[],
-  });
-
-  const newUser = () => ({
-    firstName: faker.name.findName(),
-    lastName: faker.name.lastName(),
-    email: faker.internet.email(),
-    password: bcrypt.hashSync('password', 10),
-    isDisabled: false,
-    role: ['USER'] as Role[],
-  });
-
-  const newProject = () => {
-    const start = startDate().plus({
-      days: Math.floor(Math.random() * 30),
-      month: Math.floor(Math.random() * 4),
-    });
-    const end = endDate(start);
-    const due = dueDate(end);
-
-    return {
-      title: faker.company.companyName(),
-      description: faker.lorem.paragraph(),
-      private: false,
-      enable: true,
-      status_project: randomStatus(),
-      total_time_spent: 216753972,
-      start_date: start.toJSDate(),
-      end_date: end.toJSDate(),
-      due_date: due.toJSDate(),
-    };
-  };
-
-  const newTask = () => {
-    const start = startDate();
-    const end = endDate(start);
-
-    return {
-      title: faker.company.catchPhrase(),
-      description: faker.lorem.paragraph(),
-      private: false,
-      enable: true,
-      status_task: randomStatus(),
-      total_time_spent: 216753972,
-      start_date: start.toJSDate(),
-      end_date: end.toJSDate(),
-    };
-  };
-
   const fakeManagers = new Array(2).fill('').map(() => newManager());
   const fakeProjects = new Array(10).fill('').map(() => newProject());
   const fakeTasks = new Array(20).fill('').map(() => newTask());
   const fakeUsers = new Array(30).fill('').map(() => newUser());
+  const fakeTaskComments = new Array(200).fill('').map(() => newTaskComment());
+  const fakeProjectsComments = new Array(200)
+    .fill('')
+    .map(() => newProjectComment());
 
   console.log('🌱 Generate 1 admin ...');
   await prisma.user.create({
@@ -103,6 +34,7 @@ const seed = async () => {
   });
   console.log('✅ SUPER_ADMIN creation successfull');
 
+  // MANAGERS
   console.log('🌱 Generate 2 Managers ...');
   const createdManagers = await Promise.all(
     fakeManagers.map((newManagerData) =>
@@ -111,8 +43,9 @@ const seed = async () => {
       })
     )
   );
-  logGenerated(createdManagers);
+  logGenerated({ entity: createdManagers, name: 'Managers' });
 
+  // USERS
   console.log('🌱 Generate 30 Users ...');
   const createdUsers = await Promise.all(
     fakeUsers.map((newUserData) =>
@@ -121,8 +54,9 @@ const seed = async () => {
       })
     )
   );
-  logGenerated(createdUsers);
+  logGenerated({ entity: createdUsers, name: 'Users' });
 
+  // PROJECTS
   console.log('🌱 Generate 10 Projects ...');
   const createdProjects = await Promise.all(
     fakeProjects.map((newProjectData) => {
@@ -130,6 +64,7 @@ const seed = async () => {
       const randomEndSlice = Math.floor(
         Math.random() * randomStartSlice + createdUsers.length
       );
+
       const slicedUsers = () => {
         const sliced = createdUsers
           .slice(randomStartSlice, randomEndSlice)
@@ -153,14 +88,79 @@ const seed = async () => {
       });
     })
   );
-  logGenerated(createdProjects);
+  logGenerated({ entity: createdProjects, name: 'Projects' });
 
+  const allProjects = await prisma.project.findMany({
+    include: {
+      users: true,
+    },
+  });
+
+  // TASKS
   console.log('🌱 Generate 20 Tasks ...');
   const createdTasks = await Promise.all(
-    fakeTasks.map((newTaskData) =>
-      prisma.task.create({
+    fakeTasks.map((newTaskData) => {
+      const randomIndex = Math.floor(Math.random() * createdProjects.length);
+      const randomId = allProjects[randomIndex].id;
+
+      return prisma.task.create({
         data: {
           ...newTaskData,
+          project: {
+            connect: {
+              id: randomId,
+            },
+          },
+          user: {
+            connect: {
+              id: allProjects[randomIndex].users[
+                Math.floor(
+                  Math.random() * allProjects[randomIndex].users.length
+                )
+              ].id,
+            },
+          },
+        },
+      });
+    })
+  );
+
+  logGenerated({ entity: createdTasks, name: 'Tasks' });
+
+  // TASKS COMMENTS
+  console.log('🌱 Generate 200 Comments in Tasks ...');
+  const createdTasksComments = await Promise.all(
+    fakeTaskComments.map((newCommentData) =>
+      prisma.task_Comment.create({
+        data: {
+          ...newCommentData,
+          task: {
+            connect: {
+              id: createdTasks[Math.floor(Math.random() * createdTasks.length)]
+                .id,
+            },
+          },
+
+          user: {
+            connect: {
+              id: createdUsers[Math.floor(Math.random() * createdUsers.length)]
+                .id,
+            },
+          },
+        },
+      })
+    )
+  );
+
+  logGenerated({ entity: createdTasksComments, name: 'Comments Tasks' });
+
+  // PROJECT COMMENTS
+  console.log('🌱 Generate 200 Comments in Projects ...');
+  const createdProjectsComments = await Promise.all(
+    fakeProjectsComments.map((newCommentData) =>
+      prisma.project_Comment.create({
+        data: {
+          ...newCommentData,
           project: {
             connect: {
               id: createdProjects[
@@ -180,7 +180,7 @@ const seed = async () => {
     )
   );
 
-  logGenerated(createdTasks);
+  logGenerated({ entity: createdProjectsComments, name: 'Comments Projects' });
 };
 
 seed()

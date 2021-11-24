@@ -2,12 +2,12 @@
 DONE - creer 2 MANAGER qui auront chacun entre  0 et 5 projets 
 DONE - qui auront chacun 10 et 12 tasks.
 DONE - ces tasks auront des status différents parmis IN_PROGRESS NOT_STARTED FINISHED
-ces projets auront chacun entre 0 et 20 commentaires
+IN PROGRESS - ces projets auront chacun entre 0 et 20 commentaires
 ces projets auront chacun entre 0 et 10 files 
 
 DONE - ces projets auront chacun entre 0 et 4 user qu'il faudra assigner a des tasks 
 dont 1 user par projet qui n'a pas de task.
-ces taches auront chacun entre 0 et 10 commentaire.
+DOING LOULOUB => ces taches auront chacun entre 0 et 10 commentaire.
 les users sur les projets auront des invitations en status ACCEPTED.
 ces assignations a des taches vont trigger une notification par user associé
 ces tasks auront chacunes entre 0 et 5 files

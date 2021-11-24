@@ -14,87 +14,96 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model User {
-  id            String         @id @default(uuid())
-  firstName     String
-  lastName      String
-  email         String         @unique
-  password      String
-  isDisabled    Boolean
-  role          Role[]
-  projects      Project[]
-  task          Task[]
-  files         File[]
-  comments      Comment[]
-  invitation    Invitation[]
-  notifications Notification[]
+  id               String            @id @default(uuid())
+  first_name       String
+  last_name        String
+  email            String            @unique
+  password         String
+  is_disabled      Boolean
+  role             Role[]
+  projects         Project[]
+  task             Task[]
+  files            File[]
+  task_comments    Task_Comment[]
+  project_comments Project_Comment[]
+  invitations      Invitation[]
+  task_notifications    Task_Notification[]
+  project_notifications Project_Notification[]
 }
 
 model Project {
-  id                         String         @id @default(uuid())
-  users                      User[]           
-  ownerId                    String         
-  title                      String
-  description                String
-  private                    Boolean
-  enable                     Boolean
-  status_project             Status
-  total_time_spent           Int      
-  start_date                 DateTime    
-  end_date                   DateTime
-  due_date                   DateTime
-  tasks                      Task[]
-  files                      File[]
-  comments                   Comment[]
-  invitations                Invitation[]
-  notifications              Notification[]
+  id               String            @id @default(uuid())
+  users            User[]
+  ownerId          String
+  title            String
+  description      String
+  private          Boolean
+  is_disabled       Boolean
+  status_project   Status
+  total_time_spent Int
+  start_date       DateTime
+  end_date         DateTime
+  due_date         DateTime
+  tasks            Task[]
+  files            File[]
+  comments         Project_Comment[]
+  invitations      Invitation[]
+  notifications    Project_Notification[]
 }
 
 model Task {
-  id                         String         @id @default(uuid())
-  title                      String
-  description                String
-  private                    Boolean
-  enable                     Boolean
-  status_task                Status
-  total_time_spent           Int
-  start_date                 DateTime
-  end_date                   DateTime
-  user                       User           @relation(fields: [userId], references: [id])
-  userId                     String
-  project                    Project        @relation(fields: [projectId], references: [id])
-  projectId                  String
-  files                      File[]
-  comments                   Comment[]
-  notifications              Notification[]
+  id               String         @id @default(uuid())
+  title            String
+  description      String
+  private          Boolean
+  is_disabled       Boolean
+  status_task      Status
+  total_time_spent Int
+  start_date       DateTime
+  end_date         DateTime
+  user             User           @relation(fields: [userId], references: [id])
+  userId           String
+  project          Project        @relation(fields: [projectId], references: [id])
+  projectId        String
+  files            File[]
+  comments         Task_Comment[]
+  notifications    Task_Notification[]
+}
+
+model Task_Comment {
+  id         String  @id @default(uuid())
+  is_disabled Boolean
+  content    String
+  user       User    @relation(fields: [userId], references: [id])
+  userId     String
+  task       Task    @relation(fields: [taskId], references: [id])
+  taskId     String
+}
+
+model Project_Comment {
+  id         String  @id @default(uuid())
+  is_disabled Boolean
+  content    String
+  user       User    @relation(fields: [userId], references: [id])
+  userId     String
+  project    Project @relation(fields: [projectId], references: [id])
+  projectId  String
 }
 
 model File {
-  id        String  @id @default(uuid())
-  name      String
-  path      String
-  size      Int
-  type      String
-  user      User    @relation(fields: [userId], references: [id])
-  userId    String
-  project   Project @relation(fields: [projectId], references: [id])
-  projectId String
-  task      Task    @relation(fields: [taskId], references: [id])
-  taskId    String
-  enable    Boolean
-}
-
-model Comment {
-  id        String  @id @default(uuid())
-  enable    Boolean
-  content   String
-  user      User    @relation(fields: [userId], references: [id])
-  userId    String
-  project   Project @relation(fields: [projectId], references: [id])
-  projectId String
-  task      Task    @relation(fields: [taskId], references: [id])
-  taskId    String
+  id         String  @id @default(uuid())
+  name       String
+  path       String
+  size       Int
+  type       String
+  user       User    @relation(fields: [userId], references: [id])
+  userId     String
+  project    Project @relation(fields: [projectId], references: [id])
+  projectId  String
+  task       Task    @relation(fields: [taskId], references: [id])
+  taskId     String
+  is_disabled Boolean
 }
 
 model Invitation {
@@ -107,17 +116,26 @@ model Invitation {
   userId    String
 }
 
-model Notification {
-  id        String  @id @default(uuid())
-  enable    Boolean
-  title     String
-  content   String
-  user      User    @relation(fields: [userId], references: [id])
-  userId    String
-  project   Project @relation(fields: [projectId], references: [id])
-  projectId String
-  task      Task    @relation(fields: [taskId], references: [id])
-  taskId    String
+model Task_Notification {
+  id         String  @id @default(uuid())
+  is_disabled Boolean
+  title      String
+  content    String
+  user       User    @relation(fields: [userId], references: [id])
+  userId     String
+  task       Task    @relation(fields: [taskId], references: [id])
+  taskId     String
+}
+
+model Project_Notification {
+  id         String  @id @default(uuid())
+  is_disabled Boolean
+  title      String
+  content    String
+  user       User    @relation(fields: [userId], references: [id])
+  userId     String
+  project    Project @relation(fields: [projectId], references: [id])
+  projectId  String
 }
 
 enum Status_Invitation {
@@ -125,13 +143,11 @@ enum Status_Invitation {
   ACCEPTED
   REJECTED
 }
-
 enum Status {
   IN_PROGRESS
   NOT_STARTED
   FIHISHED
 }
-
 enum Role {
   SUPER_ADMIN
   ADMIN

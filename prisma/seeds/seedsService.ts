@@ -29,5 +29,10 @@ export const randomStatus = () => {
   return status[Math.floor(Math.random() * status.length)] as Status;
 };
 
-export const logGenerated = (entity: any[]) =>
-  console.log(`✅ Generated ${entity.length} Managers ...`);
+export const logGenerated = ({
+  entity,
+  name,
+}: {
+  entity: any[];
+  name: string;
+}) => console.log(`✅ Generated ${entity.length} ${name} ...`);
