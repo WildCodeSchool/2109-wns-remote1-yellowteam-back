@@ -1,35 +1,16 @@
 /* eslint-disable no-console */
-import { PrismaClient, Role, Status } from '@prisma/client';
+import { PrismaClient, Role } from '@prisma/client';
 import faker from 'faker';
 import bcrypt from 'bcrypt';
+import {
+  dueDate,
+  endDate,
+  logGenerated,
+  randomStatus,
+  startDate,
+} from './seedsService';
 
 const prisma = new PrismaClient();
-
-const startDate = () =>
-  new Date(
-    new Date(Date.now()).setDate(
-      new Date().getDate() + Math.floor(Math.random() * 100)
-    )
-  ).toISOString();
-
-const endDate = (start: String) =>
-  new Date(
-    new Date(start as string).setDate(
-      new Date().getDate() + 5 + Math.floor(Math.random() * 100)
-    )
-  ).toISOString();
-
-const dueDate = (end: String) =>
-  new Date(
-    new Date(end as string).setDate(
-      new Date().getDate() + 10 + Math.floor(Math.random() * 10)
-    )
-  ).toISOString();
-
-const randomStatus = () => {
-  const status: Status[] = ['IN_PROGRESS', 'NOT_STARTED', 'FIHISHED'];
-  return status[Math.floor(Math.random() * status.length)] as Status;
-};
 
 const seed = async () => {
   const newAdmin = {
@@ -58,6 +39,7 @@ const seed = async () => {
     isDisabled: false,
     role: ['MANAGER'] as Role[],
   });
+
   const newUser = () => ({
     firstName: faker.name.findName(),
     lastName: faker.name.lastName(),
@@ -126,7 +108,7 @@ const seed = async () => {
       })
     )
   );
-  console.log(`✅ Generated ${createdManagers.length} Managers ...`);
+  logGenerated(createdManagers);
 
   console.log('🌱 Generate 30 Users ...');
   const createdUsers = await Promise.all(
@@ -136,7 +118,7 @@ const seed = async () => {
       })
     )
   );
-  console.log(`✅ Generated ${createdUsers.length} Users ...`);
+  logGenerated(createdUsers);
 
   console.log('🌱 Generate 10 Projects ...');
   const createdProjects = await Promise.all(
@@ -168,7 +150,7 @@ const seed = async () => {
       });
     })
   );
-  console.log(`✅ Generated ${createdProjects.length} Projects ...`);
+  logGenerated(createdProjects);
 
   console.log('🌱 Generate 20 Tasks ...');
   const createdTasks = await Promise.all(
@@ -194,7 +176,8 @@ const seed = async () => {
       })
     )
   );
-  console.log(`✅ Generated ${createdTasks.length} Tasks ...`);
+
+  logGenerated(createdTasks);
 };
 
 seed()
