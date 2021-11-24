@@ -142,9 +142,7 @@ const seed = async () => {
             createdManagers[Math.floor(Math.random() * createdManagers.length)]
               .id,
           type: 'TASK',
-          status: randomNotificationStatus(), 
-            ,
-          
+          status: randomNotificationStatus(),
           reference_id:
             createdTasks[Math.floor(Math.random() * createdTasks.length)].id,
           user: {
