@@ -50,7 +50,10 @@ const seed = async () => {
   });
 
   const newProject = () => {
-    const start = startDate();
+    const start = startDate().plus({
+      days: Math.floor(Math.random() * 30),
+      month: Math.floor(Math.random() * 4),
+    });
     const end = endDate(start);
     const due = dueDate(end);
 
@@ -60,10 +63,10 @@ const seed = async () => {
       private: false,
       enable: true,
       status_project: randomStatus(),
-      total_time_spent: new Date(216753972).toISOString(),
-      start_date: start,
-      end_date: end,
-      due_date: due,
+      total_time_spent: 216753972,
+      start_date: start.toJSDate(),
+      end_date: end.toJSDate(),
+      due_date: due.toJSDate(),
     };
   };
 
@@ -77,9 +80,9 @@ const seed = async () => {
       private: false,
       enable: true,
       status_task: randomStatus(),
-      total_time_spent: new Date(216753972).toISOString(),
-      start_date: start,
-      end_date: end,
+      total_time_spent: 216753972,
+      start_date: start.toJSDate(),
+      end_date: end.toJSDate(),
     };
   };
 

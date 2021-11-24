@@ -40,8 +40,8 @@ model Project {
   private                    Boolean
   enable                     Boolean
   status_project             Status
-  total_time_spent           DateTime      
-  start_date                 DateTime
+  total_time_spent           Int      
+  start_date                 DateTime    
   end_date                   DateTime
   due_date                   DateTime
   tasks                      Task[]
@@ -58,7 +58,7 @@ model Task {
   private                    Boolean
   enable                     Boolean
   status_task                Status
-  total_time_spent           DateTime
+  total_time_spent           Int
   start_date                 DateTime
   end_date                   DateTime
   user                       User           @relation(fields: [userId], references: [id])
