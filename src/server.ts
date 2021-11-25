@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { ApolloServer } from 'apollo-server-express';
 import {
   ApolloServerPluginLandingPageGraphQLPlayground,
@@ -5,7 +6,7 @@ import {
 } from 'apollo-server-core';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { buildSchema } from 'type-graphql';
-import { resolvers } from './generated';
+import { resolvers } from '@generated/type-graphql';
 import prisma from '../prisma/prismaClient';
 
 const createServer = async () => {
