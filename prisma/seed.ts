@@ -185,7 +185,7 @@ const seed = async () => {
   const createdUserProjectNotifications = await Promise.all(
     fakeUserNotifications.map((newNotificationData) => {
       const randomTaskIndex = Math.floor(Math.random() * AllTasks.length);
-      const randomProjectId = AllTasks[randomTaskIndex].projectId;
+      const randomTaskId = AllTasks[randomTaskIndex].projectId;
 
       return prisma.notification.create({
         data: {
@@ -199,7 +199,7 @@ const seed = async () => {
 
           status: randomNotificationStatus(),
 
-          reference_id: randomProjectId,
+          reference_id: randomTaskId,
 
           user: {
             connect: {
@@ -216,35 +216,35 @@ const seed = async () => {
     name: 'Projects Notifications',
   });
 
-
-    // PROJECT NOTIFICATIONS
-    console.log('🌱 Generate 10 Notifications ...');
-    const createdProjectNotification = await Promise.all(
-      fakeUserNotifications.map((newNotificationData) =>
-        prisma.notification.create({
-          data: {
-            ...newNotificationData,
-            senderId:
-              createdManagers[Math.floor(Math.random() * createdManagers.length)]
+  // PROJECT NOTIFICATIONS
+  console.log('🌱 Generate 10 Notifications ...');
+  const createdProjectNotification = await Promise.all(
+    fakeUserNotifications.map((newNotificationData) =>
+      prisma.notification.create({
+        data: {
+          ...newNotificationData,
+          senderId:
+            createdManagers[Math.floor(Math.random() * createdManagers.length)]
+              .id,
+          type: 'PROJECT',
+          status: randomNotificationStatus(),
+          reference_id:
+            createdProjects[Math.floor(Math.random() * createdProjects.length)]
+              .id,
+          user: {
+            connect: {
+              id: createdUsers[Math.floor(Math.random() * createdUsers.length)]
                 .id,
-            type: 'PROJECT',
-            status: randomNotificationStatus(),
-            reference_id:
-              createdProjects[Math.floor(Math.random() * createdProjects.length)].id,
-            user: {
-              connect: {
-                id: createdUsers[Math.floor(Math.random() * createdUsers.length)]
-                  .id,
-              },
             },
           },
-        })
-      )
-    );
-    logGenerated({
-      entity: createdProjectNotification,
-      name: 'Notification Tasks',
-    });
+        },
+      })
+    )
+  );
+  logGenerated({
+    entity: createdProjectNotification,
+    name: 'Notification Tasks',
+  });
 
   // TASKS COMMENTS
   console.log('🌱 Generate 200 Comments in Tasks ...');
