@@ -290,7 +290,7 @@ const seed = async () => {
             },
           },
 
-          user_task_comments: {
+          user_project_comments: {
             connect: {
               id: createdUsers[Math.floor(Math.random() * createdUsers.length)]
                 .id,
