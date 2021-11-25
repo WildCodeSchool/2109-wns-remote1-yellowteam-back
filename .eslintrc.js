@@ -15,8 +15,10 @@ module.exports = {
   plugins: ['@typescript-eslint', 'prettier'],
   rules: {
     'no-underscore-dangle': ['error', { allow: ['_id'] }],
-    'import/prefer-default-export': 0,
-    'class-methods-use-this': 0,
   },
-  ignorePatterns: ['.eslintrc.js', 'src/generated/**/*.ts'],
+  ignorePatterns: [
+    '.eslintrc.js',
+    'src/type_graphql/**/*.ts',
+    'src/custom_resolvers/**/*.ts',
+  ],
 };

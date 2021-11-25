@@ -1,0 +1,12 @@
+export { AggregateFileArgs } from "./AggregateFileArgs";
+export { CreateFileArgs } from "./CreateFileArgs";
+export { CreateManyFileArgs } from "./CreateManyFileArgs";
+export { DeleteFileArgs } from "./DeleteFileArgs";
+export { DeleteManyFileArgs } from "./DeleteManyFileArgs";
+export { FindFirstFileArgs } from "./FindFirstFileArgs";
+export { FindManyFileArgs } from "./FindManyFileArgs";
+export { FindUniqueFileArgs } from "./FindUniqueFileArgs";
+export { GroupByFileArgs } from "./GroupByFileArgs";
+export { UpdateFileArgs } from "./UpdateFileArgs";
+export { UpdateManyFileArgs } from "./UpdateManyFileArgs";
+export { UpsertFileArgs } from "./UpsertFileArgs";

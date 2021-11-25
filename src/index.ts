@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import 'reflect-metadata';
 import dotenv from 'dotenv';
+import { graphqlUploadExpress } from 'graphql-upload';
 import createServer from './server';
 import app from './app';
 
@@ -11,6 +12,8 @@ const { PORT } = process.env;
   const server = await createServer();
 
   await server.start();
+
+  app.use(graphqlUploadExpress());
 
   server.applyMiddleware({
     app,
