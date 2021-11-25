@@ -82,9 +82,11 @@ const seed = async () => {
       return prisma.project.create({
         data: {
           ...newProjectData,
+
           ownerId:
             createdManagers[Math.floor(Math.random() * createdManagers.length)]
               .id,
+
           users: {
             connect: slicedUsers(),
           },
@@ -104,22 +106,26 @@ const seed = async () => {
   console.log('🌱 Generate 20 Tasks ...');
   const createdTasks = await Promise.all(
     fakeTasks.map((newTaskData) => {
-      const randomIndex = Math.floor(Math.random() * createdProjects.length);
-      const randomId = allProjects[randomIndex].id;
+      const randomProjectIndex = Math.floor(
+        Math.random() * createdProjects.length
+      );
+      const randomProjectId = allProjects[randomProjectIndex].id;
 
       return prisma.task.create({
         data: {
           ...newTaskData,
+
           project: {
             connect: {
-              id: randomId,
+              id: randomProjectId,
             },
           },
+
           user: {
             connect: {
-              id: allProjects[randomIndex].users[
+              id: allProjects[randomProjectIndex].users[
                 Math.floor(
-                  Math.random() * allProjects[randomIndex].users.length
+                  Math.random() * allProjects[randomProjectIndex].users.length
                 )
               ].id,
             },
@@ -131,33 +137,83 @@ const seed = async () => {
 
   logGenerated({ entity: createdTasks, name: 'Tasks' });
 
+  const AllTasks = await prisma.task.findMany();
+
   // TASKS NOTIFICATIONS
-  console.log('🌱 Generate 10 Notifications ...');
+  console.log('🌱 Generate 200 Task Notifications ...');
   const createdUserTaskNotifications = await Promise.all(
-    fakeUserNotifications.map((newNotificationData) =>
-      prisma.notification.create({
+    fakeUserNotifications.map((newNotificationData) => {
+      const randomProjectIndex = Math.floor(
+        Math.random() * createdProjects.length
+      );
+      const randomProjectId = allProjects[randomProjectIndex].id;
+
+      return prisma.notification.create({
         data: {
           ...newNotificationData,
+
           senderId:
             createdManagers[Math.floor(Math.random() * createdManagers.length)]
               .id,
-          type: 'TASK',
+          type: 'PROJECT',
+
           status: randomNotificationStatus(),
-          reference_id:
-            createdTasks[Math.floor(Math.random() * createdTasks.length)].id,
+
+          reference_id: randomProjectId,
+
           user: {
             connect: {
-              id: createdUsers[Math.floor(Math.random() * createdUsers.length)]
-                .id,
+              id: allProjects[randomProjectIndex].users[
+                Math.floor(
+                  Math.random() * allProjects[randomProjectIndex].users.length
+                )
+              ].id,
             },
           },
         },
-      })
-    )
+      });
+    })
   );
+
   logGenerated({
     entity: createdUserTaskNotifications,
-    name: 'Notification Tasks',
+    name: 'Tasks Notifications',
+  });
+
+  // PROJECT NOTIFICATIONS
+  console.log('🌱 Generate 200 Project Notifications ...');
+  const createdUserProjectNotifications = await Promise.all(
+    fakeUserNotifications.map((newNotificationData) => {
+      const randomTaskIndex = Math.floor(Math.random() * AllTasks.length);
+      const randomProjectId = AllTasks[randomTaskIndex].projectId;
+
+      return prisma.notification.create({
+        data: {
+          ...newNotificationData,
+
+          senderId:
+            createdManagers[Math.floor(Math.random() * createdManagers.length)]
+              .id,
+
+          type: 'TASK',
+
+          status: randomNotificationStatus(),
+
+          reference_id: randomProjectId,
+
+          user: {
+            connect: {
+              id: AllTasks[randomTaskIndex].userId,
+            },
+          },
+        },
+      });
+    })
+  );
+
+  logGenerated({
+    entity: createdUserProjectNotifications,
+    name: 'Projects Notifications',
   });
 
   // TASKS COMMENTS
@@ -167,6 +223,7 @@ const seed = async () => {
       prisma.task_Comment.create({
         data: {
           ...newCommentData,
+
           task: {
             connect: {
               id: createdTasks[Math.floor(Math.random() * createdTasks.length)]
@@ -194,6 +251,7 @@ const seed = async () => {
       prisma.project_Comment.create({
         data: {
           ...newCommentData,
+
           project: {
             connect: {
               id: createdProjects[
@@ -224,5 +282,5 @@ seed()
   })
   .finally(async () => {
     await prisma.$disconnect();
-    console.log('🌱✅ All done !');
+    console.log('🌱✅ All done !!!');
   });

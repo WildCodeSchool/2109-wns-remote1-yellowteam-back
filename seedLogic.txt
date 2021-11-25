@@ -7,7 +7,7 @@ IN PROGRESS ces projets auront chacun entre 0 et 10 files
 
 DONE - ces projets auront chacun entre 0 et 4 user qu'il faudra assigner a des tasks 
 dont 1 user par projet qui n'a pas de task.
-DOING LOULOUB => ces taches auront chacun entre 0 et 10 commentaire.
+DONE => ces taches auront chacun entre 0 et 10 commentaire.
 les users sur les projets auront des invitations en status ACCEPTED.
 ces assignations a des taches vont trigger une notification par user associé
 ces tasks auront chacunes entre 0 et 5 files
