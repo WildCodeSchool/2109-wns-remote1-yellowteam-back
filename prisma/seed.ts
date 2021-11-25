@@ -9,6 +9,7 @@ import newManager from './seeds/createManagerSeed';
 import newTaskComment from './seeds/createTaskCommentSeed';
 import newProjectComment from './seeds/createProjectCommentSeed';
 import newNotification from './seeds/createUserNotification';
+import newFile from './seeds/createFilesSeed';
 
 const prisma = new PrismaClient();
 
@@ -25,6 +26,8 @@ const seed = async () => {
   const fakeUserNotifications = new Array(200)
     .fill('')
     .map(() => newNotification());
+
+  const fakeProjectFiles = new Array(10).fill('').map(() => newFile());
 
   console.log('🌱 Generate 1 admin ...');
   await prisma.user.create({
@@ -302,6 +305,30 @@ const seed = async () => {
   );
 
   logGenerated({ entity: createdProjectsComments, name: 'Comments Projects' });
+
+  // PROJECT FILE
+  console.log('🌱 Generate 10 Files in Projects ...');
+  const createdProjectsFile = await Promise.all(
+    fakeProjectFiles.map((newFileData) =>
+      prisma.file.create({
+        data: {
+          ...newFileData,
+
+          project: {
+            connect: {
+              id: createdProjects[
+                Math.floor(Math.random() * createdProjects.length)
+              ].id,
+            },
+          },
+
+          user: {},
+        },
+      })
+    )
+  );
+
+  logGenerated({ entity: createdProjectsFile, name: 'Project File' });
 };
 
 seed()
