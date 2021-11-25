@@ -1,0 +1,66 @@
+import * as TypeGraphQL from "type-graphql";
+import * as GraphQLScalars from "graphql-scalars";
+import { Prisma } from "@prisma/client";
+import { DecimalJSScalar } from "../../scalars";
+import { UserCreateOrConnectWithoutProjectsInput } from "./UserCreateOrConnectWithoutProjectsInput";
+import { UserCreateWithoutProjectsInput } from "./UserCreateWithoutProjectsInput";
+import { UserScalarWhereInput } from "./UserScalarWhereInput";
+import { UserUpdateManyWithWhereWithoutProjectsInput } from "./UserUpdateManyWithWhereWithoutProjectsInput";
+import { UserUpdateWithWhereUniqueWithoutProjectsInput } from "./UserUpdateWithWhereUniqueWithoutProjectsInput";
+import { UserUpsertWithWhereUniqueWithoutProjectsInput } from "./UserUpsertWithWhereUniqueWithoutProjectsInput";
+import { UserWhereUniqueInput } from "./UserWhereUniqueInput";
+
+@TypeGraphQL.InputType("UserUpdateManyWithoutProjectsInput", {
+  isAbstract: true
+})
+export class UserUpdateManyWithoutProjectsInput {
+  @TypeGraphQL.Field(_type => [UserCreateWithoutProjectsInput], {
+    nullable: true
+  })
+  create?: UserCreateWithoutProjectsInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [UserCreateOrConnectWithoutProjectsInput], {
+    nullable: true
+  })
+  connectOrCreate?: UserCreateOrConnectWithoutProjectsInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [UserUpsertWithWhereUniqueWithoutProjectsInput], {
+    nullable: true
+  })
+  upsert?: UserUpsertWithWhereUniqueWithoutProjectsInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [UserWhereUniqueInput], {
+    nullable: true
+  })
+  set?: UserWhereUniqueInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [UserWhereUniqueInput], {
+    nullable: true
+  })
+  disconnect?: UserWhereUniqueInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [UserWhereUniqueInput], {
+    nullable: true
+  })
+  delete?: UserWhereUniqueInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [UserWhereUniqueInput], {
+    nullable: true
+  })
+  connect?: UserWhereUniqueInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [UserUpdateWithWhereUniqueWithoutProjectsInput], {
+    nullable: true
+  })
+  update?: UserUpdateWithWhereUniqueWithoutProjectsInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [UserUpdateManyWithWhereWithoutProjectsInput], {
+    nullable: true
+  })
+  updateMany?: UserUpdateManyWithWhereWithoutProjectsInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [UserScalarWhereInput], {
+    nullable: true
+  })
+  deleteMany?: UserScalarWhereInput[] | undefined;
+}

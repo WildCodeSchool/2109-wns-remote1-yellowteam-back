@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Status_Invitation } from '@prisma/client';
 import { logGenerated, randomNotificationStatus } from './seeds/seedsService';
 import newProject from './seeds/createProjectSeed';
 import newUser from './seeds/createUserSeed';
@@ -64,7 +64,7 @@ const seed = async () => {
   logGenerated({ entity: createdUsers, name: 'Users' });
 
   // PROJECTS
-  console.log('🌱 Generate 10 Projects ...');
+  console.log('🌱 Generate 10 Projects with invitations ...');
   const createdProjects = await Promise.all(
     fakeProjects.map((newProjectData) => {
       const randomStartSlice = Math.floor(Math.random() * createdUsers.length);
@@ -72,11 +72,22 @@ const seed = async () => {
         Math.random() * randomStartSlice + createdUsers.length
       );
 
-      const slicedUsers = () => {
+      const slicedUsersIds = () => {
         const sliced = createdUsers
           .slice(randomStartSlice, randomEndSlice)
           .map((user) => ({
             id: user.id,
+          }));
+
+        return sliced;
+      };
+      const slicedInvitations = () => {
+        const sliced = createdUsers
+          .slice(randomStartSlice, randomEndSlice)
+          .map((user) => ({
+            email: user.email,
+            status: 'ACCEPTED' as Status_Invitation,
+            userId: user.id,
           }));
 
         return sliced;
@@ -91,7 +102,12 @@ const seed = async () => {
               .id,
 
           users: {
-            connect: slicedUsers(),
+            connect: slicedUsersIds(),
+          },
+          invitations: {
+            createMany: {
+              data: slicedInvitations(),
+            },
           },
         },
       });

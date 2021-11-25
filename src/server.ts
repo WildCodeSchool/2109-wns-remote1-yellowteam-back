@@ -4,8 +4,8 @@ import {
   ApolloServerPluginLandingPageDisabled,
 } from 'apollo-server-core';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { resolvers } from '@generated/type-graphql';
 import { buildSchema } from 'type-graphql';
+import { resolvers } from './generated';
 import prisma from '../prisma/prismaClient';
 
 const createServer = async () => {
