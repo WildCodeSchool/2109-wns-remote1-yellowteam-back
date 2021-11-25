@@ -46,7 +46,7 @@ model Project {
   due_date         DateTime
   tasks            Task[]
   files            File[]
-  comments         Project_Comment[]
+  comments         Comment[]
   invitations      Invitation[]
 }
 
@@ -65,28 +65,36 @@ model Task {
   project          Project        @relation(fields: [projectId], references: [id])
   projectId        String
   files            File[]
-  comments         Task_Comment[]
+  comments         Comment[]
 }
 
-model Task_Comment {
-  id         String  @id @default(uuid())
+model Comment {
+  id          String  @id @default(uuid())  
   is_disabled Boolean
   content    String
   user       User    @relation(fields: [userId], references: [id])
-  userId     String
+  user_id     String
+  project    Project? @relation(fields: [projectId], references: [id])
+  project_id   String
+  task       Task?    @relation(fields: [taskId], references: [id])
+  task_id    String?  
+  is_disabled Boolean
+  content    String
+  user       User    @relation(fields: [userId], references: [id])
+  user_id     String
   task       Task    @relation(fields: [taskId], references: [id])
-  taskId     String
+  task_id     String
 }
 
-model Project_Comment {
-  id         String  @id @default(uuid())
-  is_disabled Boolean
-  content    String
-  user       User    @relation(fields: [userId], references: [id])
-  userId     String
-  project    Project @relation(fields: [projectId], references: [id])
-  projectId  String
-}
+// model Project_Comment {
+//   id         String  @id @default(uuid())
+//   is_disabled Boolean
+//   content    String
+//   user       User    @relation(fields: [userId], references: [id])
+//   userId     String
+//   project    Project @relation(fields: [projectId], references: [id])
+//   projectId  String
+// }
 
 model File {
   id         String  @id @default(uuid())
@@ -149,4 +157,5 @@ enum Role {
 enum Type_Notification {
   PROJECT 
   TASK
-}
+}ttuser_idiproject_id_  
+___ePV
