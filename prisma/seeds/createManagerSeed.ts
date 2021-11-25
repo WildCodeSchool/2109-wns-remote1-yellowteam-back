@@ -5,6 +5,7 @@ import faker from 'faker';
 const newManager = () => ({
   first_name: faker.name.findName(),
   last_name: faker.name.lastName(),
+  avatar: faker.image.avatar(),
   email: faker.internet.email(),
   password: bcrypt.hashSync('password', 10),
   is_disabled: false,
