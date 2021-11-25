@@ -33,8 +33,7 @@ model User {
 
 model Project {
   id               String       @id @default(uuid())
-  users            User[]
-  userId           String
+  users            User[]          
   ownerId          String
   title            String
   description      String
@@ -73,14 +72,14 @@ model Comment {
   id                    String   @id @default(uuid())
   is_disabled           Boolean
   content               String
-  user_id               String
+  user_id               String?
   project               Project? @relation(fields: [project_id], references: [id])
-  project_id            String
+  project_id            String?
   task                  Task?    @relation(fields: [task_id], references: [id])
   task_id               String?
   user_task_comments    User?     @relation("task_comments", fields: [user_id], references: [id])
   user_project_comments User?     @relation("project_comments", references: [id], fields: [userId])
-  userId                String
+  userId                String?
 }
 
 model File {

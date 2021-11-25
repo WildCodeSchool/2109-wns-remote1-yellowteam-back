@@ -250,7 +250,7 @@ const seed = async () => {
   console.log('🌱 Generate 200 Comments in Tasks ...');
   const createdTasksComments = await Promise.all(
     fakeTaskComments.map((newCommentData) =>
-      prisma.task_Comment.create({
+      prisma.comment.create({
         data: {
           ...newCommentData,
 
@@ -261,7 +261,7 @@ const seed = async () => {
             },
           },
 
-          user: {
+          user_task_comments: {
             connect: {
               id: createdUsers[Math.floor(Math.random() * createdUsers.length)]
                 .id,
@@ -278,7 +278,7 @@ const seed = async () => {
   console.log('🌱 Generate 200 Comments in Projects ...');
   const createdProjectsComments = await Promise.all(
     fakeProjectsComments.map((newCommentData) =>
-      prisma.project_Comment.create({
+      prisma.comment.create({
         data: {
           ...newCommentData,
 
@@ -290,7 +290,7 @@ const seed = async () => {
             },
           },
 
-          user: {
+          user_task_comments: {
             connect: {
               id: createdUsers[Math.floor(Math.random() * createdUsers.length)]
                 .id,
