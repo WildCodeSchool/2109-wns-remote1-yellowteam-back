@@ -27,18 +27,18 @@ model User {
   files            File[]
   task_comments    Task_Comment[]
   project_comments Project_Comment[]
-  invitations      Invitation[]
   notifications    Notification[]
+  invitation       Invitation[]
 }
 
 model Project {
   id               String            @id @default(uuid())
   users            User[]
-  ownerId          String
+  owner_id         String
   title            String
   description      String
   private          Boolean
-  is_disabled       Boolean
+  is_disabled      Boolean
   status_project   Status
   total_time_spent Int
   start_date       DateTime
@@ -47,7 +47,7 @@ model Project {
   tasks            Task[]
   files            File[]
   comments         Project_Comment[]
-  invitations      Invitation[]
+  invitation       Invitation[]
 }
 
 model Task {
@@ -55,51 +55,51 @@ model Task {
   title            String
   description      String
   private          Boolean
-  is_disabled       Boolean
+  is_disabled      Boolean
   status_task      Status
   total_time_spent Int
   start_date       DateTime
   end_date         DateTime
-  user             User           @relation(fields: [userId], references: [id])
-  userId           String
-  project          Project        @relation(fields: [projectId], references: [id])
-  projectId        String
+  user             User           @relation(fields: [user_id], references: [id])
+  user_id          String
+  project          Project        @relation(fields: [project_id], references: [id])
+  project_id       String
   files            File[]
   comments         Task_Comment[]
 }
 
 model Task_Comment {
-  id         String  @id @default(uuid())
+  id          String  @id @default(uuid())
   is_disabled Boolean
-  content    String
-  user       User    @relation(fields: [userId], references: [id])
-  userId     String
-  task       Task    @relation(fields: [taskId], references: [id])
-  taskId     String
+  content     String
+  user        User    @relation(fields: [user_id], references: [id])
+  user_id     String
+  task        Task    @relation(fields: [task_id], references: [id])
+  task_id     String
 }
 
 model Project_Comment {
-  id         String  @id @default(uuid())
+  id          String  @id @default(uuid())
   is_disabled Boolean
-  content    String
-  user       User    @relation(fields: [userId], references: [id])
-  userId     String
-  project    Project @relation(fields: [projectId], references: [id])
-  projectId  String
+  content     String
+  user        User    @relation(fields: [user_id], references: [id])
+  user_id     String
+  project     Project @relation(fields: [project_id], references: [id])
+  project_id  String
 }
 
 model File {
-  id         String  @id @default(uuid())
-  name       String
-  path       String
-  size       Int
-  type       String
-  user       User    @relation(fields: [userId], references: [id])
-  userId     String
-  project    Project @relation(fields: [projectId], references: [id])
-  projectId  String
-  task       Task    @relation(fields: [taskId], references: [id])
-  taskId     String
+  id          String  @id @default(uuid())
+  name        String
+  path        String
+  size        Int
+  type        String
+  user        User    @relation(fields: [user_id], references: [id])
+  user_id     String
+  project     Project @relation(fields: [project_id], references: [id])
+  project_id  String
+  task        Task    @relation(fields: [task_id], references: [id])
+  task_id     String
   is_disabled Boolean
 }
 
@@ -114,16 +114,16 @@ model Invitation {
 }
 
 model Notification {
-  id         String  @id @default(uuid())
-  is_disabled Boolean
-  title      String
-  content    String
-  user       User    @relation(fields: [userId], references: [id])
-  userId     String
-  type       Type_Notification
-  status     Status_Notification
+  id           String              @id @default(uuid())
+  is_disabled  Boolean
+  title        String
+  content      String
+  user         User                @relation(fields: [user_id], references: [id])
+  user_id      String
+  type         Type_Notification
+  status       Status_Notification
   reference_id String
-  senderId   String
+  sender_id    String
 }
 
 enum Status_Invitation {
@@ -131,22 +131,26 @@ enum Status_Invitation {
   ACCEPTED
   REJECTED
 }
+
 enum Status {
   IN_PROGRESS
   NOT_STARTED
   FIHISHED
 }
+
 enum Status_Notification {
   READ
   UNREAD
 }
+
 enum Role {
   SUPER_ADMIN
   ADMIN
   MANAGER
   USER
 }
+
 enum Type_Notification {
-  PROJECT 
+  PROJECT
   TASK
 }
