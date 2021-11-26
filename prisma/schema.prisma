@@ -15,29 +15,30 @@ datasource db {
 }
 
 model User {
-  id               String         @id @default(uuid())
-  first_name       String
-  last_name        String
-  email            String         @unique
-  password         String
+  id                String         @id @default(uuid())
+  first_name        String
+  last_name         String
+  email             String         @unique
+  password          String
+  is_disabled       Boolean
   avatar           String
-  is_disabled      Boolean
-  role             Role[]
-  projects         Project[]
-  task             Task[]
-  files            File[]
-  task_comments    Comment[]      @relation("task_comments")
-  project_comments Comment[]      @relation("project_comments")
-  invitations      Invitation[]
-  notifications    Notification[]
-  created_at       DateTime       @default(now())
-  updated_at       DateTime       @updatedAt
+  role              Role[]
+  projects          Project[]
+  task              Task[]
+  files             File[]
+  task_comments     Comment[]      @relation("task_comments")
+  project_comments  Comment[]      @relation("project_comments")
+  invitations       Invitation[]
+  notifications     Notification[]
+  owned_projects    Project[]      @relation("project_owner")
+  notification_sent Notification?  @relation("notification_sender")
 }
 
 model Project {
   id               String       @id @default(uuid())
   users            User[]
-  ownerId          String
+  owner            User         @relation("project_owner", fields: [project_owner_id], references: [id])
+  project_owner_id String
   title            String
   description      String
   private          Boolean
@@ -65,10 +66,10 @@ model Task {
   total_time_spent Int
   start_date       DateTime
   end_date         DateTime
-  user             User      @relation(fields: [userId], references: [id])
-  userId           String
-  project          Project   @relation(fields: [projectId], references: [id])
-  projectId        String
+  user             User      @relation(fields: [user_id], references: [id])
+  user_id          String
+  project          Project   @relation(fields: [project_id], references: [id])
+  project_id       String
   files            File[]
   comments         Comment[]
   created_at       DateTime  @default(now())
@@ -76,19 +77,17 @@ model Task {
 }
 
 model Comment {
-  id                    String   @id @default(uuid())
-  is_disabled           Boolean
-  content               String
-  user_id               String?
-  project               Project? @relation(fields: [project_id], references: [id])
-  project_id            String?
-  task                  Task?    @relation(fields: [task_id], references: [id])
-  task_id               String?
-  user_task_comments    User?    @relation("task_comments", fields: [user_id], references: [id])
-  user_project_comments User?    @relation("project_comments", references: [id], fields: [userId])
-  userId                String?
-  created_at            DateTime @default(now())
-  updated_at            DateTime @updatedAt
+  id                      String   @id @default(uuid())
+  is_disabled             Boolean
+  content                 String
+  task_comment_user_id    String?
+  project                 Project? @relation(fields: [project_id], references: [id])
+  project_id              String?
+  task                    Task?    @relation(fields: [task_id], references: [id])
+  task_id                 String?
+  user_task_comments      User?    @relation("task_comments", fields: [project_comment_user_id], references: [id])
+  user_project_comments   User?    @relation("project_comments", references: [id], fields: [task_comment_user_id])
+  project_comment_user_id String
 }
 
 model File {
@@ -97,12 +96,12 @@ model File {
   path        String
   size        Int
   type        String
-  user        User     @relation(fields: [userId], references: [id])
-  userId      String
-  project     Project  @relation(fields: [projectId], references: [id])
-  projectId   String
+  user        User     @relation(fields: [user_id], references: [id])
+  user_id     String
+  project     Project  @relation(fields: [project_id], references: [id])
+  project_id  String
   task        Task?    @relation(fields: [taskId], references: [id])
-  taskId      String?
+  taskId      String
   is_disabled Boolean
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
@@ -112,12 +111,10 @@ model Invitation {
   id         String            @id @default(uuid())
   status     Status_Invitation
   email      String
-  project    Project           @relation(fields: [projectId], references: [id])
-  projectId  String
-  user       User              @relation(fields: [userId], references: [id])
-  userId     String
-  created_at DateTime          @default(now())
-  updated_at DateTime          @updatedAt
+  project    Project           @relation(fields: [project_id], references: [id])
+  project_id String
+  user       User              @relation(fields: [user_id], references: [id])
+  user_id    String
 }
 
 model Notification {
@@ -125,14 +122,13 @@ model Notification {
   is_disabled  Boolean
   title        String
   content      String
-  user         User                @relation(fields: [userId], references: [id])
-  userId       String
+  user         User                @relation(fields: [user_id], references: [id])
+  user_id      String
   type         Type_Notification
   status       Status_Notification
   reference_id String
-  senderId     String
-  created_at   DateTime            @default(now())
-  updated_at   DateTime            @updatedAt
+  sender       User                @relation("notification_sender", fields: [sender_id], references: [id])
+  sender_id    String              
 }
 
 enum Status_Invitation {
