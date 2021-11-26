@@ -119,7 +119,7 @@ const seed = async () => {
   console.log('🌱 Generate 20 Tasks ...');
   const createdTasks = await Promise.all(
     fakeTasks.map((newTaskData) => {
-      const randomProjectIndex = randomize(createdProjects);
+      const randomProjectIndex = randomize(allProjects);
       const randomProjectId = allProjects[randomProjectIndex].id;
 
       return prisma.task.create({
@@ -163,7 +163,7 @@ const seed = async () => {
   console.log('🌱 Generate 200 Project Notifications ...');
   const createdUserProjectNotifications = await Promise.all(
     fakeUserNotifications.map((newNotificationData) => {
-      const randomProjectIndex = randomize(createdProjects);
+      const randomProjectIndex = randomize(allProjects);
       const randomProjectId = allProjects[randomProjectIndex].id;
       const randomProjectManagerId = allProjects[randomProjectIndex].owner.id;
       const randomProjectUserId =
@@ -246,7 +246,7 @@ const seed = async () => {
   console.log('🌱 Generate 10 Project Notifications ...');
   const createdProjectNotification = await Promise.all(
     fakeUserNotifications.map((newNotificationData) => {
-      const randomProjectIndex = randomize(createdProjects);
+      const randomProjectIndex = randomize(allProjects);
       const randomProjectId = allProjects[randomProjectIndex].id;
       const randomProjectManagerId = allProjects[randomProjectIndex].owner.id;
       const randomProjectUserId =
@@ -318,8 +318,8 @@ const seed = async () => {
   console.log('🌱 Generate 200 Comments in Projects ...');
   const createdProjectsComments = await Promise.all(
     fakeProjectsComments.map((newCommentData) => {
-      const randomRandomProjectIndex = randomize(createdProjects);
-      const randomProjectId = createdProjects[randomRandomProjectIndex].id;
+      const randomRandomProjectIndex = randomize(allProjects);
+      const randomProjectId = allProjects[randomRandomProjectIndex].id;
       const randomProjectUser =
         allProjects[randomRandomProjectIndex].users[
           randomize(allProjects[randomRandomProjectIndex].users)
@@ -385,9 +385,7 @@ const seed = async () => {
   console.log('🌱 Generate 10 Files in Tasks ...');
   const createdTaskFile = await Promise.all(
     fakeTaskFiles.map((newFileData) => {
-      const randomTaskIndex = Math.floor(
-        Math.random() * createdProjects.length
-      );
+      const randomTaskIndex = Math.floor(Math.random() * AllTasks.length);
       const randomTaskId = AllTasks[randomTaskIndex].id;
       const taskUserId = AllTasks[randomTaskIndex].user.id;
       const randomTaskProjectId = AllTasks[randomTaskIndex].project.id;
