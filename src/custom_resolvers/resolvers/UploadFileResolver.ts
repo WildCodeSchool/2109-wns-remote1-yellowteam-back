@@ -1,7 +1,5 @@
-import * as TypeGraphQL from 'type-graphql';
 import { GraphQLUpload } from 'graphql-upload';
-import { Arg, Ctx } from 'type-graphql';
-import { createWriteStream } from 'fs';
+import { Arg, Ctx, Mutation, Resolver } from 'type-graphql';
 import { Stream } from 'stream';
 import { Request } from 'express';
 import { PrismaClient } from '.prisma/client';
@@ -21,9 +19,9 @@ interface Upload {
   createReadStream: () => Stream;
 }
 
-@TypeGraphQL.Resolver()
+@Resolver()
 export class UploadFile {
-  @TypeGraphQL.Mutation((_returns) => File, {
+  @Mutation((_returns) => File, {
     nullable: false,
   })
   async uploadFile(
