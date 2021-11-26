@@ -341,7 +341,6 @@ const seed = async () => {
 
   // PROJECT FILE
   console.log('🌱 Generate 10 Files in Projects ...');
-  console.log('🌱 fakeProjectFiles => ', fakeProjectFiles);
 
   const createdProjectsFile = await Promise.all(
     fakeProjectFiles.map((newFileData) =>

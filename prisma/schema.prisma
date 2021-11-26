@@ -31,7 +31,7 @@ model User {
   invitations       Invitation[]
   notifications     Notification[]
   owned_projects    Project[]      @relation("project_owner")
-  notification_sent Notification?  @relation("notification_sender")
+  notifications_sent Notification[]  @relation("notification_sender")
 }
 
 model Project {
@@ -87,7 +87,7 @@ model Comment {
   task_id                 String?
   user_task_comments      User?    @relation("task_comments", fields: [project_comment_user_id], references: [id])
   user_project_comments   User?    @relation("project_comments", references: [id], fields: [task_comment_user_id])
-  project_comment_user_id String
+  project_comment_user_id String?
 }
 
 model File {
@@ -100,8 +100,8 @@ model File {
   user_id     String
   project     Project  @relation(fields: [project_id], references: [id])
   project_id  String
-  task        Task?    @relation(fields: [taskId], references: [id])
-  taskId      String
+  task        Task?    @relation(fields: [task_id], references: [id])
+  task_id      String?
   is_disabled Boolean
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
