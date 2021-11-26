@@ -3,8 +3,16 @@ import { GraphQLUpload } from 'graphql-upload';
 import { Arg, Ctx } from 'type-graphql';
 import { createWriteStream } from 'fs';
 import { Stream } from 'stream';
-import { getPrismaFromContext } from 'src/type_graphql/helpers';
+import { Request } from 'express';
 import { PrismaClient } from '.prisma/client';
+import { Dropbox } from 'dropbox';
+import { File } from '../../type_graphql/models';
+
+const config = {
+  accessToken: process.env.DROPBOX_TOKEN,
+};
+
+const dbx = new Dropbox(config);
 
 interface Upload {
   filename: string;
@@ -15,47 +23,43 @@ interface Upload {
 
 @TypeGraphQL.Resolver()
 export class UploadFile {
-  @TypeGraphQL.Mutation((_returns) => Boolean, {
+  @TypeGraphQL.Mutation((_returns) => File, {
     nullable: false,
   })
   async uploadFile(
-    @Ctx() ctx: { prisma: PrismaClient },
+    @Ctx() ctx: { prisma: PrismaClient; req: Request },
     @Arg('file', () => GraphQLUpload) { createReadStream, filename }: Upload
-  ): Promise<Boolean> {
-    console.log(
-      await new Promise(async (resolve, reject) =>
-        createReadStream()
-          .pipe(createWriteStream(__dirname + `/../../../uploads/${filename}`))
-          .on('finish', async (e) => {
-            console.log(e);
-            const file = await ctx.prisma.file.create({
-              data: {
-                name: 'test',
-                path: 'test',
-                size: 2,
-                type: 'test',
-                is_disabled: false,
-                user: {
-                  connect: {
-                    id: '0d5215f1-f3f2-40c9-8875-35e7d3c01341',
-                  },
-                },
-                project: {
-                  connect: {
-                    id: '2e4912bb-7491-4251-ab70-108495cc6039',
-                  },
-                },
-              },
-            });
-            console.log(file);
-            resolve(true);
-          })
-          .on('error', (e) => {
-            console.log(e);
-            reject(false);
-          })
-      )
-    );
-    return true;
+  ): Promise<File> {
+    const { userId, projectId } = ctx.req.query;
+
+    const file = await dbx.filesUpload({
+      contents: createReadStream(),
+      path: `/${userId}/${projectId}/${filename}`,
+    });
+    const link = await dbx.sharingCreateSharedLinkWithSettings({
+      path: file.result.path_display as string,
+    });
+
+    const newFile = await ctx.prisma.file.create({
+      data: {
+        name: filename,
+        path: link.result.url,
+        size: 2,
+        type: 'test',
+        is_disabled: false,
+        user: {
+          connect: {
+            id: userId as string,
+          },
+        },
+        project: {
+          connect: {
+            id: projectId as string,
+          },
+        },
+      },
+    });
+
+    return newFile;
   }
 }

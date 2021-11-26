@@ -1,0 +1,22 @@
+
+GIT
+
+Maj branch sans écraser les changements locaux : git rebase <branch name>
+
+
+delete remote branch : git push origin --delete <branch name> <branch name>
+
+
+
+
+DOCKER
+
+
+kill all : docker container prune ( WARNING )
+
+kill an image : docker rm <ID>
+
+show all running containers : docker ps -a
+
+LINUX : 
+afficher les variables d'env dans un container "printenv"
