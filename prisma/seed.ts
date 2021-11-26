@@ -86,9 +86,13 @@ const seed = async () => {
         data: {
           ...newProjectData,
 
-          ownerId:
-            createdManagers[Math.floor(Math.random() * createdManagers.length)]
-              .id,
+          owner: {
+            connect: {
+              id: createdManagers[
+                Math.floor(Math.random() * createdManagers.length)
+              ].id,
+            },
+          },
 
           users: {
             connect: slicedUsers(),
@@ -102,6 +106,7 @@ const seed = async () => {
   const allProjects = await prisma.project.findMany({
     include: {
       users: true,
+      owner: true,
     },
   });
 
@@ -140,7 +145,11 @@ const seed = async () => {
 
   logGenerated({ entity: createdTasks, name: 'Tasks' });
 
-  const AllTasks = await prisma.task.findMany();
+  const AllTasks = await prisma.task.findMany({
+    include: {
+      project: true,
+    },
+  });
 
   // TASKS NOTIFICATIONS
   console.log('🌱 Generate 200 Task Notifications ...');
@@ -150,14 +159,17 @@ const seed = async () => {
         Math.random() * createdProjects.length
       );
       const randomProjectId = allProjects[randomProjectIndex].id;
-
+      const randomProjectManagerId = allProjects[randomProjectIndex].owner.id;
       return prisma.notification.create({
         data: {
           ...newNotificationData,
 
-          senderId:
-            createdManagers[Math.floor(Math.random() * createdManagers.length)]
-              .id,
+          sender: {
+            connect: {
+              id: randomProjectManagerId,
+            },
+          },
+
           type: 'PROJECT',
 
           status: randomNotificationStatus(),
@@ -183,20 +195,24 @@ const seed = async () => {
     name: 'Tasks Notifications',
   });
 
-  // PROJECT NOTIFICATIONS
-  console.log('🌱 Generate 200 Project Notifications ...');
+  // TASK NOTIFICATIONS
+  console.log('🌱 Generate 200 Tasks Notifications ...');
   const createdUserProjectNotifications = await Promise.all(
     fakeUserNotifications.map((newNotificationData) => {
       const randomTaskIndex = Math.floor(Math.random() * AllTasks.length);
-      const randomTaskId = AllTasks[randomTaskIndex].projectId;
+      const randomTaskId = AllTasks[randomTaskIndex].id;
+      const randomProjectOwnerId =
+        AllTasks[randomTaskIndex].project.project_owner_id;
 
       return prisma.notification.create({
         data: {
           ...newNotificationData,
 
-          senderId:
-            createdManagers[Math.floor(Math.random() * createdManagers.length)]
-              .id,
+          sender: {
+            connect: {
+              id: randomProjectOwnerId,
+            },
+          },
 
           type: 'TASK',
 
@@ -206,7 +222,7 @@ const seed = async () => {
 
           user: {
             connect: {
-              id: AllTasks[randomTaskIndex].userId,
+              id: AllTasks[randomTaskIndex].user_id,
             },
           },
         },
@@ -216,37 +232,49 @@ const seed = async () => {
 
   logGenerated({
     entity: createdUserProjectNotifications,
-    name: 'Projects Notifications',
+    name: 'Tasks Notifications',
   });
 
   // PROJECT NOTIFICATIONS
-  console.log('🌱 Generate 10 Notifications ...');
+  console.log('🌱 Generate 10 Project Notifications ...');
   const createdProjectNotification = await Promise.all(
-    fakeUserNotifications.map((newNotificationData) =>
-      prisma.notification.create({
+    fakeUserNotifications.map((newNotificationData) => {
+      const randomProjectIndex = Math.floor(
+        Math.random() * createdProjects.length
+      );
+      const randomProjectId = allProjects[randomProjectIndex].id;
+      const randomProjectManagerId = allProjects[randomProjectIndex].owner.id;
+      const randomProjectUserId =
+        allProjects[randomProjectIndex].users[
+          Math.floor(
+            Math.random() * allProjects[randomProjectIndex].users.length
+          )
+        ].id;
+      return prisma.notification.create({
         data: {
           ...newNotificationData,
-          senderId:
-            createdManagers[Math.floor(Math.random() * createdManagers.length)]
-              .id,
+
+          sender: {
+            connect: {
+              id: randomProjectManagerId,
+            },
+          },
+
           type: 'PROJECT',
           status: randomNotificationStatus(),
-          reference_id:
-            createdProjects[Math.floor(Math.random() * createdProjects.length)]
-              .id,
+          reference_id: randomProjectId,
           user: {
             connect: {
-              id: createdUsers[Math.floor(Math.random() * createdUsers.length)]
-                .id,
+              id: randomProjectUserId,
             },
           },
         },
-      })
-    )
+      });
+    })
   );
   logGenerated({
     entity: createdProjectNotification,
-    name: 'Notification Tasks',
+    name: 'Projects Notifications',
   });
 
   // TASKS COMMENTS
