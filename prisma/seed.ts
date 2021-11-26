@@ -255,7 +255,6 @@ const seed = async () => {
             Math.random() * allProjects[randomProjectIndex].users.length
           )
         ].id;
-
       return prisma.notification.create({
         data: {
           ...newNotificationData,
