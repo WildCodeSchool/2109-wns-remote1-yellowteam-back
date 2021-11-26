@@ -15,23 +15,25 @@ datasource db {
 }
 
 model User {
-  id                String         @id @default(uuid())
-  first_name        String
-  last_name         String
-  email             String         @unique
-  password          String
-  is_disabled       Boolean
-  avatar           String
-  role              Role[]
-  projects          Project[]
-  task              Task[]
-  files             File[]
-  task_comments     Comment[]      @relation("task_comments")
-  project_comments  Comment[]      @relation("project_comments")
-  invitations       Invitation[]
-  notifications     Notification[]
-  owned_projects    Project[]      @relation("project_owner")
-  notifications_sent Notification[]  @relation("notification_sender")
+  id                 String         @id @default(uuid())
+  first_name         String
+  last_name          String
+  email              String         @unique
+  password           String
+  is_disabled        Boolean
+  avatar             String
+  role               Role[]
+  projects           Project[]
+  task               Task[]
+  files              File[]
+  task_comments      Comment[]      @relation("task_comments")
+  project_comments   Comment[]      @relation("project_comments")
+  invitations        Invitation[]
+  notifications      Notification[]
+  owned_projects     Project[]      @relation("project_owner")
+  notifications_sent Notification[] @relation("notification_sender")
+  created_at         DateTime       @default(now())
+  updated_at         DateTime       @updatedAt
 }
 
 model Project {
@@ -88,6 +90,8 @@ model Comment {
   user_task_comments      User?    @relation("task_comments", fields: [project_comment_user_id], references: [id])
   user_project_comments   User?    @relation("project_comments", references: [id], fields: [task_comment_user_id])
   project_comment_user_id String?
+  created_at              DateTime @default(now())
+  updated_at              DateTime @updatedAt
 }
 
 model File {
@@ -101,7 +105,7 @@ model File {
   project     Project  @relation(fields: [project_id], references: [id])
   project_id  String
   task        Task?    @relation(fields: [task_id], references: [id])
-  task_id      String?
+  task_id     String?
   is_disabled Boolean
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
@@ -115,6 +119,8 @@ model Invitation {
   project_id String
   user       User              @relation(fields: [user_id], references: [id])
   user_id    String
+  created_at DateTime          @default(now())
+  updated_at DateTime          @updatedAt
 }
 
 model Notification {
@@ -128,7 +134,9 @@ model Notification {
   status       Status_Notification
   reference_id String
   sender       User                @relation("notification_sender", fields: [sender_id], references: [id])
-  sender_id    String              
+  sender_id    String
+  created_at   DateTime            @default(now())
+  updated_at   DateTime            @updatedAt
 }
 
 enum Status_Invitation {

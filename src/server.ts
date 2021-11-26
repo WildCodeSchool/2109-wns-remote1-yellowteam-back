@@ -8,10 +8,11 @@ import {
 import { buildSchema } from 'type-graphql';
 import { resolvers } from '@generated/type-graphql';
 import prisma from '../prisma/prismaClient';
+import { UploadFile } from './custom_resolvers/UploadFileResolver';
 
 const createServer = async () => {
   const schema = await buildSchema({
-    resolvers,
+    resolvers: [...resolvers, UploadFile],
     validate: false,
   });
 

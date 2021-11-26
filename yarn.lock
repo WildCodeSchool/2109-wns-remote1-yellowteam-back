@@ -2368,6 +2368,13 @@ dotenv@^8.1.0:
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.6.0.tgz#061af664d19f7f4d8fc6e4ff9b584ce237adcb8b"
   integrity sha512-IrPdXQsk2BbzvCBGBOTmmSH5SodmqZNt4ERAZDmW4CT+tL8VtvinqywuANaFu4bOMWki16nqf0e4oC0QIaDr/g==
 
+dropbox@^10.22.0:
+  version "10.22.0"
+  resolved "https://registry.yarnpkg.com/dropbox/-/dropbox-10.22.0.tgz#b642739a9b64278041a27c15af4958adfcf15630"
+  integrity sha512-tnWBAE6NJa6UUlekXuEqTvjqEg/cgg9IwnfZZJTmnDizLqA3pZOaYDFFkAV7RU6bIKjx4B5DOb5H+qKkISAnlQ==
+  dependencies:
+    node-fetch "^2.6.1"
+
 dynamic-dedupe@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/dynamic-dedupe/-/dynamic-dedupe-0.3.0.tgz#06e44c223f5e4e94d78ef9db23a6515ce2f962a1"
