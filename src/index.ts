@@ -19,6 +19,7 @@ const { PORT } = process.env;
     app,
     cors: {
       origin: '*',
+      credentials: true,
     },
   });
 

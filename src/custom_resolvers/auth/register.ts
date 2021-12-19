@@ -1,27 +1,33 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { User } from '@generated/type-graphql';
+import bcrypt from 'bcrypt';
 import { Arg, Ctx, Mutation, Resolver } from 'type-graphql';
 import { PrismaClient } from '@prisma/client';
-import { RegisterBody } from '../models/Register';
+import { Request } from 'express';
+import { User } from '@generated/type-graphql';
+import { RegisterInput, UserWithoutCountAndPassword } from '../models/register';
 
 @Resolver()
 export class RegisterResolver {
-  @Mutation(() => User, { nullable: true })
+  @Mutation(() => User)
   async register(
-    @Ctx() ctx: { prisma: PrismaClient },
-    @Arg('register', () => RegisterBody) register: RegisterBody
-  ): Promise<Boolean> {
-    await ctx.prisma.user.create({
+    @Ctx() ctx: { prisma: PrismaClient; req: Request },
+    @Arg('data') data: RegisterInput
+  ): Promise<UserWithoutCountAndPassword> {
+    const hashedPassword = bcrypt.hashSync(data.password, 10);
+
+    const user = await ctx.prisma.user.create({
       data: {
-        first_name: register.first_name,
-        last_name: register.last_name,
-        email: register.email,
-        password: register.password,
+        first_name: data.first_name,
+        last_name: data.last_name,
+        email: data.email,
+        password: hashedPassword,
         is_disabled: false,
         role: ['USER'],
       },
     });
 
-    return true;
+    const { password, ...userWithoutPassword } = user;
+
+    return userWithoutPassword;
   }
 }

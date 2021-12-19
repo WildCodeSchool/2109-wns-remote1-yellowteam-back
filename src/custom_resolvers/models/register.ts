@@ -1,7 +1,10 @@
+import { User } from '@prisma/client';
 import { Field, InputType } from 'type-graphql';
 
-@InputType({ description: 'Data needed to register a new user' })
-export declare class RegisterBody {
+export type UserWithoutCountAndPassword = Omit<User, 'password'>;
+
+@InputType()
+export class RegisterInput {
   @Field()
   first_name: string;
 
