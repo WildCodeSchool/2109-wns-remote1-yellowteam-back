@@ -21,7 +21,7 @@ model User {
   email              String         @unique
   password           String
   is_disabled        Boolean
-  avatar             String
+  avatar             String?
   role               Role[]
   projects           Project[]
   task               Task[]
