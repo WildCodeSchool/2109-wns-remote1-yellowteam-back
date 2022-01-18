@@ -4,6 +4,7 @@ import {
   ApolloServerPluginLandingPageGraphQLPlayground,
   ApolloServerPluginLandingPageDisabled,
 } from 'apollo-server-core';
+import customAuthChecker from '@utils/customAuthChecker';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { buildSchema } from 'type-graphql';
 import { resolvers } from '@generated/type-graphql';
@@ -16,6 +17,7 @@ const createServer = async () => {
   const schema = await buildSchema({
     resolvers: [...resolvers, UploadFile, RegisterResolver, LoginResolver],
     validate: false,
+    authChecker: customAuthChecker,
   });
 
   const server = new ApolloServer({
@@ -32,4 +34,5 @@ const createServer = async () => {
   });
   return server;
 };
+
 export default createServer;
