@@ -6,30 +6,28 @@ import {
 import { Authorized } from 'type-graphql';
 import { Role } from '@prisma/client';
 
-console.log('Role', Role);
-
 const resolversEnhanceMap: ResolversEnhanceMap = {
   Comment: {
-    _all: [Authorized(Role.SUPER_ADMIN)],
+    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
   },
   File: {
-    _all: [Authorized(Role.SUPER_ADMIN)],
+    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
   },
   Invitation: {
-    _all: [Authorized(Role.SUPER_ADMIN)],
+    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
   },
   Notification: {
-    _all: [Authorized(Role.SUPER_ADMIN)],
+    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
   },
   Project: {
-    _all: [Authorized(Role.SUPER_ADMIN)],
+    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
   },
   Task: {
-    _all: [Authorized(Role.SUPER_ADMIN)],
+    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
   },
   User: {
-    _all: [Authorized(Role.SUPER_ADMIN)],
+    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
   },
 };
 
-applyResolversEnhanceMap(resolversEnhanceMap);
+export const Resolve = () => applyResolversEnhanceMap(resolversEnhanceMap);

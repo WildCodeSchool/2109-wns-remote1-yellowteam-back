@@ -4,16 +4,18 @@ import {
   ApolloServerPluginLandingPageGraphQLPlayground,
   ApolloServerPluginLandingPageDisabled,
 } from 'apollo-server-core';
-import customAuthChecker from '@utils/customAuthChecker';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { buildSchema } from 'type-graphql';
 import { resolvers } from '@generated/type-graphql';
 import prisma from '../prisma/prismaClient';
+import customAuthChecker from './utils/customAuthChecker';
 import { UploadFile } from './custom_resolvers/UploadFileResolver';
 import { RegisterResolver } from './custom_resolvers/auth/register';
 import { LoginResolver } from './custom_resolvers/auth/login';
+import { Resolve } from './authConfig';
 
 const createServer = async () => {
+  Resolve();
   const schema = await buildSchema({
     resolvers: [...resolvers, UploadFile, RegisterResolver, LoginResolver],
     validate: false,
