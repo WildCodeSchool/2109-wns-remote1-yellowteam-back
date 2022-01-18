@@ -4,6 +4,7 @@ import { AuthChecker } from 'type-graphql';
 import Cookies from 'cookies';
 
 import jwt, { JwtPayload } from 'jsonwebtoken';
+import { ApolloError } from 'apollo-server-core';
 
 const customAuthChecker: AuthChecker<{
   req: Request;
@@ -14,16 +15,18 @@ const customAuthChecker: AuthChecker<{
 
   const token = cookies.get('token');
 
-  if (!token) return false;
+  if (!token) throw new ApolloError('U have to be logged in');
+
   const user = jwt.verify(
     token,
     process.env.JWT_SECRET as string
   ) as JwtPayload;
 
-  if (!user) return false;
+  if (!user) throw new ApolloError('U have to be logged in');
 
   if (roles.find((role) => user.role.includes(role))) return true;
 
-  return false;
+  throw new ApolloError('Acces denied');
 };
+
 export default customAuthChecker;

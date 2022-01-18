@@ -6,6 +6,8 @@ import {
 import { Authorized } from 'type-graphql';
 import { Role } from '@prisma/client';
 
+// TODO  - Change the roles before production
+
 const resolversEnhanceMap: ResolversEnhanceMap = {
   Comment: {
     _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
