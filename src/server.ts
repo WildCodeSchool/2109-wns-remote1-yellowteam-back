@@ -8,23 +8,33 @@ import {
 import { buildSchema } from 'type-graphql';
 import { resolvers } from '@generated/type-graphql';
 import prisma from '../prisma/prismaClient';
+import customAuthChecker from './utils/customAuthChecker';
+import { UploadFile } from './custom_resolvers/UploadFileResolver';
+import { RegisterResolver } from './custom_resolvers/auth/register';
+import { LoginResolver } from './custom_resolvers/auth/login';
+import { Resolve } from './authConfig';
 
 const createServer = async () => {
+  Resolve();
   const schema = await buildSchema({
-    resolvers,
+    resolvers: [...resolvers, UploadFile, RegisterResolver, LoginResolver],
     validate: false,
+    authChecker: customAuthChecker,
   });
 
   const server = new ApolloServer({
     schema,
-    context: async ({ req }) => ({ prisma, req }),
+    context: async ({ req, res }) => ({ prisma, req, res }),
+
     plugins: [
       process.env.NODE_ENV === 'production'
         ? ApolloServerPluginLandingPageDisabled()
         : ApolloServerPluginLandingPageGraphQLPlayground(),
     ],
+
     introspection: true,
   });
   return server;
 };
+
 export default createServer;
