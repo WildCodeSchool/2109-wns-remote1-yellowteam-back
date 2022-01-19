@@ -26,7 +26,7 @@ const { PORT } = process.env;
   const serverStartLogs = () => {
     console.log(`Server running on http://localhost:${PORT || 4000}/ 🪐🌶️. `);
     console.log(
-      `GraphQL running on http://localhost:${PORT}/${server.graphqlPath}. 👍🐉`
+      `GraphQL running on http://localhost:${PORT}${server.graphqlPath}. 👍🐉`
     );
   };
 
