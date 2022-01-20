@@ -1,10 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
+import { Role } from '@prisma/client';
+import { Authorized } from 'type-graphql';
 import {
   ResolversEnhanceMap,
   applyResolversEnhanceMap,
-} from '@generated/type-graphql';
-import { Authorized } from 'type-graphql';
-import { Role } from '@prisma/client';
+} from './generated/graphql/enhance';
 
 // TODO  - Change the roles before production
 
