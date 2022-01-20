@@ -3,7 +3,7 @@ import 'reflect-metadata';
 import dotenv from 'dotenv';
 import { graphqlUploadExpress } from 'graphql-upload';
 import createServer from './server';
-import app from './app';
+import app, { httpServer } from './socketServer';
 
 dotenv.config();
 const { PORT } = process.env;
@@ -18,7 +18,7 @@ const { PORT } = process.env;
   server.applyMiddleware({
     app,
     cors: {
-      origin: '*',
+      origin: 'http://localhost:3000',
       credentials: true,
     },
   });
@@ -31,7 +31,7 @@ const { PORT } = process.env;
   };
 
   await new Promise((resolve) =>
-    app.listen(PORT || 4000, () => {
+    httpServer.listen(PORT || 4000, () => {
       resolve(serverStartLogs());
     })
   );

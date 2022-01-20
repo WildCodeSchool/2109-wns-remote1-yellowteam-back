@@ -27,6 +27,7 @@
     "apollo-server-express": "^3.5.0",
     "bcrypt": "^5.0.1",
     "class-validator": "^0.13.2",
+    "cookies": "^0.8.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "dotenv-cli": "^4.1.0",
@@ -41,9 +42,9 @@
     "luxon": "^2.1.1",
     "prisma": "^3.5.0",
     "reflect-metadata": "^0.1.13",
+    "socket.io": "^4.4.1",
     "stream-promise": "^3.2.0",
     "ts-jest": "^27.0.7",
-    "cookies": "^0.8.0",
     "type-graphql": "^1.1.1"
   },
   "devDependencies": {
