@@ -4,7 +4,7 @@ import cors from 'cors';
 
 const app = express();
 
-app.use(express.json());
+App.use(express.json());
 
 app.use(
   cors({
@@ -15,3 +15,4 @@ app.use(
 app.get('/', (req, res) => res.status(200).send('Hello World'));
 
 export default app;
+

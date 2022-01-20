@@ -14,7 +14,8 @@
     "deploy": "npm run build && npx prisma generate && npx prisma migrate deploy && node ./dist/src/index.js",
     "test": "dotenv -e .env.test jest --watch && dotenv -e .env.test -- npx prisma migrate reset -f",
     "migrate:postgres": "dotenv -e .env.test -- npx prisma migrate dev --name postgres-init && dotenv -e .env -- npx prisma migrate dev --name postgres-init",
-    "reset:postgres": "dotenv -e .env.test -- npx prisma migrate reset -f && dotenv -e .env -- npx prisma migrate reset -f"
+    "reset:postgres": "dotenv -e .env.test -- npx prisma migrate reset -f && dotenv -e .env -- npx prisma migrate reset -f",
+    "studio:test": "dotenv -e .env.test -- npx prisma studio"
   },
   "dependencies": {
     "@prisma/client": "^3.5.0",
