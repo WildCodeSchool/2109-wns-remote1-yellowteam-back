@@ -8,7 +8,7 @@
     "lint": "eslint --ext .ts,.tsx --fix src/",
     "prettify": "prettier --write src/",
     "fmt-lint": "yarn run prettify && yarn run lint",
-    "start": "node ./dist/src/index.js",
+    "start": "npx prisma generate && node ./dist/src/index.js",
     "seed": "npx prisma migrate reset && ts-node prisma/seed.ts",
     "build": "npx prisma generate && npx prisma migrate deploy && tsc",
     "deploy": "npm run build && npx prisma generate && npx prisma migrate deploy && node ./dist/src/index.js",
