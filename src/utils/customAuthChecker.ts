@@ -14,8 +14,6 @@ const customAuthChecker: AuthChecker<{
   const cookies = new Cookies(context.req, context.res);
 
   const token = context.req.cookies.token || cookies.get('token');
-  console.log('cookies', context.req.cookies.token);
-  console.log(token);
 
   if (!token) throw new ApolloError('U have to be logged in');
 

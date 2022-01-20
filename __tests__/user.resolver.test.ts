@@ -101,8 +101,6 @@ describe('server start and return correct values from queries', () => {
     const AllUsersResult = await server.executeOperation({
       query: GET_USERS,
     });
-    console.log('query', AllUsersResult?.data?.users[0]);
-    console.log('prisma', allPrismaUsers[0]);
 
     expect(AllUsersResult.errors).toBeUndefined();
     expect(AllUsersResult.data!.users).toEqual(allPrismaUsers);
