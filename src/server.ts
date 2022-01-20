@@ -13,11 +13,18 @@ import { UploadFile } from './custom_resolvers/UploadFileResolver';
 import { RegisterResolver } from './custom_resolvers/auth/register';
 import { LoginResolver } from './custom_resolvers/auth/login';
 import { Resolve } from './authConfig';
+import { MeResolver } from './custom_resolvers/auth/me';
 
 const createServer = async () => {
   Resolve();
   const schema = await buildSchema({
-    resolvers: [...resolvers, UploadFile, RegisterResolver, LoginResolver],
+    resolvers: [
+      ...resolvers,
+      UploadFile,
+      RegisterResolver,
+      LoginResolver,
+      MeResolver,
+    ],
     validate: false,
     authChecker: customAuthChecker,
   });
