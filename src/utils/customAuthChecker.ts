@@ -2,7 +2,6 @@ import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
 import { AuthChecker } from 'type-graphql';
 import Cookies from 'cookies';
-
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import { ApolloError } from 'apollo-server-core';
 
