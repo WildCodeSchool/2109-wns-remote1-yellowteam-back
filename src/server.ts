@@ -3,7 +3,7 @@ import { ApolloServer } from 'apollo-server-express';
 import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { buildSchema } from 'type-graphql';
-import { resolvers } from '@generated/type-graphql';
+import { resolvers } from './generated/graphql';
 import prisma from '../prisma/prismaClient';
 import customAuthChecker from './utils/customAuthChecker';
 import { UploadFile } from './custom_resolvers/UploadFileResolver';
