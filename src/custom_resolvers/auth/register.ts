@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import { Arg, Ctx, Mutation, Resolver } from 'type-graphql';
 import { PrismaClient } from '@prisma/client';
 import { Request } from 'express';
-import { User } from '@generated/type-graphql';
+import { User } from '../../generated/graphql/models/User';
 import { RegisterInput, UserWithoutCountAndPassword } from '../models/register';
 
 @Resolver()

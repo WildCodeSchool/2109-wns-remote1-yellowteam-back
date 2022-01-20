@@ -1,7 +1,18 @@
 import express from 'express';
 
-const App = express();
+import cors from 'cors';
+
+const app = express();
 
 App.use(express.json());
 
-export default App;
+app.use(
+  cors({
+    origin: '*',
+  })
+);
+
+app.get('/', (req, res) => res.status(200).send('Hello World'));
+
+export default app;
+

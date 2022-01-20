@@ -8,5 +8,6 @@ dev.sqlite3
 .env
 package-lock.json
 dist
+./dist
 /dist
-.dist/
+
