@@ -8,10 +8,10 @@
     "lint": "eslint --ext .ts,.tsx --fix src/",
     "prettify": "prettier --write src/",
     "fmt-lint": "yarn run prettify && yarn run lint",
-    "start": "ts-node ./src/index.ts",
+    "start": "npx prisma generate && npx prisma migrate dev && npm run build &&  node ./dist/src/index.js",
     "seed": "npx prisma migrate reset && ts-node prisma/seed.ts",
-    "build": "tsc",
-    "deploy": "npx prisma generate && node ./dist/src/index.js",
+    "build": "npx prisma generate && npx prisma migrate dev && tsc",
+    "deploy": "npm run build && npx prisma generate && npx prisma migrate dev && node ./dist/src/index.js",
     "test": "dotenv -e .env.test jest --watch && dotenv -e .env.test -- npx prisma migrate reset -f",
     "migrate:postgres": "dotenv -e .env.test -- npx prisma migrate dev --name postgres-init && dotenv -e .env -- npx prisma migrate dev --name postgres-init",
     "reset:postgres": "dotenv -e .env.test -- npx prisma migrate reset -f && dotenv -e .env -- npx prisma migrate reset -f"
