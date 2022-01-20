@@ -3,8 +3,8 @@ import bcrypt from 'bcrypt';
 import { Arg, Ctx, Mutation, Resolver } from 'type-graphql';
 import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
-import { User } from '@generated/type-graphql';
 import jwt from 'jsonwebtoken';
+import { User } from '../../generated/graphql/models/User';
 import { UserWithoutCountAndPassword } from '../models/register';
 import { LoginInput } from '../models/login';
 

@@ -2,10 +2,10 @@
 import { GraphQLUpload } from 'graphql-upload';
 import { Arg, Authorized, Ctx, Mutation, Resolver } from 'type-graphql';
 import { Stream } from 'stream';
-import { File } from '@generated/type-graphql';
 import { Request } from 'express';
 import { Dropbox } from 'dropbox';
 import { PrismaClient } from '.prisma/client';
+import { File } from '../generated/graphql/models/File';
 
 const config = {
   accessToken: process.env.DROPBOX_TOKEN,
