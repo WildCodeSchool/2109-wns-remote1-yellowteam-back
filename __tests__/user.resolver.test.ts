@@ -57,17 +57,17 @@ describe('server start and return correct values from queries', () => {
       req: {
         headers: {
           'Set-cookies':
-            'token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmZyIiwiaWQiOiI0YzdjNTQ4Zi1hYThhLTRhNjctOTA2OS0zM2I1NTM5MWQ1ZGUiLCJyb2xlIjpbIkFETUlOIl0sImlhdCI6MTY0MjY3NDEwNywiZXhwIjoxNjQyNzYwNTA3fQ.8GGQv8r2ibGKvTrlzMTEOCtwlHfASc6Ipr2yEcf53Yg',
+            'token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmZyIiwiaWQiOiI4MDBlNDVmNC02NDgxLTQ1NDgtOTVmNC0xMDhlOTZlM2NiY2IiLCJyb2xlIjpbIkFETUlOIl0sImlhdCI6MTY0Mjc2MDcyMywiZXhwIjoxNjQyODQ3MTIzfQ.6dWQxbbXlG2p6gQ0tWfS4xx3BGTJGvfcRjNCoJNSLE0',
           token:
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmZyIiwiaWQiOiI0YzdjNTQ4Zi1hYThhLTRhNjctOTA2OS0zM2I1NTM5MWQ1ZGUiLCJyb2xlIjpbIkFETUlOIl0sImlhdCI6MTY0MjY3NDEwNywiZXhwIjoxNjQyNzYwNTA3fQ.8GGQv8r2ibGKvTrlzMTEOCtwlHfASc6Ipr2yEcf53Yg',
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmZyIiwiaWQiOiI4MDBlNDVmNC02NDgxLTQ1NDgtOTVmNC0xMDhlOTZlM2NiY2IiLCJyb2xlIjpbIkFETUlOIl0sImlhdCI6MTY0Mjc2MDcyMywiZXhwIjoxNjQyODQ3MTIzfQ.6dWQxbbXlG2p6gQ0tWfS4xx3BGTJGvfcRjNCoJNSLE0',
           cookies: {
             token:
-              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmZyIiwiaWQiOiI0YzdjNTQ4Zi1hYThhLTRhNjctOTA2OS0zM2I1NTM5MWQ1ZGUiLCJyb2xlIjpbIkFETUlOIl0sImlhdCI6MTY0MjY3NDEwNywiZXhwIjoxNjQyNzYwNTA3fQ.8GGQv8r2ibGKvTrlzMTEOCtwlHfASc6Ipr2yEcf53Yg',
+              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmZyIiwiaWQiOiI4MDBlNDVmNC02NDgxLTQ1NDgtOTVmNC0xMDhlOTZlM2NiY2IiLCJyb2xlIjpbIkFETUlOIl0sImlhdCI6MTY0Mjc2MDcyMywiZXhwIjoxNjQyODQ3MTIzfQ.6dWQxbbXlG2p6gQ0tWfS4xx3BGTJGvfcRjNCoJNSLE0',
           },
         },
         cookies: {
           token:
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmZyIiwiaWQiOiI0YzdjNTQ4Zi1hYThhLTRhNjctOTA2OS0zM2I1NTM5MWQ1ZGUiLCJyb2xlIjpbIkFETUlOIl0sImlhdCI6MTY0MjY3NDEwNywiZXhwIjoxNjQyNzYwNTA3fQ.8GGQv8r2ibGKvTrlzMTEOCtwlHfASc6Ipr2yEcf53Yg',
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmZyIiwiaWQiOiI4MDBlNDVmNC02NDgxLTQ1NDgtOTVmNC0xMDhlOTZlM2NiY2IiLCJyb2xlIjpbIkFETUlOIl0sImlhdCI6MTY0Mjc2MDcyMywiZXhwIjoxNjQyODQ3MTIzfQ.6dWQxbbXlG2p6gQ0tWfS4xx3BGTJGvfcRjNCoJNSLE0',
         },
       },
     };
