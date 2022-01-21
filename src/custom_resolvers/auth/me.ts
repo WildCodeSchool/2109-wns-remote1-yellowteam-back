@@ -46,7 +46,11 @@ export class MeResolver {
 
     const { password, ...userWithoutPassword } = prismaUser;
 
-    cookies.set('token', newToken);
+    cookies.set('token', newToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+    });
+
 
     ctx.res.setHeader('Access-Control-Allow-Credentials', 'true');
 
