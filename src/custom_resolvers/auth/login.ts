@@ -4,6 +4,7 @@ import { Arg, Ctx, Mutation, Resolver } from 'type-graphql';
 import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
+import Cookies from 'cookies';
 import { User } from '../../generated/graphql/models/User';
 import { UserWithoutCountAndPassword } from '../models/register';
 import { LoginInput } from '../models/login';
@@ -15,6 +16,7 @@ export class LoginResolver {
     @Ctx() ctx: { prisma: PrismaClient; req: Request; res: Response },
     @Arg('data') data: LoginInput
   ): Promise<UserWithoutCountAndPassword> {
+    const cookies = new Cookies(ctx.req, ctx.res);
     const user = await ctx.prisma.user.findUnique({
       where: {
         email: data.email,
@@ -41,10 +43,12 @@ export class LoginResolver {
 
     const { password, ...userWithoutPassword } = user;
 
-    ctx.res.cookie('token', token, {
+    cookies.set('token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
     });
+
+    ctx.res.setHeader('Access-Control-Allow-Credentials', 'true');
 
     return userWithoutPassword;
   }
