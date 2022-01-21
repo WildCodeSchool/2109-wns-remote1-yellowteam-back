@@ -43,11 +43,12 @@ export class LoginResolver {
     );
 
     const { password, ...userWithoutPassword } = user;
-
+      
     cookies.set('token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
     });
+
 
     ctx.res.setHeader('Access-Control-Allow-Credentials', 'true');
 
