@@ -46,6 +46,7 @@ export class LoginResolver {
     cookies.set('token', token, {
       httpOnly: true,
       secure: false,
+      domain: process.env.CLIENT_URL,
     });
 
     ctx.res.setHeader('Access-Control-Allow-Credentials', 'true');
