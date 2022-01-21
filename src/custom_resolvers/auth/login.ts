@@ -43,11 +43,7 @@ export class LoginResolver {
 
     const { password, ...userWithoutPassword } = user;
 
-    cookies.set('token', token, {
-      httpOnly: true,
-      secure: false,
-      domain: process.env.CLIENT_URL,
-    });
+    cookies.set('token', token);
 
     ctx.res.setHeader('Access-Control-Allow-Credentials', 'true');
 
