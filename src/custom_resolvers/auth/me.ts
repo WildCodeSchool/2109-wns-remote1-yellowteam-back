@@ -55,6 +55,7 @@ export class MeResolver {
           : 'http://localhost:3000',
     });
 
+
     ctx.res.setHeader('Access-Control-Allow-Credentials', 'true');
 
     return userWithoutPassword;
