@@ -17,6 +17,7 @@ export class LoginResolver {
     @Arg('data') data: LoginInput
   ): Promise<UserWithoutCountAndPassword> {
     const cookies = new Cookies(ctx.req, ctx.res);
+
     const user = await ctx.prisma.user.findUnique({
       where: {
         email: data.email,
@@ -45,8 +46,7 @@ export class LoginResolver {
 
     cookies.set('token', token, {
       httpOnly: true,
-      secure: false,
-      domain: process.env.CLIENT_URL,
+      secure: process.env.NODE_ENV === 'production',
     });
 
     ctx.res.setHeader('Access-Control-Allow-Credentials', 'true');
