@@ -49,6 +49,10 @@ export class MeResolver {
     cookies.set('token', newToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
+      domain:
+        process.env.NODE_ENV === 'production'
+          ? 'https://ytask-client.vercel.app/'
+          : 'http://localhost:3000',
     });
 
     ctx.res.setHeader('Access-Control-Allow-Credentials', 'true');
