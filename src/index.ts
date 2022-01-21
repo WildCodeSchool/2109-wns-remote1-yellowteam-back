@@ -18,7 +18,7 @@ const { PORT } = process.env;
   server.applyMiddleware({
     app,
     cors: {
-      origin: '*',
+      origin: process.env.CLIENT_URL,
       credentials: true,
     },
   });

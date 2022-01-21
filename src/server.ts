@@ -1,12 +1,9 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { ApolloServer } from 'apollo-server-express';
-import {
-  ApolloServerPluginLandingPageGraphQLPlayground,
-  ApolloServerPluginLandingPageDisabled,
-} from 'apollo-server-core';
+import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { buildSchema } from 'type-graphql';
-import { resolvers } from '@generated/type-graphql';
+import { resolvers } from './generated/graphql';
 import prisma from '../prisma/prismaClient';
 import customAuthChecker from './utils/customAuthChecker';
 import { UploadFile } from './custom_resolvers/UploadFileResolver';
@@ -33,11 +30,7 @@ const createServer = async () => {
     schema,
     context: async ({ req, res }) => ({ prisma, req, res }),
 
-    plugins: [
-      process.env.NODE_ENV === 'production'
-        ? ApolloServerPluginLandingPageDisabled()
-        : ApolloServerPluginLandingPageGraphQLPlayground(),
-    ],
+    plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
 
     introspection: true,
   });

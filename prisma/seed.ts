@@ -22,12 +22,12 @@ const seed = async () => {
   const fakeProjects = new Array(10).fill('').map(() => newProject());
   const fakeTasks = new Array(20).fill('').map(() => newTask());
   const fakeUsers = new Array(30).fill('').map(() => newUser());
-  const fakeTaskComments = new Array(200).fill('').map(() => newTaskComment());
-  const fakeProjectsComments = new Array(200)
+  const fakeTaskComments = new Array(100).fill('').map(() => newTaskComment());
+  const fakeProjectsComments = new Array(100)
     .fill('')
     .map(() => newProjectComment());
 
-  const fakeUserNotifications = new Array(200)
+  const fakeUserNotifications = new Array(100)
     .fill('')
     .map(() => newNotification());
 

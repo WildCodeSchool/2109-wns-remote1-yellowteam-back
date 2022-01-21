@@ -8,13 +8,14 @@
     "lint": "eslint --ext .ts,.tsx --fix src/",
     "prettify": "prettier --write src/",
     "fmt-lint": "yarn run prettify && yarn run lint",
-    "start": "ts-node ./src/index.ts",
+    "start": "node ./dist/src/index.js",
     "seed": "npx prisma migrate reset && ts-node prisma/seed.ts",
-    "build": "tsc",
-    "deploy": "npx prisma generate && node ./dist/src/index.js",
+    "build": "npx prisma generate && npx prisma migrate deploy && tsc",
+    "deploy": "npm run build && npx prisma generate && npx prisma migrate deploy && node ./dist/src/index.js",
     "test": "dotenv -e .env.test jest --watch && dotenv -e .env.test -- npx prisma migrate reset -f",
     "migrate:postgres": "dotenv -e .env.test -- npx prisma migrate dev --name postgres-init && dotenv -e .env -- npx prisma migrate dev --name postgres-init",
-    "reset:postgres": "dotenv -e .env.test -- npx prisma migrate reset -f && dotenv -e .env -- npx prisma migrate reset -f"
+    "reset:postgres": "dotenv -e .env.test -- npx prisma migrate reset -f && dotenv -e .env -- npx prisma migrate reset -f",
+    "studio:test": "dotenv -e .env.test -- npx prisma studio"
   },
   "dependencies": {
     "@prisma/client": "^3.5.0",
@@ -27,11 +28,12 @@
     "apollo-server-express": "^3.5.0",
     "bcrypt": "^5.0.1",
     "class-validator": "^0.13.2",
+    "cookies": "^0.8.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "dotenv-cli": "^4.1.0",
     "dropbox": "^10.22.0",
-    "express": "^4.17.1",
+    "express": "^4.17.2",
     "faker": "^5.5.3",
     "graphql": "15.7.2",
     "graphql-fields": "^2.0.3",
@@ -43,8 +45,8 @@
     "reflect-metadata": "^0.1.13",
     "stream-promise": "^3.2.0",
     "ts-jest": "^27.0.7",
-    "cookies": "^0.8.0",
-    "type-graphql": "^1.1.1"
+    "type-graphql": "^1.1.1",
+    "typegraphql-prisma": "^0.18.2"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
