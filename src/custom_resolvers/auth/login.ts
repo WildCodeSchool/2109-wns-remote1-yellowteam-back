@@ -41,7 +41,10 @@ export class LoginResolver {
 
     const { password, ...userWithoutPassword } = user;
 
-    ctx.res.cookie('token', token);
+    ctx.res.cookie('token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+    });
 
     return userWithoutPassword;
   }
