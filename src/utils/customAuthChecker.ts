@@ -12,8 +12,9 @@ const customAuthChecker: AuthChecker<{
   prisma: PrismaClient;
 }> = ({ context }, roles) => {
   const cookies = new Cookies(context.req, context.res);
-
-  const token = context.req.cookies.token || cookies.get('token');
+  const token = context.req.cookies
+    ? context.req.cookies.token
+    : cookies.get('token');
 
   if (!token) throw new ApolloError('U have to be logged in');
 
