@@ -22,13 +22,13 @@ const resolversEnhanceMap: ResolversEnhanceMap = {
     _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
   },
   Project: {
-    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
+    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN, Role.MANAGER, Role.USER)],
   },
   Task: {
-    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
+    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN, Role.MANAGER, Role.USER)],
   },
   User: {
-    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN)],
+    _all: [Authorized(Role.SUPER_ADMIN, Role.ADMIN, Role.MANAGER, Role.USER)],
   },
 };
 
