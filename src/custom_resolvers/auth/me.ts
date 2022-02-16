@@ -51,8 +51,8 @@ export class MeResolver {
       secure: process.env.NODE_ENV === 'production',
       domain:
         process.env.NODE_ENV === 'production'
-          ? 'http://localhost:3000'
-          : 'https://ytask-client.vercel.app/',
+          ? 'https://ytask-client.vercel.app/'
+          : 'http://localhost:3000',
     });
 
     ctx.res.setHeader('Access-Control-Allow-Credentials', 'true');
