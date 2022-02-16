@@ -25,7 +25,7 @@ model User {
   avatar             String?
   role               Role[]
   projects           Project[]
-  task               Task[]
+  tasks              Task[]
   files              File[]
   task_comments      Comment[]      @relation("task_comments")
   project_comments   Comment[]      @relation("project_comments")
