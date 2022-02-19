@@ -57,7 +57,7 @@ export class User {
 
   projects?: Project[];
 
-  task?: Task[];
+  tasks?: Task[];
 
   files?: File[];
 

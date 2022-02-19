@@ -13,8 +13,8 @@ import { UserNotifications_sentArgs } from "./args/UserNotifications_sentArgs";
 import { UserOwned_projectsArgs } from "./args/UserOwned_projectsArgs";
 import { UserProject_commentsArgs } from "./args/UserProject_commentsArgs";
 import { UserProjectsArgs } from "./args/UserProjectsArgs";
-import { UserTaskArgs } from "./args/UserTaskArgs";
 import { UserTask_commentsArgs } from "./args/UserTask_commentsArgs";
+import { UserTasksArgs } from "./args/UserTasksArgs";
 import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => User)
@@ -33,12 +33,12 @@ export class UserRelationsResolver {
   @TypeGraphQL.FieldResolver(_type => [Task], {
     nullable: false
   })
-  async task(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserTaskArgs): Promise<Task[]> {
+  async tasks(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserTasksArgs): Promise<Task[]> {
     return getPrismaFromContext(ctx).user.findUnique({
       where: {
         id: user.id,
       },
-    }).task(args);
+    }).tasks(args);
   }
 
   @TypeGraphQL.FieldResolver(_type => [File], {

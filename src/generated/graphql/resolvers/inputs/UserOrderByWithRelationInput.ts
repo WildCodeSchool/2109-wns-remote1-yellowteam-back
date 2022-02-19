@@ -62,7 +62,7 @@ export class UserOrderByWithRelationInput {
   @TypeGraphQL.Field(_type => TaskOrderByRelationAggregateInput, {
     nullable: true
   })
-  task?: TaskOrderByRelationAggregateInput | undefined;
+  tasks?: TaskOrderByRelationAggregateInput | undefined;
 
   @TypeGraphQL.Field(_type => FileOrderByRelationAggregateInput, {
     nullable: true

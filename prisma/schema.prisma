@@ -7,7 +7,7 @@ generator client {
 
 generator typegraphql {
   provider = "typegraphql-prisma"
-  output = "../src/generated/graphql"
+  output   = "../src/generated/graphql"
 }
 
 datasource db {
@@ -47,7 +47,7 @@ model Project {
   private          Boolean
   is_disabled      Boolean
   status_project   Status
-  total_time_spent Int
+  total_time_spent Int          @default(0)
   start_date       DateTime
   end_date         DateTime
   due_date         DateTime

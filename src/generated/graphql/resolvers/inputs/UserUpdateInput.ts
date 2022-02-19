@@ -79,7 +79,7 @@ export class UserUpdateInput {
   @TypeGraphQL.Field(_type => TaskUpdateManyWithoutUserInput, {
     nullable: true
   })
-  task?: TaskUpdateManyWithoutUserInput | undefined;
+  tasks?: TaskUpdateManyWithoutUserInput | undefined;
 
   @TypeGraphQL.Field(_type => FileUpdateManyWithoutUserInput, {
     nullable: true
