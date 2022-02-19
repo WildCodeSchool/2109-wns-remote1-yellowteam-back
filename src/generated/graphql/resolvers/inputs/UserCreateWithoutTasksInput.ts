@@ -12,10 +12,10 @@ import { ProjectCreateNestedManyWithoutOwnerInput } from "../inputs/ProjectCreat
 import { ProjectCreateNestedManyWithoutUsersInput } from "../inputs/ProjectCreateNestedManyWithoutUsersInput";
 import { UserCreateroleInput } from "../inputs/UserCreateroleInput";
 
-@TypeGraphQL.InputType("UserCreateWithoutTaskInput", {
+@TypeGraphQL.InputType("UserCreateWithoutTasksInput", {
   isAbstract: true
 })
-export class UserCreateWithoutTaskInput {
+export class UserCreateWithoutTasksInput {
   @TypeGraphQL.Field(_type => String, {
     nullable: true
   })

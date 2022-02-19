@@ -4,7 +4,7 @@ import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { FileCreateNestedManyWithoutTaskInput } from "../inputs/FileCreateNestedManyWithoutTaskInput";
 import { ProjectCreateNestedOneWithoutTasksInput } from "../inputs/ProjectCreateNestedOneWithoutTasksInput";
-import { UserCreateNestedOneWithoutTaskInput } from "../inputs/UserCreateNestedOneWithoutTaskInput";
+import { UserCreateNestedOneWithoutTasksInput } from "../inputs/UserCreateNestedOneWithoutTasksInput";
 import { Status } from "../../enums/Status";
 
 @TypeGraphQL.InputType("TaskCreateWithoutCommentsInput", {
@@ -66,10 +66,10 @@ export class TaskCreateWithoutCommentsInput {
   })
   updated_at?: Date | undefined;
 
-  @TypeGraphQL.Field(_type => UserCreateNestedOneWithoutTaskInput, {
+  @TypeGraphQL.Field(_type => UserCreateNestedOneWithoutTasksInput, {
     nullable: false
   })
-  user!: UserCreateNestedOneWithoutTaskInput;
+  user!: UserCreateNestedOneWithoutTasksInput;
 
   @TypeGraphQL.Field(_type => ProjectCreateNestedOneWithoutTasksInput, {
     nullable: false

@@ -339,8 +339,8 @@ export { UserCreateNestedOneWithoutNotificationsInput } from "./UserCreateNested
 export { UserCreateNestedOneWithoutNotifications_sentInput } from "./UserCreateNestedOneWithoutNotifications_sentInput";
 export { UserCreateNestedOneWithoutOwned_projectsInput } from "./UserCreateNestedOneWithoutOwned_projectsInput";
 export { UserCreateNestedOneWithoutProject_commentsInput } from "./UserCreateNestedOneWithoutProject_commentsInput";
-export { UserCreateNestedOneWithoutTaskInput } from "./UserCreateNestedOneWithoutTaskInput";
 export { UserCreateNestedOneWithoutTask_commentsInput } from "./UserCreateNestedOneWithoutTask_commentsInput";
+export { UserCreateNestedOneWithoutTasksInput } from "./UserCreateNestedOneWithoutTasksInput";
 export { UserCreateOrConnectWithoutFilesInput } from "./UserCreateOrConnectWithoutFilesInput";
 export { UserCreateOrConnectWithoutInvitationsInput } from "./UserCreateOrConnectWithoutInvitationsInput";
 export { UserCreateOrConnectWithoutNotificationsInput } from "./UserCreateOrConnectWithoutNotificationsInput";
@@ -348,8 +348,8 @@ export { UserCreateOrConnectWithoutNotifications_sentInput } from "./UserCreateO
 export { UserCreateOrConnectWithoutOwned_projectsInput } from "./UserCreateOrConnectWithoutOwned_projectsInput";
 export { UserCreateOrConnectWithoutProject_commentsInput } from "./UserCreateOrConnectWithoutProject_commentsInput";
 export { UserCreateOrConnectWithoutProjectsInput } from "./UserCreateOrConnectWithoutProjectsInput";
-export { UserCreateOrConnectWithoutTaskInput } from "./UserCreateOrConnectWithoutTaskInput";
 export { UserCreateOrConnectWithoutTask_commentsInput } from "./UserCreateOrConnectWithoutTask_commentsInput";
+export { UserCreateOrConnectWithoutTasksInput } from "./UserCreateOrConnectWithoutTasksInput";
 export { UserCreateWithoutFilesInput } from "./UserCreateWithoutFilesInput";
 export { UserCreateWithoutInvitationsInput } from "./UserCreateWithoutInvitationsInput";
 export { UserCreateWithoutNotificationsInput } from "./UserCreateWithoutNotificationsInput";
@@ -357,8 +357,8 @@ export { UserCreateWithoutNotifications_sentInput } from "./UserCreateWithoutNot
 export { UserCreateWithoutOwned_projectsInput } from "./UserCreateWithoutOwned_projectsInput";
 export { UserCreateWithoutProject_commentsInput } from "./UserCreateWithoutProject_commentsInput";
 export { UserCreateWithoutProjectsInput } from "./UserCreateWithoutProjectsInput";
-export { UserCreateWithoutTaskInput } from "./UserCreateWithoutTaskInput";
 export { UserCreateWithoutTask_commentsInput } from "./UserCreateWithoutTask_commentsInput";
+export { UserCreateWithoutTasksInput } from "./UserCreateWithoutTasksInput";
 export { UserCreateroleInput } from "./UserCreateroleInput";
 export { UserListRelationFilter } from "./UserListRelationFilter";
 export { UserMaxOrderByAggregateInput } from "./UserMaxOrderByAggregateInput";
@@ -378,7 +378,7 @@ export { UserUpdateOneRequiredWithoutInvitationsInput } from "./UserUpdateOneReq
 export { UserUpdateOneRequiredWithoutNotificationsInput } from "./UserUpdateOneRequiredWithoutNotificationsInput";
 export { UserUpdateOneRequiredWithoutNotifications_sentInput } from "./UserUpdateOneRequiredWithoutNotifications_sentInput";
 export { UserUpdateOneRequiredWithoutOwned_projectsInput } from "./UserUpdateOneRequiredWithoutOwned_projectsInput";
-export { UserUpdateOneRequiredWithoutTaskInput } from "./UserUpdateOneRequiredWithoutTaskInput";
+export { UserUpdateOneRequiredWithoutTasksInput } from "./UserUpdateOneRequiredWithoutTasksInput";
 export { UserUpdateOneWithoutProject_commentsInput } from "./UserUpdateOneWithoutProject_commentsInput";
 export { UserUpdateOneWithoutTask_commentsInput } from "./UserUpdateOneWithoutTask_commentsInput";
 export { UserUpdateWithWhereUniqueWithoutProjectsInput } from "./UserUpdateWithWhereUniqueWithoutProjectsInput";
@@ -389,8 +389,8 @@ export { UserUpdateWithoutNotifications_sentInput } from "./UserUpdateWithoutNot
 export { UserUpdateWithoutOwned_projectsInput } from "./UserUpdateWithoutOwned_projectsInput";
 export { UserUpdateWithoutProject_commentsInput } from "./UserUpdateWithoutProject_commentsInput";
 export { UserUpdateWithoutProjectsInput } from "./UserUpdateWithoutProjectsInput";
-export { UserUpdateWithoutTaskInput } from "./UserUpdateWithoutTaskInput";
 export { UserUpdateWithoutTask_commentsInput } from "./UserUpdateWithoutTask_commentsInput";
+export { UserUpdateWithoutTasksInput } from "./UserUpdateWithoutTasksInput";
 export { UserUpdateroleInput } from "./UserUpdateroleInput";
 export { UserUpsertWithWhereUniqueWithoutProjectsInput } from "./UserUpsertWithWhereUniqueWithoutProjectsInput";
 export { UserUpsertWithoutFilesInput } from "./UserUpsertWithoutFilesInput";
@@ -399,7 +399,7 @@ export { UserUpsertWithoutNotificationsInput } from "./UserUpsertWithoutNotifica
 export { UserUpsertWithoutNotifications_sentInput } from "./UserUpsertWithoutNotifications_sentInput";
 export { UserUpsertWithoutOwned_projectsInput } from "./UserUpsertWithoutOwned_projectsInput";
 export { UserUpsertWithoutProject_commentsInput } from "./UserUpsertWithoutProject_commentsInput";
-export { UserUpsertWithoutTaskInput } from "./UserUpsertWithoutTaskInput";
 export { UserUpsertWithoutTask_commentsInput } from "./UserUpsertWithoutTask_commentsInput";
+export { UserUpsertWithoutTasksInput } from "./UserUpsertWithoutTasksInput";
 export { UserWhereInput } from "./UserWhereInput";
 export { UserWhereUniqueInput } from "./UserWhereUniqueInput";

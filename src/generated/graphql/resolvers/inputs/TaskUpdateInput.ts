@@ -10,7 +10,7 @@ import { FileUpdateManyWithoutTaskInput } from "../inputs/FileUpdateManyWithoutT
 import { IntFieldUpdateOperationsInput } from "../inputs/IntFieldUpdateOperationsInput";
 import { ProjectUpdateOneRequiredWithoutTasksInput } from "../inputs/ProjectUpdateOneRequiredWithoutTasksInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
-import { UserUpdateOneRequiredWithoutTaskInput } from "../inputs/UserUpdateOneRequiredWithoutTaskInput";
+import { UserUpdateOneRequiredWithoutTasksInput } from "../inputs/UserUpdateOneRequiredWithoutTasksInput";
 
 @TypeGraphQL.InputType("TaskUpdateInput", {
   isAbstract: true
@@ -71,10 +71,10 @@ export class TaskUpdateInput {
   })
   updated_at?: DateTimeFieldUpdateOperationsInput | undefined;
 
-  @TypeGraphQL.Field(_type => UserUpdateOneRequiredWithoutTaskInput, {
+  @TypeGraphQL.Field(_type => UserUpdateOneRequiredWithoutTasksInput, {
     nullable: true
   })
-  user?: UserUpdateOneRequiredWithoutTaskInput | undefined;
+  user?: UserUpdateOneRequiredWithoutTasksInput | undefined;
 
   @TypeGraphQL.Field(_type => ProjectUpdateOneRequiredWithoutTasksInput, {
     nullable: true

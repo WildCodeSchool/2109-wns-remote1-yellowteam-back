@@ -69,7 +69,7 @@ export class UserCreateWithoutProjectsInput {
   @TypeGraphQL.Field(_type => TaskCreateNestedManyWithoutUserInput, {
     nullable: true
   })
-  task?: TaskCreateNestedManyWithoutUserInput | undefined;
+  tasks?: TaskCreateNestedManyWithoutUserInput | undefined;
 
   @TypeGraphQL.Field(_type => FileCreateNestedManyWithoutUserInput, {
     nullable: true

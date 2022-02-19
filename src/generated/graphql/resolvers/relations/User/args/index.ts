@@ -5,5 +5,5 @@ export { UserNotifications_sentArgs } from "./UserNotifications_sentArgs";
 export { UserOwned_projectsArgs } from "./UserOwned_projectsArgs";
 export { UserProject_commentsArgs } from "./UserProject_commentsArgs";
 export { UserProjectsArgs } from "./UserProjectsArgs";
-export { UserTaskArgs } from "./UserTaskArgs";
 export { UserTask_commentsArgs } from "./UserTask_commentsArgs";
+export { UserTasksArgs } from "./UserTasksArgs";

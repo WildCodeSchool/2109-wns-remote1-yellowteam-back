@@ -2,20 +2,20 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
-import { UserCreateWithoutTaskInput } from "../inputs/UserCreateWithoutTaskInput";
+import { UserCreateWithoutTasksInput } from "../inputs/UserCreateWithoutTasksInput";
 import { UserWhereUniqueInput } from "../inputs/UserWhereUniqueInput";
 
-@TypeGraphQL.InputType("UserCreateOrConnectWithoutTaskInput", {
+@TypeGraphQL.InputType("UserCreateOrConnectWithoutTasksInput", {
   isAbstract: true
 })
-export class UserCreateOrConnectWithoutTaskInput {
+export class UserCreateOrConnectWithoutTasksInput {
   @TypeGraphQL.Field(_type => UserWhereUniqueInput, {
     nullable: false
   })
   where!: UserWhereUniqueInput;
 
-  @TypeGraphQL.Field(_type => UserCreateWithoutTaskInput, {
+  @TypeGraphQL.Field(_type => UserCreateWithoutTasksInput, {
     nullable: false
   })
-  create!: UserCreateWithoutTaskInput;
+  create!: UserCreateWithoutTasksInput;
 }

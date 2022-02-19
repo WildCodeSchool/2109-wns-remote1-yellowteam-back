@@ -1,33 +1,32 @@
 import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
 import { AuthChecker } from 'type-graphql';
-import Cookies from 'cookies';
+import mobileClientAuthChecker from './mobileClientAuthChecker';
+import clientTypeChecker from './platformTypeChecker';
 
-import jwt, { JwtPayload } from 'jsonwebtoken';
-import { ApolloError } from 'apollo-server-core';
+import webClientAuthCheck from './webClientAuthCheck';
 
 const customAuthChecker: AuthChecker<{
   req: Request;
   res: Response;
   prisma: PrismaClient;
-}> = ({ context }, roles) => {
-  const cookies = new Cookies(context.req, context.res);
-  const token = context.req.cookies
-    ? context.req.cookies.token
-    : cookies.get('token');
-
-  if (!token) throw new ApolloError('U have to be logged in');
-
-  const user = jwt.verify(
-    token,
-    process.env.JWT_SECRET as string
-  ) as JwtPayload;
-
-  if (!user) throw new ApolloError('U have to be logged in');
-
-  if (roles.find((role) => user.role.includes(role))) return true;
-
-  throw new ApolloError('Acces denied');
+}> = async ({ context }, roles) => {
+  if (
+    clientTypeChecker(context.req) === 'web' &&
+    (await webClientAuthCheck(context, roles))
+  ) {
+    return true;
+  }
+  if (
+    clientTypeChecker(context.req) === 'mobile' &&
+    (await mobileClientAuthChecker(context, roles))
+  ) {
+    return true;
+  }
+  if (await webClientAuthCheck(context, roles)) {
+    return true;
+  }
+  return false;
 };
 
 export default customAuthChecker;
