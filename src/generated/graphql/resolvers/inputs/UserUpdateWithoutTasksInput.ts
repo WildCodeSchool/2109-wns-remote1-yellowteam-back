@@ -16,10 +16,10 @@ import { ProjectUpdateManyWithoutUsersInput } from "../inputs/ProjectUpdateManyW
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 import { UserUpdateroleInput } from "../inputs/UserUpdateroleInput";
 
-@TypeGraphQL.InputType("UserUpdateWithoutTaskInput", {
+@TypeGraphQL.InputType("UserUpdateWithoutTasksInput", {
   isAbstract: true
 })
-export class UserUpdateWithoutTaskInput {
+export class UserUpdateWithoutTasksInput {
   @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
     nullable: true
   })

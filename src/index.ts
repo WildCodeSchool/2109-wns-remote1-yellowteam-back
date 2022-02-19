@@ -20,6 +20,7 @@ const { PORT } = process.env;
     cors: {
       origin: process.env.CLIENT_URL,
       credentials: true,
+      exposedHeaders: ['x-authorization'],
     },
   });
 

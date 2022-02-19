@@ -6,7 +6,7 @@ import { TaskWhereUniqueInput } from "../../../inputs/TaskWhereUniqueInput";
 import { TaskScalarFieldEnum } from "../../../../enums/TaskScalarFieldEnum";
 
 @TypeGraphQL.ArgsType()
-export class UserTaskArgs {
+export class UserTasksArgs {
   @TypeGraphQL.Field(_type => TaskWhereInput, {
     nullable: true
   })
