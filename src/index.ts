@@ -2,8 +2,8 @@
 import 'reflect-metadata';
 import dotenv from 'dotenv';
 import { graphqlUploadExpress } from 'graphql-upload';
-import createServer from './server';
 import app from './app';
+import createServer, { httpServer } from './server';
 
 dotenv.config();
 const { PORT } = process.env;
@@ -23,7 +23,6 @@ const { PORT } = process.env;
       exposedHeaders: ['x-authorization'],
     },
   });
-
   const serverStartLogs = () => {
     console.log(`Server running on http://localhost:${PORT || 4000}/ 🪐🌶️. `);
     console.log(
@@ -32,7 +31,7 @@ const { PORT } = process.env;
   };
 
   await new Promise((resolve) =>
-    app.listen(PORT || 4000, () => {
+    httpServer.listen(PORT || 4000, async () => {
       resolve(serverStartLogs());
     })
   );

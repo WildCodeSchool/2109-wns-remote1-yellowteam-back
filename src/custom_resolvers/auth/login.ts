@@ -1,5 +1,14 @@
+/* eslint-disable no-console */
 /* eslint-disable import/no-extraneous-dependencies */
-import { Arg, Ctx, Mutation, Resolver } from 'type-graphql';
+import {
+  Arg,
+  Ctx,
+  Mutation,
+  Publisher,
+  PubSub,
+  PubSubEngine,
+  Resolver,
+} from 'type-graphql';
 import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
 import loginJWTCookies from '../../utils/loginJWTCookies';
@@ -13,9 +22,23 @@ import { LoginInput } from '../models/login';
 export class LoginResolver {
   @Mutation(() => User)
   async login(
-    @Ctx() ctx: { prisma: PrismaClient; req: Request; res: Response },
-    @Arg('data') data: LoginInput
+    @Ctx()
+    ctx: {
+      prisma: PrismaClient;
+      req: Request;
+      res: Response;
+      pubsub: PubSubEngine;
+    },
+    @Arg('data') data: LoginInput,
+    @PubSub('NOTIFICATIONS') publish: Publisher<{ content: string }>
   ): Promise<UserWithoutCountAndPassword> {
+    try {
+      await publish({ content: 'test' });
+      await ctx.pubsub.publish('NOTIFICATIONS', 'test');
+    } catch (error) {
+      console.log(error);
+    }
+
     if (platformTypeChecker(ctx.req) === 'web') {
       return loginJWTCookies(ctx, data);
     }
