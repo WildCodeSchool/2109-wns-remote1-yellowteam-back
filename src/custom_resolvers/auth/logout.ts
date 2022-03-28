@@ -12,6 +12,6 @@ export class LogoutResolver {
   ): Promise<String> {
     const cookies = new Cookies(ctx.req, ctx.res);
     cookies.set('token', '');
-    return 'User successfully logged out';
+      return 'User successfully logged out';
   }
 }
