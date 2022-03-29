@@ -45,9 +45,9 @@ export class ProjectCreateInput {
   status_project!: "IN_PROGRESS" | "NOT_STARTED" | "FIHISHED";
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false
+    nullable: true
   })
-  total_time_spent!: number;
+  total_time_spent?: number | undefined;
 
   @TypeGraphQL.Field(_type => Date, {
     nullable: false
