@@ -4,9 +4,25 @@ import dotenv from 'dotenv';
 import { graphqlUploadExpress } from 'graphql-upload';
 import createServer from './server';
 import app from './app';
+import whitelist from './constants/cors.whitelist';
 
 dotenv.config();
 const { PORT } = process.env;
+
+const corsOptions = {
+  origin: (
+    origin: string | undefined,
+    callback: (err: Error | null, check?: boolean) => Error | void
+  ) => {
+    if (whitelist.indexOf(origin as string) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  exposedHeaders: ['x-authorization'],
+};
 
 (async () => {
   const server = await createServer();
@@ -17,11 +33,7 @@ const { PORT } = process.env;
 
   server.applyMiddleware({
     app,
-    cors: {
-      origin: process.env.CLIENT_URL,
-      credentials: true,
-      exposedHeaders: ['x-authorization'],
-    },
+    cors: corsOptions,
   });
 
   const serverStartLogs = () => {
