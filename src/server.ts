@@ -14,6 +14,7 @@ import { RegisterResolver } from './custom_resolvers/auth/register';
 import { LoginResolver } from './custom_resolvers/auth/login';
 import { Resolve } from './authConfig';
 import { MeResolver } from './custom_resolvers/auth/me';
+import { LogoutResolver } from './custom_resolvers/auth/logout';
 
 const createServer = async () => {
   Resolve();
@@ -24,6 +25,7 @@ const createServer = async () => {
       RegisterResolver,
       LoginResolver,
       MeResolver,
+      LogoutResolver
     ],
     validate: false,
     authChecker: customAuthChecker,
