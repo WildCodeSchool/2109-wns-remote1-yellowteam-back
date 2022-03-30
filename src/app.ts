@@ -6,6 +6,8 @@ const app = express();
 
 app.use(express.json());
 
+const whitelistedUrls = whitelist || [];
+
 const corsOptions = {
   origin: (
     origin: string | undefined,
@@ -14,7 +16,7 @@ const corsOptions = {
     if (process.env.NODE_ENV === 'development') {
       return callback(null, true);
     }
-    if (whitelist.indexOf(origin as string) !== -1) {
+    if (whitelistedUrls.indexOf(origin as string) !== -1) {
       return callback(null, true);
     }
     return callback(new Error('Not allowed by CORS'));
