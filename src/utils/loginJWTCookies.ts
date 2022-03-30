@@ -3,7 +3,9 @@ import bcrypt from 'bcrypt';
 import Cookies from 'cookies';
 
 const loginJWTCookies = async (ctx, data) => {
-  const cookies = new Cookies(ctx.req, ctx.res);
+  const cookies = new Cookies(ctx.req, ctx.res, {
+    secure: process.env.NODE_ENV === 'production',
+  });
 
   const user = await ctx.prisma.user.findUnique({
     where: {
@@ -34,6 +36,7 @@ const loginJWTCookies = async (ctx, data) => {
   cookies.set('token', token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
   });
 
   ctx.res.setHeader('Access-Control-Allow-Credentials', 'true');

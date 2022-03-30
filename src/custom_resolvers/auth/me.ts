@@ -15,7 +15,9 @@ export class MeResolver {
     @Ctx() ctx: { prisma: PrismaClient; req: Request; res: Response }
   ): Promise<UserWithoutCountAndPassword> {
     if (platformTypeChecker(ctx.req) === 'web') {
-      const cookies = new Cookies(ctx.req, ctx.res);
+      const cookies = new Cookies(ctx.req, ctx.res, {
+        secure: process.env.NODE_ENV === 'production',
+      });
 
       const token = cookies.get('token');
 
@@ -51,10 +53,7 @@ export class MeResolver {
       cookies.set('token', newToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
-        domain:
-          process.env.NODE_ENV === 'production'
-            ? 'https://ytask-client.vercel.app/'
-            : 'http://localhost:3000',
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
       });
 
       ctx.res.setHeader('Access-Control-Allow-Credentials', 'true');
