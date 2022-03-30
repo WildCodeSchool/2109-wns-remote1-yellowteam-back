@@ -11,11 +11,13 @@ const corsOptions = {
     origin: string | undefined,
     callback: (err: Error | null, check?: boolean) => Error | void
   ) => {
-    if (whitelist.indexOf(origin as string) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
+    if (process.env.NODE_ENV === 'development') {
+      return callback(null, true);
     }
+    if (whitelist.indexOf(origin as string) !== -1) {
+      return callback(null, true);
+    }
+    return callback(new Error('Not allowed by CORS'));
   },
   credentials: true,
   exposedHeaders: ['x-authorization'],
