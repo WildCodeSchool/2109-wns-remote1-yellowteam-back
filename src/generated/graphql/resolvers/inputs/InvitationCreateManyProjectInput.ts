@@ -24,9 +24,9 @@ export class InvitationCreateManyProjectInput {
   email!: string;
 
   @TypeGraphQL.Field(_type => String, {
-    nullable: false
+    nullable: true
   })
-  user_id!: string;
+  user_id?: string | undefined;
 
   @TypeGraphQL.Field(_type => Date, {
     nullable: true

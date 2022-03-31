@@ -229,7 +229,7 @@ const seed = async () => {
 
           user: {
             connect: {
-              id: AllTasks[randomTaskIndex].user_id,
+              id: AllTasks[randomTaskIndex].user_id as string,
             },
           },
         },
@@ -387,7 +387,7 @@ const seed = async () => {
     fakeTaskFiles.map((newFileData) => {
       const randomTaskIndex = Math.floor(Math.random() * AllTasks.length);
       const randomTaskId = AllTasks[randomTaskIndex].id;
-      const taskUserId = AllTasks[randomTaskIndex].user.id;
+      const taskUserId = AllTasks[randomTaskIndex]!.user!.id as string;
       const randomTaskProjectId = AllTasks[randomTaskIndex].project.id;
 
       return prisma.file.create({

@@ -8,10 +8,10 @@ import { UserUpdateWithoutFilesInput } from "../inputs/UserUpdateWithoutFilesInp
 import { UserUpsertWithoutFilesInput } from "../inputs/UserUpsertWithoutFilesInput";
 import { UserWhereUniqueInput } from "../inputs/UserWhereUniqueInput";
 
-@TypeGraphQL.InputType("UserUpdateOneRequiredWithoutFilesInput", {
+@TypeGraphQL.InputType("UserUpdateOneWithoutFilesInput", {
   isAbstract: true
 })
-export class UserUpdateOneRequiredWithoutFilesInput {
+export class UserUpdateOneWithoutFilesInput {
   @TypeGraphQL.Field(_type => UserCreateWithoutFilesInput, {
     nullable: true
   })
@@ -26,6 +26,16 @@ export class UserUpdateOneRequiredWithoutFilesInput {
     nullable: true
   })
   upsert?: UserUpsertWithoutFilesInput | undefined;
+
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: true
+  })
+  disconnect?: boolean | undefined;
+
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: true
+  })
+  delete?: boolean | undefined;
 
   @TypeGraphQL.Field(_type => UserWhereUniqueInput, {
     nullable: true

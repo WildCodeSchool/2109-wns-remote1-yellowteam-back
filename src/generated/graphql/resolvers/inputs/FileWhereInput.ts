@@ -60,10 +60,10 @@ export class FileWhereInput {
   })
   user?: UserRelationFilter | undefined;
 
-  @TypeGraphQL.Field(_type => StringFilter, {
+  @TypeGraphQL.Field(_type => StringNullableFilter, {
     nullable: true
   })
-  user_id?: StringFilter | undefined;
+  user_id?: StringNullableFilter | undefined;
 
   @TypeGraphQL.Field(_type => ProjectRelationFilter, {
     nullable: true

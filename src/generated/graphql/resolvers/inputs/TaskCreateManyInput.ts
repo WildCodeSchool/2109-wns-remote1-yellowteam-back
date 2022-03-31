@@ -54,9 +54,9 @@ export class TaskCreateManyInput {
   end_date!: Date;
 
   @TypeGraphQL.Field(_type => String, {
-    nullable: false
+    nullable: true
   })
-  user_id!: string;
+  user_id?: string | undefined;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: false

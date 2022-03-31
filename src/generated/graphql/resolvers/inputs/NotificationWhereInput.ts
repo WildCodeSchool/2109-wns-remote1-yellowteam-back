@@ -7,6 +7,7 @@ import { DateTimeFilter } from "../inputs/DateTimeFilter";
 import { EnumStatus_NotificationFilter } from "../inputs/EnumStatus_NotificationFilter";
 import { EnumType_NotificationFilter } from "../inputs/EnumType_NotificationFilter";
 import { StringFilter } from "../inputs/StringFilter";
+import { StringNullableFilter } from "../inputs/StringNullableFilter";
 import { UserRelationFilter } from "../inputs/UserRelationFilter";
 
 @TypeGraphQL.InputType("NotificationWhereInput", {
@@ -53,10 +54,10 @@ export class NotificationWhereInput {
   })
   user?: UserRelationFilter | undefined;
 
-  @TypeGraphQL.Field(_type => StringFilter, {
+  @TypeGraphQL.Field(_type => StringNullableFilter, {
     nullable: true
   })
-  user_id?: StringFilter | undefined;
+  user_id?: StringNullableFilter | undefined;
 
   @TypeGraphQL.Field(_type => EnumType_NotificationFilter, {
     nullable: true

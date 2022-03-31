@@ -6,6 +6,7 @@ import { DateTimeFilter } from "../inputs/DateTimeFilter";
 import { EnumStatus_InvitationFilter } from "../inputs/EnumStatus_InvitationFilter";
 import { ProjectRelationFilter } from "../inputs/ProjectRelationFilter";
 import { StringFilter } from "../inputs/StringFilter";
+import { StringNullableFilter } from "../inputs/StringNullableFilter";
 import { UserRelationFilter } from "../inputs/UserRelationFilter";
 
 @TypeGraphQL.InputType("InvitationWhereInput", {
@@ -57,10 +58,10 @@ export class InvitationWhereInput {
   })
   user?: UserRelationFilter | undefined;
 
-  @TypeGraphQL.Field(_type => StringFilter, {
+  @TypeGraphQL.Field(_type => StringNullableFilter, {
     nullable: true
   })
-  user_id?: StringFilter | undefined;
+  user_id?: StringNullableFilter | undefined;
 
   @TypeGraphQL.Field(_type => DateTimeFilter, {
     nullable: true
