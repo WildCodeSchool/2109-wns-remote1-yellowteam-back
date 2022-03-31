@@ -8,10 +8,10 @@ import { UserUpdateWithoutNotificationsInput } from "../inputs/UserUpdateWithout
 import { UserUpsertWithoutNotificationsInput } from "../inputs/UserUpsertWithoutNotificationsInput";
 import { UserWhereUniqueInput } from "../inputs/UserWhereUniqueInput";
 
-@TypeGraphQL.InputType("UserUpdateOneRequiredWithoutNotificationsInput", {
+@TypeGraphQL.InputType("UserUpdateOneWithoutNotificationsInput", {
   isAbstract: true
 })
-export class UserUpdateOneRequiredWithoutNotificationsInput {
+export class UserUpdateOneWithoutNotificationsInput {
   @TypeGraphQL.Field(_type => UserCreateWithoutNotificationsInput, {
     nullable: true
   })
@@ -26,6 +26,16 @@ export class UserUpdateOneRequiredWithoutNotificationsInput {
     nullable: true
   })
   upsert?: UserUpsertWithoutNotificationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: true
+  })
+  disconnect?: boolean | undefined;
+
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: true
+  })
+  delete?: boolean | undefined;
 
   @TypeGraphQL.Field(_type => UserWhereUniqueInput, {
     nullable: true

@@ -4,6 +4,7 @@ import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { DateTimeWithAggregatesFilter } from "../inputs/DateTimeWithAggregatesFilter";
 import { EnumStatus_InvitationWithAggregatesFilter } from "../inputs/EnumStatus_InvitationWithAggregatesFilter";
+import { StringNullableWithAggregatesFilter } from "../inputs/StringNullableWithAggregatesFilter";
 import { StringWithAggregatesFilter } from "../inputs/StringWithAggregatesFilter";
 
 @TypeGraphQL.InputType("InvitationScalarWhereWithAggregatesInput", {
@@ -45,10 +46,10 @@ export class InvitationScalarWhereWithAggregatesInput {
   })
   project_id?: StringWithAggregatesFilter | undefined;
 
-  @TypeGraphQL.Field(_type => StringWithAggregatesFilter, {
+  @TypeGraphQL.Field(_type => StringNullableWithAggregatesFilter, {
     nullable: true
   })
-  user_id?: StringWithAggregatesFilter | undefined;
+  user_id?: StringNullableWithAggregatesFilter | undefined;
 
   @TypeGraphQL.Field(_type => DateTimeWithAggregatesFilter, {
     nullable: true

@@ -7,7 +7,7 @@ import { DateTimeFieldUpdateOperationsInput } from "../inputs/DateTimeFieldUpdat
 import { EnumStatus_NotificationFieldUpdateOperationsInput } from "../inputs/EnumStatus_NotificationFieldUpdateOperationsInput";
 import { EnumType_NotificationFieldUpdateOperationsInput } from "../inputs/EnumType_NotificationFieldUpdateOperationsInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
-import { UserUpdateOneRequiredWithoutNotificationsInput } from "../inputs/UserUpdateOneRequiredWithoutNotificationsInput";
+import { UserUpdateOneWithoutNotificationsInput } from "../inputs/UserUpdateOneWithoutNotificationsInput";
 
 @TypeGraphQL.InputType("NotificationUpdateWithoutSenderInput", {
   isAbstract: true
@@ -58,8 +58,8 @@ export class NotificationUpdateWithoutSenderInput {
   })
   updated_at?: DateTimeFieldUpdateOperationsInput | undefined;
 
-  @TypeGraphQL.Field(_type => UserUpdateOneRequiredWithoutNotificationsInput, {
+  @TypeGraphQL.Field(_type => UserUpdateOneWithoutNotificationsInput, {
     nullable: true
   })
-  user?: UserUpdateOneRequiredWithoutNotificationsInput | undefined;
+  user?: UserUpdateOneWithoutNotificationsInput | undefined;
 }

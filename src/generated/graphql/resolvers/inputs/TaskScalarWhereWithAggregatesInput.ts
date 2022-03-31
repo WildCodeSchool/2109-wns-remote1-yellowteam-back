@@ -6,6 +6,7 @@ import { BoolWithAggregatesFilter } from "../inputs/BoolWithAggregatesFilter";
 import { DateTimeWithAggregatesFilter } from "../inputs/DateTimeWithAggregatesFilter";
 import { EnumStatusWithAggregatesFilter } from "../inputs/EnumStatusWithAggregatesFilter";
 import { IntWithAggregatesFilter } from "../inputs/IntWithAggregatesFilter";
+import { StringNullableWithAggregatesFilter } from "../inputs/StringNullableWithAggregatesFilter";
 import { StringWithAggregatesFilter } from "../inputs/StringWithAggregatesFilter";
 
 @TypeGraphQL.InputType("TaskScalarWhereWithAggregatesInput", {
@@ -72,10 +73,10 @@ export class TaskScalarWhereWithAggregatesInput {
   })
   end_date?: DateTimeWithAggregatesFilter | undefined;
 
-  @TypeGraphQL.Field(_type => StringWithAggregatesFilter, {
+  @TypeGraphQL.Field(_type => StringNullableWithAggregatesFilter, {
     nullable: true
   })
-  user_id?: StringWithAggregatesFilter | undefined;
+  user_id?: StringNullableWithAggregatesFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringWithAggregatesFilter, {
     nullable: true
