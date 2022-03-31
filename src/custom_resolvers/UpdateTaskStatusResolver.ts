@@ -10,7 +10,7 @@ import { TaskStatusInput } from './models/updateTaskStatus';
 
 @Resolver()
 export class UpdateTaskStatusResolver {
-  @Authorized()
+  @Authorized(['ADMIN', 'SUPER_ADMIN', 'USER', 'MANAGER'])
   @Mutation(() => Task)
   async updateTaskStatus(
     @Ctx() ctx: { prisma: PrismaClient; res: Response; user: TJWT_PAYLOAD },
@@ -22,14 +22,23 @@ export class UpdateTaskStatusResolver {
     if (!task) {
       throw new ApolloError('No task found');
     }
-    if (ctx.user.id !== task.user_id) {
-      throw new Error('User is not authorized to modify task status');
+
+    const projectUsers = await ctx.prisma.project
+      .findUnique({
+        where: {
+          id: task.project_id,
+        },
+      })
+      .users();
+
+    if (!projectUsers.some((user) => user.id === ctx.user.id)) {
+      throw new ApolloError('You are not allowed to update this task');
     }
 
     if (task.status_task !== data.status) {
       const updatedTask = await ctx.prisma.task.update({
         where: { id: task.id },
-        data: { status_task: task.status_task },
+        data: { status_task: data.status },
       });
       return updatedTask;
     }
