@@ -22,7 +22,7 @@ export interface Upload {
 
 @Resolver()
 export class UploadFile {
-  @Authorized()
+  @Authorized(['ADMIN', 'SUPER_ADMIN', 'USER', 'MANAGER'])
   @Mutation(() => File, {
     nullable: false,
   })
