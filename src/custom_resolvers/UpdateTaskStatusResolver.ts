@@ -3,13 +3,14 @@ import { PrismaClient } from '@prisma/client';
 import { ApolloError } from 'apollo-server-core';
 import { Response } from 'express';
 import { TJWT_PAYLOAD } from 'src/interfaces';
-import { Resolver, Mutation, Ctx, Arg } from 'type-graphql';
+import { Resolver, Mutation, Ctx, Arg, Authorized } from 'type-graphql';
 import { TaskWhereUniqueInput } from '../generated/graphql';
 import { Task } from '../generated/graphql/models/Task';
 import { TaskStatusInput } from './models/updateTaskStatus';
 
 @Resolver()
 export class UpdateTaskStatusResolver {
+  @Authorized()
   @Mutation(() => Task)
   async updateTaskStatus(
     @Ctx() ctx: { prisma: PrismaClient; res: Response; user: TJWT_PAYLOAD },
