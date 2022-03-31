@@ -14,10 +14,8 @@ const webClientAuthCheck = async (
   roles: string[]
 ) => {
   const cookies = new Cookies(context.req, context.res);
-  const token = context.req.cookies
-    ? context.req.cookies.token
-    : cookies.get('token');
-
+  const token = cookies.get('token');
+  console.log(cookies);
   if (!token) throw new ApolloError('U have to be logged in');
 
   const user = verify(token, process.env.JWT_SECRET as string) as JwtPayload;
