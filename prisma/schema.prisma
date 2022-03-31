@@ -69,8 +69,8 @@ model Task {
   total_time_spent Int
   start_date       DateTime
   end_date         DateTime
-  user             User      @relation(fields: [user_id], references: [id])
-  user_id          String
+  user             User?     @relation(fields: [user_id], references: [id])
+  user_id          String?
   project          Project   @relation(fields: [project_id], references: [id])
   project_id       String
   files            File[]
@@ -101,8 +101,8 @@ model File {
   path        String
   size        Int
   type        String
-  user        User     @relation(fields: [user_id], references: [id])
-  user_id     String
+  user        User?    @relation(fields: [user_id], references: [id])
+  user_id     String?
   project     Project  @relation(fields: [project_id], references: [id])
   project_id  String
   task        Task?    @relation(fields: [task_id], references: [id])
@@ -118,8 +118,8 @@ model Invitation {
   email      String
   project    Project           @relation(fields: [project_id], references: [id])
   project_id String
-  user       User              @relation(fields: [user_id], references: [id])
-  user_id    String
+  user       User?             @relation(fields: [user_id], references: [id])
+  user_id    String?
   created_at DateTime          @default(now())
   updated_at DateTime          @updatedAt
 }
@@ -129,8 +129,8 @@ model Notification {
   is_disabled  Boolean
   title        String
   content      String
-  user         User                @relation(fields: [user_id], references: [id])
-  user_id      String
+  user         User?               @relation(fields: [user_id], references: [id])
+  user_id      String?
   type         Type_Notification
   status       Status_Notification
   reference_id String

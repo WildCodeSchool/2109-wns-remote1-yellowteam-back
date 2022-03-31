@@ -33,9 +33,9 @@ export class FileCreateManyProjectInput {
   type!: string;
 
   @TypeGraphQL.Field(_type => String, {
-    nullable: false
+    nullable: true
   })
-  user_id!: string;
+  user_id?: string | undefined;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true

@@ -35,7 +35,7 @@ export class InvitationCreateWithoutProjectInput {
   updated_at?: Date | undefined;
 
   @TypeGraphQL.Field(_type => UserCreateNestedOneWithoutInvitationsInput, {
-    nullable: false
+    nullable: true
   })
-  user!: UserCreateNestedOneWithoutInvitationsInput;
+  user?: UserCreateNestedOneWithoutInvitationsInput | undefined;
 }

@@ -7,6 +7,7 @@ import { DateTimeFilter } from "../inputs/DateTimeFilter";
 import { EnumStatusFilter } from "../inputs/EnumStatusFilter";
 import { IntFilter } from "../inputs/IntFilter";
 import { StringFilter } from "../inputs/StringFilter";
+import { StringNullableFilter } from "../inputs/StringNullableFilter";
 
 @TypeGraphQL.InputType("TaskScalarWhereInput", {
   isAbstract: true
@@ -72,10 +73,10 @@ export class TaskScalarWhereInput {
   })
   end_date?: DateTimeFilter | undefined;
 
-  @TypeGraphQL.Field(_type => StringFilter, {
+  @TypeGraphQL.Field(_type => StringNullableFilter, {
     nullable: true
   })
-  user_id?: StringFilter | undefined;
+  user_id?: StringNullableFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringFilter, {
     nullable: true

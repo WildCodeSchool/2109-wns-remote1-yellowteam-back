@@ -18,9 +18,9 @@ export class InvitationRelationsResolver {
   }
 
   @TypeGraphQL.FieldResolver(_type => User, {
-    nullable: false
+    nullable: true
   })
-  async user(@TypeGraphQL.Root() invitation: Invitation, @TypeGraphQL.Ctx() ctx: any): Promise<User> {
+  async user(@TypeGraphQL.Root() invitation: Invitation, @TypeGraphQL.Ctx() ctx: any): Promise<User | null> {
     return getPrismaFromContext(ctx).invitation.findUnique({
       where: {
         id: invitation.id,

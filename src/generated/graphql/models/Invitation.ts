@@ -32,12 +32,12 @@ export class Invitation {
   })
   project_id!: string;
 
-  user?: User;
+  user?: User | null;
 
   @TypeGraphQL.Field(_type => String, {
-    nullable: false
+    nullable: true
   })
-  user_id!: string;
+  user_id?: string | null;
 
   @TypeGraphQL.Field(_type => Date, {
     nullable: false

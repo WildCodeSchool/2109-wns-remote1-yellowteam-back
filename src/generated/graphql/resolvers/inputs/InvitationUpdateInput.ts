@@ -6,7 +6,7 @@ import { DateTimeFieldUpdateOperationsInput } from "../inputs/DateTimeFieldUpdat
 import { EnumStatus_InvitationFieldUpdateOperationsInput } from "../inputs/EnumStatus_InvitationFieldUpdateOperationsInput";
 import { ProjectUpdateOneRequiredWithoutInvitationsInput } from "../inputs/ProjectUpdateOneRequiredWithoutInvitationsInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
-import { UserUpdateOneRequiredWithoutInvitationsInput } from "../inputs/UserUpdateOneRequiredWithoutInvitationsInput";
+import { UserUpdateOneWithoutInvitationsInput } from "../inputs/UserUpdateOneWithoutInvitationsInput";
 
 @TypeGraphQL.InputType("InvitationUpdateInput", {
   isAbstract: true
@@ -42,8 +42,8 @@ export class InvitationUpdateInput {
   })
   project?: ProjectUpdateOneRequiredWithoutInvitationsInput | undefined;
 
-  @TypeGraphQL.Field(_type => UserUpdateOneRequiredWithoutInvitationsInput, {
+  @TypeGraphQL.Field(_type => UserUpdateOneWithoutInvitationsInput, {
     nullable: true
   })
-  user?: UserUpdateOneRequiredWithoutInvitationsInput | undefined;
+  user?: UserUpdateOneWithoutInvitationsInput | undefined;
 }

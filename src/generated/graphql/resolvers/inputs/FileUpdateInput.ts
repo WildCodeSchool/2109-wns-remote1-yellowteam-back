@@ -8,7 +8,7 @@ import { IntFieldUpdateOperationsInput } from "../inputs/IntFieldUpdateOperation
 import { ProjectUpdateOneRequiredWithoutFilesInput } from "../inputs/ProjectUpdateOneRequiredWithoutFilesInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 import { TaskUpdateOneWithoutFilesInput } from "../inputs/TaskUpdateOneWithoutFilesInput";
-import { UserUpdateOneRequiredWithoutFilesInput } from "../inputs/UserUpdateOneRequiredWithoutFilesInput";
+import { UserUpdateOneWithoutFilesInput } from "../inputs/UserUpdateOneWithoutFilesInput";
 
 @TypeGraphQL.InputType("FileUpdateInput", {
   isAbstract: true
@@ -54,10 +54,10 @@ export class FileUpdateInput {
   })
   updated_at?: DateTimeFieldUpdateOperationsInput | undefined;
 
-  @TypeGraphQL.Field(_type => UserUpdateOneRequiredWithoutFilesInput, {
+  @TypeGraphQL.Field(_type => UserUpdateOneWithoutFilesInput, {
     nullable: true
   })
-  user?: UserUpdateOneRequiredWithoutFilesInput | undefined;
+  user?: UserUpdateOneWithoutFilesInput | undefined;
 
   @TypeGraphQL.Field(_type => ProjectUpdateOneRequiredWithoutFilesInput, {
     nullable: true

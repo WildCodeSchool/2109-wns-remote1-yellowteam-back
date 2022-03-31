@@ -68,9 +68,9 @@ export class TaskCreateInput {
   updated_at?: Date | undefined;
 
   @TypeGraphQL.Field(_type => UserCreateNestedOneWithoutTasksInput, {
-    nullable: false
+    nullable: true
   })
-  user!: UserCreateNestedOneWithoutTasksInput;
+  user?: UserCreateNestedOneWithoutTasksInput | undefined;
 
   @TypeGraphQL.Field(_type => ProjectCreateNestedOneWithoutTasksInput, {
     nullable: false
