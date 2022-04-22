@@ -1,10 +1,8 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import { ApolloServer } from 'apollo-server-express';
+import { ApolloServer, ExpressContext } from 'apollo-server-express';
 import {
   ApolloServerPluginLandingPageGraphQLPlayground,
   ApolloServerPluginLandingPageDisabled,
 } from 'apollo-server-core';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { buildSchema } from 'type-graphql';
 import { verify } from 'jsonwebtoken';
 import Cookies from 'cookies';
@@ -18,8 +16,9 @@ import { Resolve } from './authConfig';
 import { MeResolver } from './custom_resolvers/auth/me';
 import { LogoutResolver } from './custom_resolvers/auth/logout';
 import { UpdateTaskStatusResolver } from './custom_resolvers/UpdateTaskStatusResolver';
+import { SearchResolver } from './custom_resolvers/Search/SearchResolver';
 
-const createServer = async () => {
+const createServer = async (): Promise<ApolloServer<ExpressContext>> => {
   Resolve();
   const schema = await buildSchema({
     resolvers: [
@@ -27,6 +26,7 @@ const createServer = async () => {
       UploadFile,
       RegisterResolver,
       LoginResolver,
+      SearchResolver,
       MeResolver,
       LogoutResolver,
       UpdateTaskStatusResolver,

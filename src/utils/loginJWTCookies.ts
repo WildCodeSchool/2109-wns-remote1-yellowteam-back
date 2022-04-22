@@ -1,8 +1,16 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { sign } from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import Cookies from 'cookies';
+import { UserWithoutCountAndPassword } from 'src/custom_resolvers/models/register';
+import { Context } from 'apollo-server-core';
+import { LoginInput } from 'src/custom_resolvers/models/login';
 
-const loginJWTCookies = async (ctx, data) => {
+const loginJWTCookies = async (
+  ctx: Context<Record<string, any>>,
+  data: LoginInput
+): Promise<UserWithoutCountAndPassword> => {
   const cookies = new Cookies(ctx.req, ctx.res, {
     secure: process.env.NODE_ENV === 'production',
   });

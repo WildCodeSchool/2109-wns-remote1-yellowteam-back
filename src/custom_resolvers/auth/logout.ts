@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { Ctx, Mutation, Resolver } from 'type-graphql';
 import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
@@ -9,9 +8,9 @@ export class LogoutResolver {
   @Mutation(() => String)
   async logout(
     @Ctx() ctx: { prisma: PrismaClient; req: Request; res: Response }
-  ): Promise<String> {
+  ): Promise<string> {
     const cookies = new Cookies(ctx.req, ctx.res);
     cookies.set('token', '');
-      return 'User successfully logged out';
+    return 'User successfully logged out';
   }
 }

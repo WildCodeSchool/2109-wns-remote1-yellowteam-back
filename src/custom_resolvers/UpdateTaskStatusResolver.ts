@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { PrismaClient } from '@prisma/client';
 import { ApolloError } from 'apollo-server-core';
 import { Response } from 'express';
