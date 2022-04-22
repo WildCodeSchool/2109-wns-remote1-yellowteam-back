@@ -6,8 +6,8 @@ import * as Minio from 'minio';
 import { ApolloError } from 'apollo-server-core';
 import { Request } from 'express';
 import { PrismaClient } from '.prisma/client';
-import { File, Role } from 'src/generated/graphql';
-import getFileType from '@utils/getFileType';
+import { File, Role } from '../generated/graphql';
+import getFileType from '../utils/getFileType';
 
 const { MINIO_USERNAME, MINIO_PASSWORD, MINIO_ENDPOINT } = process.env;
 
