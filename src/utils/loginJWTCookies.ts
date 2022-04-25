@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt';
 import Cookies from 'cookies';
 import { UserWithoutCountAndPassword } from 'src/custom_resolvers/models/register';
 import { Context } from 'apollo-server-core';
-import { LoginInput } from 'src/custom_resolvers/models/login';
+import { LoginInput } from '../custom_resolvers/Inputs/login';
 
 const loginJWTCookies = async (
   ctx: Context<Record<string, any>>,
