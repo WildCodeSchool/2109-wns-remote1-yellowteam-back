@@ -6,6 +6,7 @@ import { BoolWithAggregatesFilter } from "../inputs/BoolWithAggregatesFilter";
 import { DateTimeWithAggregatesFilter } from "../inputs/DateTimeWithAggregatesFilter";
 import { EnumStatus_NotificationWithAggregatesFilter } from "../inputs/EnumStatus_NotificationWithAggregatesFilter";
 import { EnumType_NotificationWithAggregatesFilter } from "../inputs/EnumType_NotificationWithAggregatesFilter";
+import { StringNullableWithAggregatesFilter } from "../inputs/StringNullableWithAggregatesFilter";
 import { StringWithAggregatesFilter } from "../inputs/StringWithAggregatesFilter";
 
 @TypeGraphQL.InputType("NotificationScalarWhereWithAggregatesInput", {
@@ -47,10 +48,10 @@ export class NotificationScalarWhereWithAggregatesInput {
   })
   content?: StringWithAggregatesFilter | undefined;
 
-  @TypeGraphQL.Field(_type => StringWithAggregatesFilter, {
+  @TypeGraphQL.Field(_type => StringNullableWithAggregatesFilter, {
     nullable: true
   })
-  user_id?: StringWithAggregatesFilter | undefined;
+  user_id?: StringNullableWithAggregatesFilter | undefined;
 
   @TypeGraphQL.Field(_type => EnumType_NotificationWithAggregatesFilter, {
     nullable: true

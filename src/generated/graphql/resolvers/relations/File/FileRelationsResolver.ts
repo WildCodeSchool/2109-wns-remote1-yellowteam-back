@@ -8,9 +8,9 @@ import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRel
 @TypeGraphQL.Resolver(_of => File)
 export class FileRelationsResolver {
   @TypeGraphQL.FieldResolver(_type => User, {
-    nullable: false
+    nullable: true
   })
-  async user(@TypeGraphQL.Root() file: File, @TypeGraphQL.Ctx() ctx: any): Promise<User> {
+  async user(@TypeGraphQL.Root() file: File, @TypeGraphQL.Ctx() ctx: any): Promise<User | null> {
     return getPrismaFromContext(ctx).file.findUnique({
       where: {
         id: file.id,

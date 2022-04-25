@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { PrismaClient } from '@prisma/client';
 import { ApolloError } from 'apollo-server-core';
 import { Request, Response } from 'express';
@@ -11,7 +10,7 @@ const mobileClientAuthChecker = async (
     prisma: PrismaClient;
   },
   roles: string[]
-) => {
+): Promise<boolean | Error> => {
   const token = context.req.headers.authorization?.split(' ')[1];
 
   if (!token) throw new ApolloError('U have to be logged in');

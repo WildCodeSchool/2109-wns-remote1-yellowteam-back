@@ -1,0 +1,1 @@
+export { UpdateTaskStatusResolver } from './UpdateTaskStatusResolver';

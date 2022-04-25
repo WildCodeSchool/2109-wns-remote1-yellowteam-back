@@ -5,7 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { DateTimeFieldUpdateOperationsInput } from "../inputs/DateTimeFieldUpdateOperationsInput";
 import { EnumStatus_InvitationFieldUpdateOperationsInput } from "../inputs/EnumStatus_InvitationFieldUpdateOperationsInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
-import { UserUpdateOneRequiredWithoutInvitationsInput } from "../inputs/UserUpdateOneRequiredWithoutInvitationsInput";
+import { UserUpdateOneWithoutInvitationsInput } from "../inputs/UserUpdateOneWithoutInvitationsInput";
 
 @TypeGraphQL.InputType("InvitationUpdateWithoutProjectInput", {
   isAbstract: true
@@ -36,8 +36,8 @@ export class InvitationUpdateWithoutProjectInput {
   })
   updated_at?: DateTimeFieldUpdateOperationsInput | undefined;
 
-  @TypeGraphQL.Field(_type => UserUpdateOneRequiredWithoutInvitationsInput, {
+  @TypeGraphQL.Field(_type => UserUpdateOneWithoutInvitationsInput, {
     nullable: true
   })
-  user?: UserUpdateOneRequiredWithoutInvitationsInput | undefined;
+  user?: UserUpdateOneWithoutInvitationsInput | undefined;
 }

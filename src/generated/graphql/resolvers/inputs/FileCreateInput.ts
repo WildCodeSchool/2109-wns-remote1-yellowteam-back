@@ -51,9 +51,9 @@ export class FileCreateInput {
   updated_at?: Date | undefined;
 
   @TypeGraphQL.Field(_type => UserCreateNestedOneWithoutFilesInput, {
-    nullable: false
+    nullable: true
   })
-  user!: UserCreateNestedOneWithoutFilesInput;
+  user?: UserCreateNestedOneWithoutFilesInput | undefined;
 
   @TypeGraphQL.Field(_type => ProjectCreateNestedOneWithoutFilesInput, {
     nullable: false
