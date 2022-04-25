@@ -44,7 +44,6 @@ export class UploadFile {
     const metadata = {
       'Content-type': 'image',
     };
-    console.log('log', MINIO_USERNAME, MINIO_PASSWORD);
 
     try {
       await minioClient.putObject(
