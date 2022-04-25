@@ -55,16 +55,6 @@ export class UserUpdateWithoutNotifications_sentInput {
   })
   avatar?: NullableStringFieldUpdateOperationsInput | undefined;
 
-  @TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput, {
-    nullable: true
-  })
-  created_at?: DateTimeFieldUpdateOperationsInput | undefined;
-
-  @TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput, {
-    nullable: true
-  })
-  updated_at?: DateTimeFieldUpdateOperationsInput | undefined;
-
   @TypeGraphQL.Field(_type => UserUpdateroleInput, {
     nullable: true
   })
@@ -109,4 +99,14 @@ export class UserUpdateWithoutNotifications_sentInput {
     nullable: true
   })
   owned_projects?: ProjectUpdateManyWithoutOwnerInput | undefined;
+
+  @TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  created_at?: DateTimeFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  updated_at?: DateTimeFieldUpdateOperationsInput | undefined;
 }

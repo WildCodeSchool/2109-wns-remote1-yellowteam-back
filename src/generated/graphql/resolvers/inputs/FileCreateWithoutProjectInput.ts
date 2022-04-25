@@ -34,6 +34,16 @@ export class FileCreateWithoutProjectInput {
   })
   type!: string;
 
+  @TypeGraphQL.Field(_type => UserCreateNestedOneWithoutFilesInput, {
+    nullable: true
+  })
+  user?: UserCreateNestedOneWithoutFilesInput | undefined;
+
+  @TypeGraphQL.Field(_type => TaskCreateNestedOneWithoutFilesInput, {
+    nullable: true
+  })
+  task?: TaskCreateNestedOneWithoutFilesInput | undefined;
+
   @TypeGraphQL.Field(_type => Boolean, {
     nullable: false
   })
@@ -48,14 +58,4 @@ export class FileCreateWithoutProjectInput {
     nullable: true
   })
   updated_at?: Date | undefined;
-
-  @TypeGraphQL.Field(_type => UserCreateNestedOneWithoutFilesInput, {
-    nullable: true
-  })
-  user?: UserCreateNestedOneWithoutFilesInput | undefined;
-
-  @TypeGraphQL.Field(_type => TaskCreateNestedOneWithoutFilesInput, {
-    nullable: true
-  })
-  task?: TaskCreateNestedOneWithoutFilesInput | undefined;
 }

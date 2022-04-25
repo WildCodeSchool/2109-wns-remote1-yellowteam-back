@@ -45,6 +45,11 @@ export class NotificationCreateWithoutUserInput {
   })
   reference_id!: string;
 
+  @TypeGraphQL.Field(_type => UserCreateNestedOneWithoutNotifications_sentInput, {
+    nullable: false
+  })
+  sender!: UserCreateNestedOneWithoutNotifications_sentInput;
+
   @TypeGraphQL.Field(_type => Date, {
     nullable: true
   })
@@ -54,9 +59,4 @@ export class NotificationCreateWithoutUserInput {
     nullable: true
   })
   updated_at?: Date | undefined;
-
-  @TypeGraphQL.Field(_type => UserCreateNestedOneWithoutNotifications_sentInput, {
-    nullable: false
-  })
-  sender!: UserCreateNestedOneWithoutNotifications_sentInput;
 }

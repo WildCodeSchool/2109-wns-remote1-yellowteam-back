@@ -26,6 +26,11 @@ export class InvitationUpdateWithoutProjectInput {
   })
   email?: StringFieldUpdateOperationsInput | undefined;
 
+  @TypeGraphQL.Field(_type => UserUpdateOneWithoutInvitationsInput, {
+    nullable: true
+  })
+  user?: UserUpdateOneWithoutInvitationsInput | undefined;
+
   @TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput, {
     nullable: true
   })
@@ -35,9 +40,4 @@ export class InvitationUpdateWithoutProjectInput {
     nullable: true
   })
   updated_at?: DateTimeFieldUpdateOperationsInput | undefined;
-
-  @TypeGraphQL.Field(_type => UserUpdateOneWithoutInvitationsInput, {
-    nullable: true
-  })
-  user?: UserUpdateOneWithoutInvitationsInput | undefined;
 }

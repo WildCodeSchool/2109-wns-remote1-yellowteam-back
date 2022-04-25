@@ -60,16 +60,6 @@ export class TaskUpdateWithoutUserInput {
   })
   end_date?: DateTimeFieldUpdateOperationsInput | undefined;
 
-  @TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput, {
-    nullable: true
-  })
-  created_at?: DateTimeFieldUpdateOperationsInput | undefined;
-
-  @TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput, {
-    nullable: true
-  })
-  updated_at?: DateTimeFieldUpdateOperationsInput | undefined;
-
   @TypeGraphQL.Field(_type => ProjectUpdateOneRequiredWithoutTasksInput, {
     nullable: true
   })
@@ -84,4 +74,14 @@ export class TaskUpdateWithoutUserInput {
     nullable: true
   })
   comments?: CommentUpdateManyWithoutTaskInput | undefined;
+
+  @TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  created_at?: DateTimeFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  updated_at?: DateTimeFieldUpdateOperationsInput | undefined;
 }

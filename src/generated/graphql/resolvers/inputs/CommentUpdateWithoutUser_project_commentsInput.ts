@@ -28,16 +28,6 @@ export class CommentUpdateWithoutUser_project_commentsInput {
   })
   content?: StringFieldUpdateOperationsInput | undefined;
 
-  @TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput, {
-    nullable: true
-  })
-  created_at?: DateTimeFieldUpdateOperationsInput | undefined;
-
-  @TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput, {
-    nullable: true
-  })
-  updated_at?: DateTimeFieldUpdateOperationsInput | undefined;
-
   @TypeGraphQL.Field(_type => ProjectUpdateOneWithoutCommentsInput, {
     nullable: true
   })
@@ -52,4 +42,14 @@ export class CommentUpdateWithoutUser_project_commentsInput {
     nullable: true
   })
   user_task_comments?: UserUpdateOneWithoutTask_commentsInput | undefined;
+
+  @TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  created_at?: DateTimeFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  updated_at?: DateTimeFieldUpdateOperationsInput | undefined;
 }

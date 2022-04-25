@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
 import { UserWithoutCountAndPassword } from 'src/custom_resolvers/models/register';
-import { LoginInput } from 'src/custom_resolvers/models/login';
+import { LoginInput } from '../custom_resolvers/Inputs/login';
 
 const loginAuthorizationHeader = async (
   ctx: { prisma: PrismaClient; req: Request; res: Response },

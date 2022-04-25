@@ -25,16 +25,6 @@ export class CommentCreateWithoutUser_project_commentsInput {
   })
   content!: string;
 
-  @TypeGraphQL.Field(_type => Date, {
-    nullable: true
-  })
-  created_at?: Date | undefined;
-
-  @TypeGraphQL.Field(_type => Date, {
-    nullable: true
-  })
-  updated_at?: Date | undefined;
-
   @TypeGraphQL.Field(_type => ProjectCreateNestedOneWithoutCommentsInput, {
     nullable: true
   })
@@ -49,4 +39,14 @@ export class CommentCreateWithoutUser_project_commentsInput {
     nullable: true
   })
   user_task_comments?: UserCreateNestedOneWithoutTask_commentsInput | undefined;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: true
+  })
+  created_at?: Date | undefined;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: true
+  })
+  updated_at?: Date | undefined;
 }
