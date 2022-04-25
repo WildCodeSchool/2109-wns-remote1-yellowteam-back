@@ -24,10 +24,6 @@ export class RegisterResolver {
       secure: process.env.NODE_ENV === 'production',
     });
 
-    if (data.secret_key !== process.env.ACCESS_KEY) {
-      throw new Error('Invalid secret key');
-    }
-
     const user = await ctx.prisma.user.create({
       data: {
         first_name: data.first_name,
