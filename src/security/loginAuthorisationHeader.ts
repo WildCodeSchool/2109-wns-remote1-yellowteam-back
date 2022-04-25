@@ -3,8 +3,8 @@ import { sign } from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
-import { UserWithoutCountAndPassword } from 'src/interfaces/user';
-import { LoginInput } from 'src/custom_resolvers/Inputs/login';
+import { UserWithoutCountAndPassword } from '../../src/interfaces/user';
+import { LoginInput } from '../../src/custom_resolvers/Inputs/login';
 
 const loginAuthorizationHeader = async (
   ctx: { prisma: PrismaClient; req: Request; res: Response },

@@ -22,6 +22,11 @@ export class ProjectUpdateWithoutOwnerInput {
   })
   id?: StringFieldUpdateOperationsInput | undefined;
 
+  @TypeGraphQL.Field(_type => UserUpdateManyWithoutProjectsInput, {
+    nullable: true
+  })
+  users?: UserUpdateManyWithoutProjectsInput | undefined;
+
   @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
     nullable: true
   })
@@ -67,21 +72,6 @@ export class ProjectUpdateWithoutOwnerInput {
   })
   due_date?: DateTimeFieldUpdateOperationsInput | undefined;
 
-  @TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput, {
-    nullable: true
-  })
-  created_at?: DateTimeFieldUpdateOperationsInput | undefined;
-
-  @TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput, {
-    nullable: true
-  })
-  updated_at?: DateTimeFieldUpdateOperationsInput | undefined;
-
-  @TypeGraphQL.Field(_type => UserUpdateManyWithoutProjectsInput, {
-    nullable: true
-  })
-  users?: UserUpdateManyWithoutProjectsInput | undefined;
-
   @TypeGraphQL.Field(_type => TaskUpdateManyWithoutProjectInput, {
     nullable: true
   })
@@ -101,4 +91,14 @@ export class ProjectUpdateWithoutOwnerInput {
     nullable: true
   })
   invitations?: InvitationUpdateManyWithoutProjectInput | undefined;
+
+  @TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  created_at?: DateTimeFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  updated_at?: DateTimeFieldUpdateOperationsInput | undefined;
 }

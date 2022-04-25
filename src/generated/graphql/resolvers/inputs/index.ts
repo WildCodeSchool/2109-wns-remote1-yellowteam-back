@@ -331,7 +331,6 @@ export { TaskWhereUniqueInput } from "./TaskWhereUniqueInput";
 export { UserCountOrderByAggregateInput } from "./UserCountOrderByAggregateInput";
 export { UserCreateInput } from "./UserCreateInput";
 export { UserCreateManyInput } from "./UserCreateManyInput";
-export { UserCreateManyroleInput } from "./UserCreateManyroleInput";
 export { UserCreateNestedManyWithoutProjectsInput } from "./UserCreateNestedManyWithoutProjectsInput";
 export { UserCreateNestedOneWithoutFilesInput } from "./UserCreateNestedOneWithoutFilesInput";
 export { UserCreateNestedOneWithoutInvitationsInput } from "./UserCreateNestedOneWithoutInvitationsInput";

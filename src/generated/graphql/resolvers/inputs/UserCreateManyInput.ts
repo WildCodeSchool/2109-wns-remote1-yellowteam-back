@@ -2,7 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
-import { UserCreateManyroleInput } from "../inputs/UserCreateManyroleInput";
+import { UserCreateroleInput } from "../inputs/UserCreateroleInput";
 
 @TypeGraphQL.InputType("UserCreateManyInput", {
   isAbstract: true
@@ -43,6 +43,11 @@ export class UserCreateManyInput {
   })
   avatar?: string | undefined;
 
+  @TypeGraphQL.Field(_type => UserCreateroleInput, {
+    nullable: true
+  })
+  role?: UserCreateroleInput | undefined;
+
   @TypeGraphQL.Field(_type => Date, {
     nullable: true
   })
@@ -52,9 +57,4 @@ export class UserCreateManyInput {
     nullable: true
   })
   updated_at?: Date | undefined;
-
-  @TypeGraphQL.Field(_type => UserCreateManyroleInput, {
-    nullable: true
-  })
-  role?: UserCreateManyroleInput | undefined;
 }

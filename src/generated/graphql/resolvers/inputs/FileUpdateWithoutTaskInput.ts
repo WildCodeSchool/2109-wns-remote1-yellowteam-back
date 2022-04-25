@@ -38,6 +38,16 @@ export class FileUpdateWithoutTaskInput {
   })
   type?: StringFieldUpdateOperationsInput | undefined;
 
+  @TypeGraphQL.Field(_type => UserUpdateOneWithoutFilesInput, {
+    nullable: true
+  })
+  user?: UserUpdateOneWithoutFilesInput | undefined;
+
+  @TypeGraphQL.Field(_type => ProjectUpdateOneRequiredWithoutFilesInput, {
+    nullable: true
+  })
+  project?: ProjectUpdateOneRequiredWithoutFilesInput | undefined;
+
   @TypeGraphQL.Field(_type => BoolFieldUpdateOperationsInput, {
     nullable: true
   })
@@ -52,14 +62,4 @@ export class FileUpdateWithoutTaskInput {
     nullable: true
   })
   updated_at?: DateTimeFieldUpdateOperationsInput | undefined;
-
-  @TypeGraphQL.Field(_type => UserUpdateOneWithoutFilesInput, {
-    nullable: true
-  })
-  user?: UserUpdateOneWithoutFilesInput | undefined;
-
-  @TypeGraphQL.Field(_type => ProjectUpdateOneRequiredWithoutFilesInput, {
-    nullable: true
-  })
-  project?: ProjectUpdateOneRequiredWithoutFilesInput | undefined;
 }

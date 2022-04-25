@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { LoginInput } from 'src/custom_resolvers/Inputs/login';
-import { GQLContext } from 'src/interfaces';
-import { UserWithoutCountAndPassword } from 'src/interfaces/user';
+import { LoginInput } from '../../src/custom_resolvers/Inputs/login';
+import { GQLContext } from '../../src/interfaces';
+import { UserWithoutCountAndPassword } from '../../src/interfaces/user';
 
 import {
   checkPassword,
