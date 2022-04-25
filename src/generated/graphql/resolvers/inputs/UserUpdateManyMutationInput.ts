@@ -47,6 +47,11 @@ export class UserUpdateManyMutationInput {
   })
   avatar?: NullableStringFieldUpdateOperationsInput | undefined;
 
+  @TypeGraphQL.Field(_type => UserUpdateroleInput, {
+    nullable: true
+  })
+  role?: UserUpdateroleInput | undefined;
+
   @TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput, {
     nullable: true
   })
@@ -56,9 +61,4 @@ export class UserUpdateManyMutationInput {
     nullable: true
   })
   updated_at?: DateTimeFieldUpdateOperationsInput | undefined;
-
-  @TypeGraphQL.Field(_type => UserUpdateroleInput, {
-    nullable: true
-  })
-  role?: UserUpdateroleInput | undefined;
 }

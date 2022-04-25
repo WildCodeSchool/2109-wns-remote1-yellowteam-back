@@ -25,16 +25,6 @@ export class InvitationCreateInput {
   })
   email!: string;
 
-  @TypeGraphQL.Field(_type => Date, {
-    nullable: true
-  })
-  created_at?: Date | undefined;
-
-  @TypeGraphQL.Field(_type => Date, {
-    nullable: true
-  })
-  updated_at?: Date | undefined;
-
   @TypeGraphQL.Field(_type => ProjectCreateNestedOneWithoutInvitationsInput, {
     nullable: false
   })
@@ -44,4 +34,14 @@ export class InvitationCreateInput {
     nullable: true
   })
   user?: UserCreateNestedOneWithoutInvitationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: true
+  })
+  created_at?: Date | undefined;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: true
+  })
+  updated_at?: Date | undefined;
 }

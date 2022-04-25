@@ -20,14 +20,14 @@ services:
     environment:
       ADMINER_DESIGN: mvt
 
-  # ytask:
-  #   build:
-  #     context: ./
-  #   ports:
-  #     - '3000:3000'
-  #   volumes:
-  #     - ./src/:/app/src/
-  #   command: npm run deploy
+  ytask:
+    build:
+      context: ./
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./src/:/app/src/
+    command: npm run deploy
 
   # nginx:
   #   restart: always

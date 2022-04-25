@@ -57,16 +57,6 @@ export class TaskCreateInput {
   })
   end_date!: Date;
 
-  @TypeGraphQL.Field(_type => Date, {
-    nullable: true
-  })
-  created_at?: Date | undefined;
-
-  @TypeGraphQL.Field(_type => Date, {
-    nullable: true
-  })
-  updated_at?: Date | undefined;
-
   @TypeGraphQL.Field(_type => UserCreateNestedOneWithoutTasksInput, {
     nullable: true
   })
@@ -86,4 +76,14 @@ export class TaskCreateInput {
     nullable: true
   })
   comments?: CommentCreateNestedManyWithoutTaskInput | undefined;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: true
+  })
+  created_at?: Date | undefined;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: true
+  })
+  updated_at?: Date | undefined;
 }

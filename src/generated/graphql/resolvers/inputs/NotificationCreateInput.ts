@@ -31,6 +31,11 @@ export class NotificationCreateInput {
   })
   content!: string;
 
+  @TypeGraphQL.Field(_type => UserCreateNestedOneWithoutNotificationsInput, {
+    nullable: true
+  })
+  user?: UserCreateNestedOneWithoutNotificationsInput | undefined;
+
   @TypeGraphQL.Field(_type => Type_Notification, {
     nullable: false
   })
@@ -46,6 +51,11 @@ export class NotificationCreateInput {
   })
   reference_id!: string;
 
+  @TypeGraphQL.Field(_type => UserCreateNestedOneWithoutNotifications_sentInput, {
+    nullable: false
+  })
+  sender!: UserCreateNestedOneWithoutNotifications_sentInput;
+
   @TypeGraphQL.Field(_type => Date, {
     nullable: true
   })
@@ -55,14 +65,4 @@ export class NotificationCreateInput {
     nullable: true
   })
   updated_at?: Date | undefined;
-
-  @TypeGraphQL.Field(_type => UserCreateNestedOneWithoutNotificationsInput, {
-    nullable: true
-  })
-  user?: UserCreateNestedOneWithoutNotificationsInput | undefined;
-
-  @TypeGraphQL.Field(_type => UserCreateNestedOneWithoutNotifications_sentInput, {
-    nullable: false
-  })
-  sender!: UserCreateNestedOneWithoutNotifications_sentInput;
 }
