@@ -13,7 +13,4 @@ export class RegisterInput {
 
   @Field()
   password: string;
-
-  @Field()
-  secret_key: string;
 }
