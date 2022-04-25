@@ -3,9 +3,9 @@ import { ApolloError } from 'apollo-server-core';
 import { Response } from 'express';
 import { TJWT_PAYLOAD } from 'src/interfaces';
 import { Resolver, Mutation, Ctx, Arg, Authorized } from 'type-graphql';
-import { TaskWhereUniqueInput } from '../generated/graphql';
-import { Task } from '../generated/graphql/models/Task';
-import { TaskStatusInput } from './models/updateTaskStatus';
+import { TaskWhereUniqueInput } from '../../../generated/graphql';
+import { Task } from '../../../generated/graphql/models/Task';
+import { TaskStatusInput } from '../../models/updateTaskStatus';
 
 @Resolver()
 export class UpdateTaskStatusResolver {
