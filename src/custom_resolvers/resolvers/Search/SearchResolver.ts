@@ -2,8 +2,8 @@ import { PrismaClient } from '@prisma/client';
 import { Response } from 'express';
 import { TJWT_PAYLOAD } from 'src/interfaces';
 import { Resolver, Ctx, Arg, Query } from 'type-graphql';
-import { SearchInput } from '../models/searchInput';
-import { SearchResult } from '../models/searchResult';
+import { SearchInput } from '../../models/searchInput';
+import { SearchResult } from '../../models/searchResult';
 
 @Resolver()
 export class SearchResolver {
