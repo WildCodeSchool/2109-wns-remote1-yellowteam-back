@@ -45,10 +45,7 @@ const loginJWTCookies = async (
     httpOnly: process.env.NODE_ENV === 'production',
     secure: process.env.NODE_ENV === 'production',
     sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-    domain:
-      process.env.NODE_ENV === 'production'
-        ? 'infallible-hopper-ee85e3.netlify.app'
-        : 'localhost',
+    // domain: process.env.NODE_ENV === 'production' ? 'localhost' : 'localhost',
   });
 
   ctx.res.setHeader('Access-Control-Allow-Credentials', 'true');
