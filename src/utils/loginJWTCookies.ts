@@ -42,9 +42,13 @@ const loginJWTCookies = async (
   const { password, ...userWithoutPassword } = user;
 
   cookies.set('token', token, {
-    httpOnly: true,
+    httpOnly: process.env.NODE_ENV === 'production',
     secure: process.env.NODE_ENV === 'production',
     sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+    domain:
+      process.env.NODE_ENV === 'production'
+        ? 'infallible-hopper-ee85e3.netlify.app'
+        : 'localhost',
   });
 
   ctx.res.setHeader('Access-Control-Allow-Credentials', 'true');
