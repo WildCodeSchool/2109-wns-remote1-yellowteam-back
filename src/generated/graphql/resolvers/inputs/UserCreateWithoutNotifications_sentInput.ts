@@ -51,16 +51,6 @@ export class UserCreateWithoutNotifications_sentInput {
   })
   avatar?: string | undefined;
 
-  @TypeGraphQL.Field(_type => Date, {
-    nullable: true
-  })
-  created_at?: Date | undefined;
-
-  @TypeGraphQL.Field(_type => Date, {
-    nullable: true
-  })
-  updated_at?: Date | undefined;
-
   @TypeGraphQL.Field(_type => UserCreateroleInput, {
     nullable: true
   })
@@ -105,4 +95,14 @@ export class UserCreateWithoutNotifications_sentInput {
     nullable: true
   })
   owned_projects?: ProjectCreateNestedManyWithoutOwnerInput | undefined;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: true
+  })
+  created_at?: Date | undefined;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: true
+  })
+  updated_at?: Date | undefined;
 }

@@ -35,21 +35,6 @@ export class FileCreateInput {
   })
   type!: string;
 
-  @TypeGraphQL.Field(_type => Boolean, {
-    nullable: false
-  })
-  is_disabled!: boolean;
-
-  @TypeGraphQL.Field(_type => Date, {
-    nullable: true
-  })
-  created_at?: Date | undefined;
-
-  @TypeGraphQL.Field(_type => Date, {
-    nullable: true
-  })
-  updated_at?: Date | undefined;
-
   @TypeGraphQL.Field(_type => UserCreateNestedOneWithoutFilesInput, {
     nullable: true
   })
@@ -64,4 +49,19 @@ export class FileCreateInput {
     nullable: true
   })
   task?: TaskCreateNestedOneWithoutFilesInput | undefined;
+
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: false
+  })
+  is_disabled!: boolean;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: true
+  })
+  created_at?: Date | undefined;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: true
+  })
+  updated_at?: Date | undefined;
 }

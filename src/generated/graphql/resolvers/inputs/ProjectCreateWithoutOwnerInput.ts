@@ -18,6 +18,11 @@ export class ProjectCreateWithoutOwnerInput {
   })
   id?: string | undefined;
 
+  @TypeGraphQL.Field(_type => UserCreateNestedManyWithoutProjectsInput, {
+    nullable: true
+  })
+  users?: UserCreateNestedManyWithoutProjectsInput | undefined;
+
   @TypeGraphQL.Field(_type => String, {
     nullable: false
   })
@@ -63,21 +68,6 @@ export class ProjectCreateWithoutOwnerInput {
   })
   due_date!: Date;
 
-  @TypeGraphQL.Field(_type => Date, {
-    nullable: true
-  })
-  created_at?: Date | undefined;
-
-  @TypeGraphQL.Field(_type => Date, {
-    nullable: true
-  })
-  updated_at?: Date | undefined;
-
-  @TypeGraphQL.Field(_type => UserCreateNestedManyWithoutProjectsInput, {
-    nullable: true
-  })
-  users?: UserCreateNestedManyWithoutProjectsInput | undefined;
-
   @TypeGraphQL.Field(_type => TaskCreateNestedManyWithoutProjectInput, {
     nullable: true
   })
@@ -97,4 +87,14 @@ export class ProjectCreateWithoutOwnerInput {
     nullable: true
   })
   invitations?: InvitationCreateNestedManyWithoutProjectInput | undefined;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: true
+  })
+  created_at?: Date | undefined;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: true
+  })
+  updated_at?: Date | undefined;
 }

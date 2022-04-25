@@ -39,21 +39,6 @@ export class FileUpdateInput {
   })
   type?: StringFieldUpdateOperationsInput | undefined;
 
-  @TypeGraphQL.Field(_type => BoolFieldUpdateOperationsInput, {
-    nullable: true
-  })
-  is_disabled?: BoolFieldUpdateOperationsInput | undefined;
-
-  @TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput, {
-    nullable: true
-  })
-  created_at?: DateTimeFieldUpdateOperationsInput | undefined;
-
-  @TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput, {
-    nullable: true
-  })
-  updated_at?: DateTimeFieldUpdateOperationsInput | undefined;
-
   @TypeGraphQL.Field(_type => UserUpdateOneWithoutFilesInput, {
     nullable: true
   })
@@ -68,4 +53,19 @@ export class FileUpdateInput {
     nullable: true
   })
   task?: TaskUpdateOneWithoutFilesInput | undefined;
+
+  @TypeGraphQL.Field(_type => BoolFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  is_disabled?: BoolFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  created_at?: DateTimeFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  updated_at?: DateTimeFieldUpdateOperationsInput | undefined;
 }

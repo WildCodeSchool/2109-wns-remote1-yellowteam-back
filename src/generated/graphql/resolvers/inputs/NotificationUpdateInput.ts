@@ -34,6 +34,11 @@ export class NotificationUpdateInput {
   })
   content?: StringFieldUpdateOperationsInput | undefined;
 
+  @TypeGraphQL.Field(_type => UserUpdateOneWithoutNotificationsInput, {
+    nullable: true
+  })
+  user?: UserUpdateOneWithoutNotificationsInput | undefined;
+
   @TypeGraphQL.Field(_type => EnumType_NotificationFieldUpdateOperationsInput, {
     nullable: true
   })
@@ -49,6 +54,11 @@ export class NotificationUpdateInput {
   })
   reference_id?: StringFieldUpdateOperationsInput | undefined;
 
+  @TypeGraphQL.Field(_type => UserUpdateOneRequiredWithoutNotifications_sentInput, {
+    nullable: true
+  })
+  sender?: UserUpdateOneRequiredWithoutNotifications_sentInput | undefined;
+
   @TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput, {
     nullable: true
   })
@@ -58,14 +68,4 @@ export class NotificationUpdateInput {
     nullable: true
   })
   updated_at?: DateTimeFieldUpdateOperationsInput | undefined;
-
-  @TypeGraphQL.Field(_type => UserUpdateOneWithoutNotificationsInput, {
-    nullable: true
-  })
-  user?: UserUpdateOneWithoutNotificationsInput | undefined;
-
-  @TypeGraphQL.Field(_type => UserUpdateOneRequiredWithoutNotifications_sentInput, {
-    nullable: true
-  })
-  sender?: UserUpdateOneRequiredWithoutNotifications_sentInput | undefined;
 }
