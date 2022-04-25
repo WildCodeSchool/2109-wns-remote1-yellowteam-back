@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { Role } from '@prisma/client';
 import { Authorized } from 'type-graphql';
 import {
@@ -32,4 +31,5 @@ const resolversEnhanceMap: ResolversEnhanceMap = {
   },
 };
 
-export const Resolve = () => applyResolversEnhanceMap(resolversEnhanceMap);
+export const Resolve = (): void =>
+  applyResolversEnhanceMap(resolversEnhanceMap);

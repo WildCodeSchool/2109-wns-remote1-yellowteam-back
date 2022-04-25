@@ -1,12 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { sign } from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
+import { UserWithoutCountAndPassword } from 'src/custom_resolvers/models/register';
+import { LoginInput } from 'src/custom_resolvers/models/login';
 
 const loginAuthorizationHeader = async (
   ctx: { prisma: PrismaClient; req: Request; res: Response },
-  data
-) => {
+  data: LoginInput
+): Promise<UserWithoutCountAndPassword> => {
   const user = await ctx.prisma.user.findUnique({
     where: {
       email: data.email,

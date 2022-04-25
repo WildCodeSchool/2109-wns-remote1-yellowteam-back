@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { PrismaClient } from '@prisma/client';
 import { ApolloError } from 'apollo-server-core';
 import Cookies from 'cookies';
@@ -12,7 +11,7 @@ const webClientAuthCheck = async (
     prisma: PrismaClient;
   },
   roles: string[]
-) => {
+): Promise<boolean | Error> => {
   const cookies = new Cookies(context.req, context.res);
   const token = context.req.cookies
     ? context.req.cookies.token
