@@ -7,9 +7,8 @@ services:
     ports:
       - 5432:5432
     environment:
-      - NODE_ENV: production
-      - POSTGRES_USER: ytaskAdmin
-      - POSTGRES_PASSWORD: ytask1337
+      POSTGRES_USER: ytaskAdmin
+      POSTGRES_PASSWORD: ytask1337
     volumes:
       - postgres:/data/postgres
 
