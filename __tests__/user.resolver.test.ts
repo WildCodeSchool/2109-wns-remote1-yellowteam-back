@@ -83,7 +83,7 @@ describe('server start and return correct values from queries', () => {
     } catch (error) {
       console.log('prisma', error);
     }
-    // get all users from database
+    // retrieve all users from database and retr
     const allPrismaUsers = await prismaClient.user.findMany({
       select: {
         id: true,
