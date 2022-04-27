@@ -1,5 +1,5 @@
 import { ApolloError } from 'apollo-server-core';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import Cookies from 'cookies';
 import { sign } from 'jsonwebtoken';
 import { User } from '../generated/graphql';

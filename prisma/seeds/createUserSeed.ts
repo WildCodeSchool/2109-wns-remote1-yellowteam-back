@@ -1,5 +1,5 @@
 import faker from 'faker';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { Role } from '@prisma/client';
 
 export default function newUser() {
