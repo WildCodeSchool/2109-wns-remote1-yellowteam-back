@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-console */
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { Arg, Ctx, Mutation, Resolver } from 'type-graphql';
 import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
@@ -31,7 +31,7 @@ export class RegisterResolver {
         email: data.email,
         password: hashedPassword,
         is_disabled: false,
-        role: [Role.ADMIN],
+        role: [Role.USER],
       },
     });
 

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { sign } from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import Cookies from 'cookies';
 import { UserWithoutCountAndPassword } from 'src/custom_resolvers/models/register';
 import { Context } from 'apollo-server-core';

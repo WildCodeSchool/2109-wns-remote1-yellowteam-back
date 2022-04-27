@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import { Role } from '@prisma/client';
 import faker from 'faker';
 
-const newManager = () => ({
+const newManager = (): FakeUser => ({
   first_name: faker.name.findName(),
   last_name: faker.name.lastName(),
   avatar: faker.image.avatar(),
