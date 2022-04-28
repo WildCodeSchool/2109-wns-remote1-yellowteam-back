@@ -1,6 +1,6 @@
 import { ApolloError } from 'apollo-server-core';
 
-const whitelistedUrls = process.env.CLIENTS_WHITELIST?.split(',') || [];
+const whitelistedUrls = process.env.CLIENT_WHITELIST?.split(',') || [];
 
 const corsOptions = {
   origin: (
