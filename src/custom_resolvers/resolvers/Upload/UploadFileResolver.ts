@@ -4,10 +4,10 @@ import { Arg, Authorized, Ctx, Mutation, Resolver } from 'type-graphql';
 import { Stream, Readable } from 'stream';
 import { ApolloError } from 'apollo-server-core';
 import { Request } from 'express';
-import { PrismaClient } from '.prisma/client';
 import { File, Role } from '../../../generated/graphql';
 import getFileType from '../../../utils/getFileType';
 import minioClient from '../../../../src/services/minio';
+import { PrismaClient } from 'src/generated/client';
 
 export interface Upload {
   filename: string;
