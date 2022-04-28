@@ -2,10 +2,10 @@
 /* eslint-disable no-console */
 import 'reflect-metadata';
 import faker from 'faker';
-import { Role } from '.prisma/client';
 import { ApolloServer } from 'apollo-server-express';
 import prismaClient from '../prisma/prismaClient';
 import createServer from '../src/server';
+import { Role } from '../src/generated/client';
 
 const GET_USERS = `
 query getUsers{

@@ -1,7 +1,7 @@
-import { PrismaClient } from '@prisma/client';
 import { ApolloError } from 'apollo-server-core';
 import { Request, Response } from 'express';
 import { verify, JwtPayload } from 'jsonwebtoken';
+import { PrismaClient } from 'src/generated/client';
 
 const mobileClientAuthChecker = async (
   context: {

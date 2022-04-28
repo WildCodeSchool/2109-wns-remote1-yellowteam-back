@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
-import { Prisma } from "@prisma/client";
+import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { ProjectCreateNestedOneWithoutInvitationsInput } from "../inputs/ProjectCreateNestedOneWithoutInvitationsInput";
 import { Status_Invitation } from "../../enums/Status_Invitation";

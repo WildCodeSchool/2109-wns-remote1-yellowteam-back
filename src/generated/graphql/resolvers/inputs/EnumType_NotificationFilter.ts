@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
-import { Prisma } from "@prisma/client";
+import { Prisma } from "../../../client";
 import { DecimalJSScalar } from "../../scalars";
 import { NestedEnumType_NotificationFilter } from "../inputs/NestedEnumType_NotificationFilter";
 import { Type_Notification } from "../../enums/Type_Notification";

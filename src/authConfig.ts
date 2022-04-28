@@ -1,5 +1,5 @@
-import { Role } from '@prisma/client';
 import { Authorized } from 'type-graphql';
+import { Role } from './generated/client';
 import {
   ResolversEnhanceMap,
   applyResolversEnhanceMap,
