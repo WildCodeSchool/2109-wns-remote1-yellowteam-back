@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
-import { Prisma } from "../../../client";
+import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { UserCreateWithoutNotifications_sentInput } from "../inputs/UserCreateWithoutNotifications_sentInput";
 import { UserWhereUniqueInput } from "../inputs/UserWhereUniqueInput";

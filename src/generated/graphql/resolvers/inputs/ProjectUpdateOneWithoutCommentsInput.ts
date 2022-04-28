@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
-import { Prisma } from "../../../client";
+import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { ProjectCreateOrConnectWithoutCommentsInput } from "../inputs/ProjectCreateOrConnectWithoutCommentsInput";
 import { ProjectCreateWithoutCommentsInput } from "../inputs/ProjectCreateWithoutCommentsInput";

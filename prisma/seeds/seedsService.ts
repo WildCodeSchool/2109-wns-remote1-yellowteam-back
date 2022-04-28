@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import { Status, Status_Notification } from 'src/generated/client';
+import { Status, Status_Notification } from '@prisma/client';
 
 /* eslint-disable no-console */
 export const startDate = () => {

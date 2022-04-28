@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
-import { Prisma } from "../../../client";
+import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { FileAvgAggregate } from "../outputs/FileAvgAggregate";
 import { FileCountAggregate } from "../outputs/FileCountAggregate";

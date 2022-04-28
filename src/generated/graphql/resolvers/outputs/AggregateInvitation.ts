@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
-import { Prisma } from "../../../client";
+import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { InvitationCountAggregate } from "../outputs/InvitationCountAggregate";
 import { InvitationMaxAggregate } from "../outputs/InvitationMaxAggregate";

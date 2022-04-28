@@ -1,8 +1,8 @@
+import { PrismaClient } from '@prisma/client';
 import { ApolloError } from 'apollo-server-core';
 import Cookies from 'cookies';
 import { Request, Response } from 'express';
 import { verify, JwtPayload } from 'jsonwebtoken';
-import { PrismaClient } from 'src/generated/client';
 
 const webClientAuthCheck = async (
   context: {

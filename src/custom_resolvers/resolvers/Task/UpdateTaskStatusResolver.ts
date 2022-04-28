@@ -1,7 +1,5 @@
 import { ApolloError } from 'apollo-server-core';
-import { Response } from 'express';
-import { PrismaClient } from 'src/generated/client';
-import { TJWT_PAYLOAD } from 'src/interfaces';
+import { GQLContext } from 'src/interfaces';
 import { Resolver, Mutation, Ctx, Arg, Authorized } from 'type-graphql';
 import { TaskWhereUniqueInput } from '../../../generated/graphql';
 import { Task } from '../../../generated/graphql/models/Task';
@@ -12,7 +10,7 @@ export class UpdateTaskStatusResolver {
   @Authorized(['ADMIN', 'SUPER_ADMIN', 'USER', 'MANAGER'])
   @Mutation(() => Task)
   async updateTaskStatus(
-    @Ctx() ctx: { prisma: PrismaClient; res: Response; user: TJWT_PAYLOAD },
+    @Ctx() ctx: GQLContext,
     @Arg('data') data: TaskStatusInput
   ): Promise<Task> {
     const task = await ctx.prisma.task.findUnique({

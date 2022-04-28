@@ -13,7 +13,7 @@ import newTaskComment from './seeds/createTaskCommentSeed';
 import newProjectComment from './seeds/createProjectCommentSeed';
 import newNotification from './seeds/createUserNotification';
 import newFile from './seeds/createFilesSeed';
-import { PrismaClient } from 'src/generated/client';
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 

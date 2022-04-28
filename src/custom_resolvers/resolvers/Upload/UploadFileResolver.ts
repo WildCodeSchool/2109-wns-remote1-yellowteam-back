@@ -7,7 +7,7 @@ import { Request } from 'express';
 import { File, Role } from '../../../generated/graphql';
 import getFileType from '../../../utils/getFileType';
 import minioClient from '../../../../src/services/minio';
-import { PrismaClient } from 'src/generated/client';
+import { GQLContext } from 'src/interfaces';
 
 export interface Upload {
   filename: string;
@@ -23,7 +23,7 @@ export class UploadFile {
     nullable: false,
   })
   async uploadFile(
-    @Ctx() ctx: { prisma: PrismaClient; req: Request },
+    @Ctx() ctx: GQLContext,
     @Arg('file', () => GraphQLUpload)
     { createReadStream, filename }: Upload
   ): Promise<File> {
