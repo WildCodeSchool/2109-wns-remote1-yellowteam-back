@@ -21,7 +21,7 @@ const seed = async () => {
   const fakeManagers = new Array(2).fill('').map(() => newManager());
   const fakeProjects = new Array(10).fill('').map(() => newProject());
   const fakeTasks = new Array(20).fill('').map(() => newTask());
-  const s = new Array(30).fill('').map(() => newUser());
+  const fakeUsers = new Array(30).fill('').map(() => newUser());
   const fakeTaskComments = new Array(100).fill('').map(() => newTaskComment());
   const fakeProjectsComments = new Array(100)
     .fill('')
