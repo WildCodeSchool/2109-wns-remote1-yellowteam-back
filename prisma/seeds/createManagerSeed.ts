@@ -1,9 +1,8 @@
 import bcrypt from 'bcrypt';
 import faker from 'faker';
 import { Role } from 'src/generated/client';
-import { FakeUser } from './interfaces/seeds';
 
-const newManager = (): FakeUser => ({
+const newManager = () => ({
   first_name: faker.name.findName(),
   last_name: faker.name.lastName(),
   avatar: faker.image.avatar(),
