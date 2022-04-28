@@ -1,38 +1,23 @@
-# 1ere étape (stage) -> build
-FROM node:16.7.0-alpine AS builder
+# pull the Node.js Docker image
+FROM node:alpine
 
-WORKDIR /app
+# create the directory inside the container
 
-COPY package.json .
-COPY yarn.lock .
-RUN yarn
+WORKDIR /usr/src/
 
-COPY tsconfig.json .
-COPY src src
-COPY prisma prisma
+# copy the package.json files from local machine to the workdir in container
+COPY package*.json .
 
-RUN yarn prisma generate
-RUN yarn tsc
+# run npm install in our local machine
+RUN npm install
 
-# 2ème étape -> installer les deps de PROD
-# Copier le dist de la 1ère stage vers notre 2ème stage
-FROM node:16.7.0-alpine AS installer
 
-WORKDIR /app
-COPY package.json .
-COPY yarn.lock .
-RUN yarn --production --frozen-lockfile
+# copy the generated modules and all other files to the container
+COPY . .
 
-# COPY --from=builder /app/dist dist
-COPY --from=builder /app/node_modules/.prisma node_modules/.prisma
 
-# 3ème étape -> lancer l'app
-FROM node:16.7.0-alpine
+# our app is running on port 5000 within the container, so need to expose it
+EXPOSE 4000
 
-WORKDIR /app
-COPY package.json .
-
-COPY --from=builder /app/dist dist
-COPY --from=installer /app/node_modules node_modules
-
-CMD ["yarn", "start"]
+# the command that starts our app
+CMD ["npm", "run", "deploy"]
