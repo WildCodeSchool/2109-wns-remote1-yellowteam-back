@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
-import { Prisma } from "../../../client";
+import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { NestedEnumStatus_NotificationFilter } from "../inputs/NestedEnumStatus_NotificationFilter";
 import { NestedEnumStatus_NotificationWithAggregatesFilter } from "../inputs/NestedEnumStatus_NotificationWithAggregatesFilter";

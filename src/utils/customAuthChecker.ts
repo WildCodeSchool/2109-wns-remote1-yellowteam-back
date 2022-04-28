@@ -1,6 +1,6 @@
+import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
 import { PubSubEngine } from 'graphql-subscriptions';
-import { PrismaClient } from 'src/generated/client';
 import { AuthChecker } from 'type-graphql';
 import mobileClientAuthChecker from '../utils/mobileClientAuthChecker';
 import clientTypeChecker from '../utils/platformTypeChecker';
