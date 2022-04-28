@@ -4,7 +4,8 @@ import { Arg, Authorized, Ctx, Mutation, Resolver } from 'type-graphql';
 import { Stream, Readable } from 'stream';
 import { ApolloError } from 'apollo-server-core';
 import minioClient from '../../../../src/services/minio';
-import { GQLContext } from 'src/interfaces';
+import { GQLContext } from '../../../../src/interfaces';
+import { Role, User } from '../../../../src/generated/graphql';
 
 export interface Upload {
   filename: string;
