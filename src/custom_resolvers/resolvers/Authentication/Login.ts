@@ -1,25 +1,18 @@
 import { Arg, Ctx, Mutation, Resolver } from 'type-graphql';
-import { PrismaClient } from '@prisma/client';
-import { Request, Response } from 'express';
-import { PubSubEngine } from 'graphql-subscriptions';
 import { User } from '../../../generated/graphql';
 import loginJWTCookies from '../../../security/loginJWTCookies';
 import platformTypeChecker from '../../../utils/platformTypeChecker';
 import loginAuthorizationHeader from '../../../security/loginAuthorisationHeader';
 import { LoginInput } from '../../Inputs/login';
 import { UserWithoutCountAndPassword } from 'src/interfaces/user';
+import { GQLContext } from 'src/interfaces';
 
 @Resolver()
 export class LoginResolver {
   @Mutation(() => User)
   async login(
     @Ctx()
-    ctx: {
-      prisma: PrismaClient;
-      req: Request;
-      res: Response;
-      pubsub: PubSubEngine;
-    },
+    ctx: GQLContext,
     @Arg('data') data: LoginInput
   ): Promise<UserWithoutCountAndPassword> {
     if (platformTypeChecker(ctx.req) === 'web') {

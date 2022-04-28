@@ -2,12 +2,12 @@
 /* eslint-disable no-console */
 import 'reflect-metadata';
 import faker from 'faker';
-import { Role } from '.prisma/client';
 import { ApolloServer } from 'apollo-server-express';
 import prismaClient from '../prisma/prismaClient';
 import createServer from '../src/server';
 import Cookies from 'cookies';
 import { Request, Response } from 'express';
+import { Role } from '../src/generated/client';
 
 const REGISTER = `
 mutation register($data: RegisterInput!){

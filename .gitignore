@@ -12,3 +12,5 @@ dist
 /dist
 
 /logs
+
+src/generated

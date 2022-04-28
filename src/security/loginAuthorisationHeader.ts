@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { sign } from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
-import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
 import { UserWithoutCountAndPassword } from '../../src/interfaces/user';
 import { LoginInput } from '../../src/custom_resolvers/Inputs/login';
+import { PrismaClient } from 'src/generated/client';
 
 const loginAuthorizationHeader = async (
   ctx: { prisma: PrismaClient; req: Request; res: Response },

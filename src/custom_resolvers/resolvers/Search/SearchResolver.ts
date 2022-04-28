@@ -1,6 +1,4 @@
-import { PrismaClient } from '@prisma/client';
-import { Response } from 'express';
-import { TJWT_PAYLOAD } from 'src/interfaces';
+import { GQLContext } from 'src/interfaces';
 import { Resolver, Ctx, Arg, Query } from 'type-graphql';
 import { SearchInput } from '../../models/searchInput';
 import { SearchResult } from '../../models/searchResult';
@@ -9,7 +7,7 @@ import { SearchResult } from '../../models/searchResult';
 export class SearchResolver {
   @Query(() => [SearchResult], { nullable: true })
   async search(
-    @Ctx() ctx: { prisma: PrismaClient; res: Response; user: TJWT_PAYLOAD },
+    @Ctx() ctx: GQLContext,
     @Arg('data') data: SearchInput
   ): Promise<SearchResult[]> {
     const searchProjectsResults = await ctx.prisma.project.findMany({

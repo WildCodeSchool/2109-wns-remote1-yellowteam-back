@@ -1,6 +1,6 @@
-import { PrismaClient } from '@prisma/client';
 import { ApolloError } from 'apollo-server-core';
 import { Response } from 'express';
+import { PrismaClient } from 'src/generated/client';
 import { TJWT_PAYLOAD } from 'src/interfaces';
 import { Resolver, Mutation, Ctx, Arg, Authorized } from 'type-graphql';
 import { TaskWhereUniqueInput } from '../../../generated/graphql';

@@ -1,5 +1,5 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import { PrismaClient, PrismaPromise } from '.prisma/client';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { PrismaClient, PrismaPromise } from 'src/generated/client';
 
 interface ApiError {
   message: string;

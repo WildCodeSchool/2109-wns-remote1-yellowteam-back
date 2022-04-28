@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-import { PrismaClient } from '@prisma/client';
 import {
   logGenerated,
   randomize,
@@ -14,6 +13,7 @@ import newTaskComment from './seeds/createTaskCommentSeed';
 import newProjectComment from './seeds/createProjectCommentSeed';
 import newNotification from './seeds/createUserNotification';
 import newFile from './seeds/createFilesSeed';
+import { PrismaClient } from 'src/generated/client';
 
 const prisma = new PrismaClient();
 
