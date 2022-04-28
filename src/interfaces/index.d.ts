@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '../../prisma/prismaClient';
 
 export type TJWT_PAYLOAD = {
   email: string;
@@ -10,7 +10,7 @@ export type TJWT_PAYLOAD = {
 export interface GQLContext {
   req: Request;
   res: Response;
-  prisma: PrismaClient;
+  prisma: typeof PrismaClient;
   user?: User;
   pubsub: PubSub;
 }
