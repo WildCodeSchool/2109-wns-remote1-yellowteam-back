@@ -14,16 +14,18 @@ export const graphQLContext = async ({
   req: Request;
   res: Response;
 }): Promise<GQLContext> => {
-  const cookies = new Cookies(req, res);
-  const token = cookies.get('token');
-  if (token) {
-    const user = verify(token, process.env.JWT_SECRET as string);
+  if (process.env.NODE_ENV !== 'test') {
+    const cookies = new Cookies(req, res);
+    const token = cookies.get('token');
+    if (token) {
+      const user = verify(token, process.env.JWT_SECRET as string);
 
-    if (typeof user === 'string') {
-      throw new Error('User not logged in');
+      if (typeof user === 'string') {
+        throw new Error('User not logged in');
+      }
+
+      return { prisma, req, res, pubsub, user };
     }
-
-    return { prisma, req, res, pubsub, user };
   }
 
   return { prisma, req, res, pubsub };

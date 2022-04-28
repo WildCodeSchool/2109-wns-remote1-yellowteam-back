@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { sign } from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
 import { UserWithoutCountAndPassword } from 'src/custom_resolvers/models/register';

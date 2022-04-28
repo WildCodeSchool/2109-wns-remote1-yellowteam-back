@@ -21,7 +21,6 @@ const createServer = async (): Promise<ApolloServer<ExpressContext>> => {
   const server = new ApolloServer({
     schema,
     context: async ({ req, res }) => graphQLContext({ req, res }),
-
     plugins: [
       process.env.NODE_ENV === 'production'
         ? ApolloServerPluginLandingPageDisabled

@@ -2,22 +2,12 @@
 import { GraphQLUpload } from 'graphql-upload';
 import { Arg, Authorized, Ctx, Mutation, Resolver } from 'type-graphql';
 import { Stream, Readable } from 'stream';
-import * as Minio from 'minio';
 import { ApolloError } from 'apollo-server-core';
 import { Request } from 'express';
 import { PrismaClient } from '.prisma/client';
-import { File, Role } from '../generated/graphql';
-import getFileType from '../utils/getFileType';
-
-const { MINIO_USERNAME, MINIO_PASSWORD, MINIO_ENDPOINT } = process.env;
-
-const minioClient = new Minio.Client({
-  endPoint: MINIO_ENDPOINT as string,
-  port: 80,
-  useSSL: false,
-  accessKey: MINIO_USERNAME as string,
-  secretKey: MINIO_PASSWORD as string,
-});
+import { File, Role } from '../../../generated/graphql';
+import getFileType from '../../../utils/getFileType';
+import minioClient from '../../../../src/services/minio';
 
 export interface Upload {
   filename: string;
@@ -44,10 +34,10 @@ export class UploadFile {
     const metadata = {
       'Content-type': 'image',
     };
-
+    console.log('on est ici');
     try {
       await minioClient.putObject(
-        'dcreport',
+        'ytask',
         filename,
         stream as Readable,
         metadata
