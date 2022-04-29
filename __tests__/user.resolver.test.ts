@@ -5,7 +5,7 @@ import faker from 'faker';
 import { ApolloServer } from 'apollo-server-express';
 import prismaClient from '../prisma/prismaClient';
 import createServer from '../src/server';
-import { Role } from '../src/generated/client';
+import { Role } from '@prisma/client';
 
 const GET_USERS = `
 query getUsers{
