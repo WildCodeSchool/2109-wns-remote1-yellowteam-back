@@ -53,6 +53,11 @@ export class UserWhereInput {
   })
   email?: StringFilter | undefined;
 
+  @TypeGraphQL.Field(_type => StringNullableFilter, {
+    nullable: true
+  })
+  phone_number?: StringNullableFilter | undefined;
+
   @TypeGraphQL.Field(_type => StringFilter, {
     nullable: true
   })
