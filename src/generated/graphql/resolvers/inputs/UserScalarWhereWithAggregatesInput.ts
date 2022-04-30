@@ -47,6 +47,11 @@ export class UserScalarWhereWithAggregatesInput {
   })
   email?: StringWithAggregatesFilter | undefined;
 
+  @TypeGraphQL.Field(_type => StringNullableWithAggregatesFilter, {
+    nullable: true
+  })
+  phone_number?: StringNullableWithAggregatesFilter | undefined;
+
   @TypeGraphQL.Field(_type => StringWithAggregatesFilter, {
     nullable: true
   })
