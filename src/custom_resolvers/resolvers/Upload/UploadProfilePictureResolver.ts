@@ -41,6 +41,18 @@ export class UploadProfilePicture {
         metadata
       );
 
+      const { avatar } = await ctx.prisma.user.findUnique({
+        where: {
+          id: userId,
+        },
+        rejectOnNotFound: true,
+      });
+
+      await minioClient.removeObject(
+        'ytask',
+        avatar?.split('/')[avatar?.split('/').length - 1] as string
+      );
+
       const updatedUser = await ctx.prisma.user.update({
         data: {
           avatar: `https://minio-dc-s3.digitalcopilote.re/ytask/${filename}`,
