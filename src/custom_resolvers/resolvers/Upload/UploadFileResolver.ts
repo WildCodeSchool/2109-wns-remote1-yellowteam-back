@@ -6,8 +6,9 @@ import { ApolloError } from 'apollo-server-core';
 import { Request } from 'express';
 import { File, Role } from '../../../generated/graphql';
 import getFileType from '../../../utils/getFileType';
-import minioClient from '../../../../src/services/minio';
+import minioClient from '../../../services/minioClient';
 import { GQLContext } from 'src/interfaces';
+import { minioService } from 'src/services/minioService';
 
 export interface Upload {
   filename: string;
@@ -36,12 +37,7 @@ export class UploadFile {
     };
     console.log('on est ici');
     try {
-      await minioClient.putObject(
-        'ytask',
-        filename,
-        stream as Readable,
-        metadata
-      );
+      await minioService.putObject(filename, stream as Readable, metadata);
 
       const newFile = await ctx.prisma.file.create({
         data: {
