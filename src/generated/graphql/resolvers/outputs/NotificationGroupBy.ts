@@ -40,7 +40,7 @@ export class NotificationGroupBy {
   @TypeGraphQL.Field(_type => Type_Notification, {
     nullable: false
   })
-  type!: "PROJECT" | "TASK";
+  type!: "PROJECT" | "TASK" | "INVITATION";
 
   @TypeGraphQL.Field(_type => Status_Notification, {
     nullable: false
