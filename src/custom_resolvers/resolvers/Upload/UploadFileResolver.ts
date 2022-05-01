@@ -3,12 +3,10 @@ import { GraphQLUpload } from 'graphql-upload';
 import { Arg, Authorized, Ctx, Mutation, Resolver } from 'type-graphql';
 import { Stream, Readable } from 'stream';
 import { ApolloError } from 'apollo-server-core';
-import { Request } from 'express';
 import { File, Role } from '../../../generated/graphql';
 import getFileType from '../../../utils/getFileType';
-import minioClient from '../../../services/minioClient';
-import { GQLContext } from 'src/interfaces';
-import { minioService } from 'src/services/minioService';
+import { GQLContext } from '../../../../src/interfaces';
+import { minioService } from '../../../../src/services/minioService';
 
 export interface Upload {
   filename: string;
