@@ -30,6 +30,11 @@ export class UserMinAggregate {
   @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
+  phone_number!: string | null;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
   password!: string | null;
 
   @TypeGraphQL.Field(_type => Boolean, {

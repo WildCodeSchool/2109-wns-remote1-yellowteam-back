@@ -3,9 +3,9 @@ import { GraphQLUpload } from 'graphql-upload';
 import { Arg, Authorized, Ctx, Mutation, Resolver } from 'type-graphql';
 import { Stream, Readable } from 'stream';
 import { ApolloError } from 'apollo-server-core';
-import minioClient from '../../../../src/services/minio';
 import { GQLContext } from '../../../../src/interfaces';
 import { Role, User } from '../../../../src/generated/graphql';
+import { minioService } from '../../../../src/services/minioService';
 
 export interface Upload {
   filename: string;
@@ -34,16 +34,28 @@ export class UploadProfilePicture {
         'Content-type': 'image',
       };
 
-      await minioClient.putObject(
-        'ytask',
+      const { avatar } = await ctx.prisma.user.findUnique({
+        where: {
+          id: userId,
+        },
+        rejectOnNotFound: true,
+      });
+
+      const previousFileName = avatar?.split('/')[
+        avatar?.split('/').length - 1
+      ] as string;
+
+      await minioService.replaceProfilePicture(
+        previousFileName,
         filename,
+        userId,
         stream as Readable,
         metadata
       );
 
       const updatedUser = await ctx.prisma.user.update({
         data: {
-          avatar: `https://minio-dc-s3.digitalcopilote.re/ytask/${filename}`,
+          avatar: `https://minio-dc-s3.digitalcopilote.re/ytask/profile_picture/${userId}/${filename}`,
         },
         where: {
           id: userId as string,

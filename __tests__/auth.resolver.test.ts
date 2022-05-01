@@ -7,7 +7,7 @@ import prismaClient from '../prisma/prismaClient';
 import createServer from '../src/server';
 import Cookies from 'cookies';
 import { Request, Response } from 'express';
-import { Role } from '../src/generated/client';
+import { Role } from '@prisma/client';
 
 const REGISTER = `
 mutation register($data: RegisterInput!){
