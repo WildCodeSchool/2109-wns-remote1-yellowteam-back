@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import whitelist from './constants/cors.whitelist';
+import { createServer } from 'http';
 
 const app = express();
 
@@ -28,5 +29,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.get('/', (req, res) => res.status(200).send('Hello World'));
+
+export const httpServer = createServer(app);
 
 export default app;

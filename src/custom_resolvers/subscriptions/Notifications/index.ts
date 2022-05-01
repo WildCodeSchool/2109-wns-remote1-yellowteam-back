@@ -1,0 +1,1 @@
+export { SubscribtionsResolver } from './newBugSubscription';
