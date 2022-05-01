@@ -3,11 +3,10 @@ import { GraphQLUpload } from 'graphql-upload';
 import { Arg, Authorized, Ctx, Mutation, Resolver } from 'type-graphql';
 import { Stream, Readable } from 'stream';
 import { ApolloError } from 'apollo-server-core';
-import { Request } from 'express';
 import { File, Role } from '../../../generated/graphql';
 import getFileType from '../../../utils/getFileType';
-import minioClient from '../../../../src/services/minio';
-import { GQLContext } from 'src/interfaces';
+import { GQLContext } from '../../../../src/interfaces';
+import { minioService } from '../../../../src/services/minioService';
 
 export interface Upload {
   filename: string;
@@ -34,14 +33,9 @@ export class UploadFile {
     const metadata = {
       'Content-type': 'image',
     };
-    console.log('on est ici');
+
     try {
-      await minioClient.putObject(
-        'ytask',
-        filename,
-        stream as Readable,
-        metadata
-      );
+      await minioService.putObject(filename, stream as Readable, metadata);
 
       const newFile = await ctx.prisma.file.create({
         data: {
