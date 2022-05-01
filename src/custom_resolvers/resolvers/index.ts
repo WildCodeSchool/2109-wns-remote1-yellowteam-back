@@ -3,14 +3,19 @@ import { NonEmptyArray } from 'type-graphql';
 import * as AuthResolversImport from './Authentication';
 import * as SearchResolverImport from './Search/index';
 import * as TaskResolverImport from './Task/index';
-import * as UpoloadResolverImport from './Upload/index';
+import * as UploadResolverImport from './Upload/index';
+import * as InvitationResolverImport from './Invitations/index';
+
+const CustomInvitationResolvers = Object.values(
+  InvitationResolverImport
+) as unknown as NonEmptyArray<Function>;
 
 const CustomAuthResolvers = Object.values(
   AuthResolversImport
 ) as unknown as NonEmptyArray<Function>;
 
 const CustomUploadResolvers = Object.values(
-  UpoloadResolverImport
+  UploadResolverImport
 ) as unknown as NonEmptyArray<Function>;
 
 const CustomTaskResolvers = Object.values(
@@ -26,4 +31,5 @@ export const customResolvers = [
   ...CustomSearchResolvers,
   ...CustomTaskResolvers,
   ...CustomUploadResolvers,
+  ...CustomInvitationResolvers,
 ] as unknown as NonEmptyArray<Function>;

@@ -1,0 +1,1 @@
+export { CreateInvitationResolver } from './customCreateInvitationResolver';
