@@ -45,16 +45,17 @@ export class UploadProfilePicture {
         avatar?.split('/').length - 1
       ] as string;
 
-      await minioService.replaceFile(
+      await minioService.replaceProfilePicture(
         previousFileName,
         filename,
+        userId,
         stream as Readable,
         metadata
       );
 
       const updatedUser = await ctx.prisma.user.update({
         data: {
-          avatar: `https://minio-dc-s3.digitalcopilote.re/ytask/${filename}`,
+          avatar: `https://minio-dc-s3.digitalcopilote.re/ytask/profile_picture/${userId}/${filename}`,
         },
         where: {
           id: userId as string,
