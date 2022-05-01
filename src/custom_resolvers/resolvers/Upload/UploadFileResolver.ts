@@ -35,7 +35,7 @@ export class UploadFile {
     const metadata = {
       'Content-type': 'image',
     };
-    console.log('on est ici');
+
     try {
       await minioService.putObject(filename, stream as Readable, metadata);
 
