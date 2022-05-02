@@ -168,4 +168,5 @@ enum Role {
 enum Type_Notification {
   PROJECT
   TASK
+  INVITATION
 }

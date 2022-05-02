@@ -37,7 +37,7 @@ export class NotificationMinAggregate {
   @TypeGraphQL.Field(_type => Type_Notification, {
     nullable: true
   })
-  type!: "PROJECT" | "TASK" | null;
+  type!: "PROJECT" | "TASK" | "INVITATION" | null;
 
   @TypeGraphQL.Field(_type => Status_Notification, {
     nullable: true
