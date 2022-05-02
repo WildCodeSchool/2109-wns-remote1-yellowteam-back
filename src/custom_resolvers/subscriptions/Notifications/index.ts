@@ -1,1 +1,1 @@
-export { SubscribtionsResolver } from './newBugSubscription';
+export { SubscribtionsResolver } from './notificationsSubscriptions';

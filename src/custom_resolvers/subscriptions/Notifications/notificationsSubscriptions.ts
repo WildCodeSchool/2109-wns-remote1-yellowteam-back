@@ -6,18 +6,7 @@ import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
 import * as TypeGraphQL from 'type-graphql';
 import { PubSubEngine } from 'graphql-subscriptions';
-import {
-  Resolver,
-  Query,
-  Mutation,
-  Arg,
-  PubSub,
-  Publisher,
-  Subscription,
-  Root,
-  ResolverFilterData,
-  Ctx,
-} from 'type-graphql';
+import { Resolver, Arg, Subscription, Root } from 'type-graphql';
 import { User } from '../../../generated/graphql';
 import {
   NotificationType,
@@ -26,40 +15,6 @@ import {
 
 @Resolver((_of) => NotificationType)
 export class SubscribtionsResolver {
-  private autoIncrement = 0;
-
-  @Query((returns) => Date)
-  currentDate(): Date {
-    return new Date();
-  }
-
-  @Mutation((returns) => Boolean)
-  async pubSubMutation(
-    @PubSub() pubSub: PubSubEngine,
-    @Arg('message', { nullable: true }) message?: string
-  ): Promise<boolean> {
-    const payload: NotificationPayload = {
-      senderId: '1',
-      userId: '1',
-      message,
-    };
-    await pubSub.publish('NOTIFICATIONS', payload);
-    return true;
-  }
-
-  @Mutation((returns) => Boolean)
-  async publisherMutation(
-    @PubSub('NOTIFICATIONS') publish: Publisher<NotificationPayload>,
-    @Arg('message', { nullable: true }) message?: string
-  ): Promise<boolean> {
-    await publish({
-      senderId: '1',
-      userId: '1',
-      message,
-    });
-    return true;
-  }
-
   @Subscription({
     topics: 'NOTIFICATIONS',
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -98,21 +53,6 @@ export class SubscribtionsResolver {
       date: new Date(),
     };
     return newNotification;
-  }
-
-  @Mutation((returns) => Boolean)
-  async pubSubMutationToDynamicTopic(
-    @PubSub() pubSub: PubSubEngine,
-    @Arg('topic') topic: string,
-    @Arg('message', { nullable: true }) message?: string
-  ): Promise<boolean> {
-    const payload: NotificationPayload = {
-      userId: '1',
-      message,
-      senderId: '1',
-    };
-    await pubSub.publish(topic, payload);
-    return true;
   }
 
   @Subscription({
