@@ -5,7 +5,7 @@ import { Field, ID, ObjectType } from 'type-graphql';
 @ObjectType()
 export class NotificationType {
   @Field((type) => ID)
-  id: number;
+  id: string;
 
   @Field({ nullable: true })
   message?: string;

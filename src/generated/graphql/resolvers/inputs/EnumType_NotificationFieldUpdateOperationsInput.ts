@@ -11,5 +11,5 @@ export class EnumType_NotificationFieldUpdateOperationsInput {
   @TypeGraphQL.Field(_type => Type_Notification, {
     nullable: true
   })
-  set?: "PROJECT" | "TASK" | undefined;
+  set?: "PROJECT" | "TASK" | "INVITATION" | undefined;
 }

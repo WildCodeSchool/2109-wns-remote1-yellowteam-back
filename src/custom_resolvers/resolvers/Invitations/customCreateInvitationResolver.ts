@@ -15,6 +15,8 @@ import {
 import { WebsocketContext } from '../../../../src/interfaces';
 import { PubSub } from 'type-graphql';
 import { NotificationPayload } from '../../../../src/custom_resolvers/models/notification';
+import { send } from 'process';
+import { Status_Notification, Type_Notification } from '@prisma/client';
 
 @TypeGraphQL.Resolver((_of) => Invitation)
 export class CreateInvitationResolver {
@@ -29,10 +31,52 @@ export class CreateInvitationResolver {
   ): Promise<Invitation> {
     const { _count } = transformFields(graphqlFields(info as any));
 
+    const sender = await ctx.prisma.user.findUnique({
+      where: {
+        email: args.data.email,
+      },
+      rejectOnNotFound: true,
+    });
+
+    const receiver = await ctx.prisma.user.findUnique({
+      where: {
+        email: args.data.user?.connect?.email,
+      },
+      rejectOnNotFound: true,
+    });
+
+    const project = await ctx.prisma.project.findUnique({
+      where: {
+        id: args.data.project?.connect?.id,
+      },
+      rejectOnNotFound: true,
+    });
+
+    await ctx.prisma.notification.create({
+      data: {
+        content: `${sender.first_name} ${sender.last_name} invited you to join the project ${project.title}`,
+        sender: {
+          connect: {
+            id: sender.id,
+          },
+        },
+        reference_id: project.id,
+        status: Status_Notification.UNREAD,
+        type: Type_Notification.INVITATION,
+        title: 'New invitation',
+        is_disabled: false,
+        user: {
+          connect: {
+            id: receiver.id,
+          },
+        },
+      },
+    });
+
     const payload: NotificationPayload = {
-      senderId: '100_100_1337',
-      userId: ctx.user.id,
-      message: `SOMEONE INVITED YOU TO JOIN THIS PROJECT`,
+      senderId: sender?.id,
+      userId: receiver?.id,
+      message: `${sender.first_name} ${sender.last_name} invited you to join ${project?.title} project`,
     };
 
     await pubSub.publish('NOTIFICATIONS', payload);
