@@ -18,11 +18,15 @@ export const webSocketContext = async (
   msg: SubscribeMessage,
   args: ExecutionArgs
 ): Promise<WebsocketContext> => {
+  console.log('ici');
   const cookies = new Cookies(ctx.extra.request, {} as unknown as Response);
   const token = cookies.get('token');
 
   if (token) {
-    const user = verify(token, process.env.JWT_SECRET as string);
+    console.log(token);
+    const user = verify(token, process.env.JWT_SECRET as string, {
+      ignoreExpiration: true,
+    });
     if (typeof user === 'string') {
       throw new Error('User not logged in');
     }
@@ -40,18 +44,24 @@ export const graphQLContext = async ({
   req: Request;
   res: Response;
 }): Promise<GQLContext> => {
+  const cookies = new Cookies(req, res);
+  const token = cookies.get('token');
+  console.log('ici');
+
   if (process.env.NODE_ENV !== 'test') {
-    const cookies = new Cookies(req, res);
-    const token = cookies.get('token');
-    if (token) {
-      const user = verify(token, process.env.JWT_SECRET as string);
+    return { prisma, req, res, pubsub };
+  }
 
-      if (typeof user === 'string') {
-        throw new Error('User not logged in');
-      }
+  if (token) {
+    const user = verify(token, process.env.JWT_SECRET as string, {
+      ignoreExpiration: true,
+    });
 
-      return { prisma, req, res, pubsub, user };
+    if (typeof user === 'string') {
+      throw new Error('User not logged in');
     }
+
+    return { prisma, req, res, pubsub, user };
   }
 
   return { prisma, req, res, pubsub };

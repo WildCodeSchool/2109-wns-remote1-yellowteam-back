@@ -9,6 +9,7 @@ const loginAuthorizationHeader = async (
   ctx: GQLContext,
   data: LoginInput
 ): Promise<UserWithoutCountAndPassword> => {
+  console.log('ici');
   const user = await ctx.prisma.user.findUnique({
     where: {
       email: data.email,
@@ -18,7 +19,7 @@ const loginAuthorizationHeader = async (
   if (!user) throw new Error("User doesn't exist");
 
   if (!bcrypt.compareSync(data.password, user.password)) {
-    ctx.res.setHeader('x-Authorization', '');
+    ctx.res.setHeader('authorization', '');
     throw new Error('Invalid password');
   }
 
@@ -38,7 +39,7 @@ const loginAuthorizationHeader = async (
 
   const { password, ...userWithoutPassword } = user;
 
-  ctx.res.setHeader('x-Authorization', `Bearer ${token}`);
+  ctx.res.setHeader('authorization', `Bearer ${token}`);
   ctx.res.setHeader('Access-Control-Allow-Credentials', 'true');
 
   return userWithoutPassword;

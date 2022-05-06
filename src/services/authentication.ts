@@ -74,12 +74,16 @@ export const signRefreshToken = (user: User): string => {
  * @returns void - when the token is set in the cookies
  */
 
-export const setCookieToken = (token: string, ctx: GQLContext): void => {
+export const setCookieToken = (
+  token: string,
+  cookieName: string,
+  ctx: GQLContext
+): void => {
   const cookies = new Cookies(ctx.req, ctx.res, {
     secure: process.env.NODE_ENV === 'production',
   });
 
-  cookies.set('token', token, {
+  cookies.set(cookieName, token, {
     httpOnly: process.env.NODE_ENV === 'production',
     secure: process.env.NODE_ENV === 'production',
     sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
