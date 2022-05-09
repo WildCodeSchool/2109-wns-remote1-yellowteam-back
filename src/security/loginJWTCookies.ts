@@ -1,7 +1,8 @@
+import { signRefreshToken } from './../services/authentication';
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { LoginInput } from '../../src/custom_resolvers/Inputs/login';
-import { GQLContext } from '../../src/interfaces';
-import { UserWithoutCountAndPassword } from '../../src/interfaces/user';
+import { LoginInput } from '../custom_resolvers/Inputs/login';
+import { UserWithoutCountAndPassword } from '../interfaces/user';
+import { GQLContext } from 'src/interfaces';
 
 import {
   checkPassword,
@@ -24,10 +25,12 @@ const loginJWTCookies = async (
   checkPassword(data.password, user.password, ctx);
 
   const token = signToken(user);
+  const refreshToken = signRefreshToken(user);
 
   const { password, ...userWithoutPassword } = user;
 
-  setCookieToken(token, ctx);
+  setCookieToken(token, 'token', ctx);
+  setCookieToken(refreshToken, 'refreshToken', ctx);
 
   return userWithoutPassword;
 };

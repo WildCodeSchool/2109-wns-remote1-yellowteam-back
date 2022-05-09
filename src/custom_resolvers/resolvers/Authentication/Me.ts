@@ -14,7 +14,9 @@ export class MeResolver {
     const cookies = new Cookies(ctx.req, ctx.res, {
       secure: true,
     });
-    const token = cookies.get('token');
+
+    const token =
+      cookies.get('token') || ctx.req.headers.authorization.split(' ')[1];
 
     if (!token) throw new Error('No token provided');
 
@@ -45,7 +47,7 @@ export class MeResolver {
 
     const { password, ...userWithoutPassword } = prismaUser;
 
-    setCookieToken(newToken, ctx);
+    setCookieToken(newToken, 'token', ctx);
 
     return userWithoutPassword;
   }

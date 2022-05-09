@@ -19,7 +19,6 @@ export class UpdateTaskStatusResolver {
     if (!task) {
       throw new ApolloError('No task found');
     }
-
     const projectUsers = await ctx.prisma.project
       .findUnique({
         where: {
@@ -27,11 +26,9 @@ export class UpdateTaskStatusResolver {
         },
       })
       .users();
-
     if (!projectUsers.some((user) => user.id === ctx.user.id)) {
       throw new ApolloError('You are not allowed to update this task');
     }
-
     if (task.status_task !== data.status) {
       const updatedTask = await ctx.prisma.task.update({
         where: { id: task.id },
