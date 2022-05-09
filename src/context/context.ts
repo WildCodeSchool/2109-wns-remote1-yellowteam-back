@@ -18,12 +18,10 @@ export const webSocketContext = async (
   msg: SubscribeMessage,
   args: ExecutionArgs
 ): Promise<WebsocketContext> => {
-  console.log('ici');
   const cookies = new Cookies(ctx.extra.request, {} as unknown as Response);
   const token = cookies.get('token');
 
   if (token) {
-    console.log(token);
     const user = verify(token, process.env.JWT_SECRET as string, {
       ignoreExpiration: true,
     });

@@ -9,7 +9,6 @@ const loginAuthorizationHeader = async (
   ctx: GQLContext,
   data: LoginInput
 ): Promise<UserWithoutCountAndPassword> => {
-  console.log('ici');
   const user = await ctx.prisma.user.findUnique({
     where: {
       email: data.email,
