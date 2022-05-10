@@ -45,6 +45,11 @@ export class UserUpdateWithoutFilesInput {
   })
   phone_number?: NullableStringFieldUpdateOperationsInput | undefined;
 
+  @TypeGraphQL.Field(_type => NullableStringFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  cover_picture?: NullableStringFieldUpdateOperationsInput | undefined;
+
   @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
     nullable: true
   })

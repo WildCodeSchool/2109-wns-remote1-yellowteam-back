@@ -52,6 +52,11 @@ export class UserScalarWhereWithAggregatesInput {
   })
   phone_number?: StringNullableWithAggregatesFilter | undefined;
 
+  @TypeGraphQL.Field(_type => StringNullableWithAggregatesFilter, {
+    nullable: true
+  })
+  cover_picture?: StringNullableWithAggregatesFilter | undefined;
+
   @TypeGraphQL.Field(_type => StringWithAggregatesFilter, {
     nullable: true
   })

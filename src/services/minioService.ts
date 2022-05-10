@@ -25,11 +25,12 @@ export const minioService = {
     await minioClient.putObject(config.bucket, fileName, stream, metadata);
   },
 
-  async replaceProfilePicture(
+  async replaceFile(
     previousFileName: string,
     fileName: string,
     userId: string,
     stream: Readable,
+    folder: string,
     metadata: { [key: string]: string }
   ): Promise<void> {
     minioClient.removeObject(
@@ -39,7 +40,7 @@ export const minioService = {
         console.log(`${previousFileName} removed`);
         await minioClient.putObject(
           config.bucket,
-          `profile_picture/${userId}/${fileName}`,
+          `${folder}/${userId}/${fileName}`,
           stream,
           metadata
         );

@@ -41,6 +41,11 @@ export class User {
   phone_number?: string | null;
 
   @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  cover_picture?: string | null;
+
+  @TypeGraphQL.Field(_type => String, {
     nullable: false
   })
   password!: string;
