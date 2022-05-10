@@ -3,9 +3,9 @@ import { GraphQLUpload } from 'graphql-upload';
 import { Arg, Authorized, Ctx, Mutation, Resolver } from 'type-graphql';
 import { Stream, Readable } from 'stream';
 import { ApolloError } from 'apollo-server-core';
-import { GQLContext } from '../../../../src/interfaces';
-import { Role, User } from '../../../../src/generated/graphql';
-import { minioService } from '../../../../src/services/minioService';
+import { GQLContext } from '../../../interfaces';
+import { Role, User } from '../../../generated/graphql';
+import { minioService } from '../../../services/minioService';
 
 export interface Upload {
   filename: string;
@@ -15,12 +15,12 @@ export interface Upload {
 }
 
 @Resolver()
-export class UploadProfilePicture {
+export class UploadCoverPicture {
   @Authorized(Role.SUPER_ADMIN, Role.ADMIN, Role.USER, Role.MANAGER)
   @Mutation(() => User, {
     nullable: false,
   })
-  async uploadProfilePicture(
+  async uploadCoverPicture(
     @Ctx() ctx: GQLContext,
     @Arg('file', () => GraphQLUpload)
     { createReadStream, filename }: Upload
@@ -34,15 +34,15 @@ export class UploadProfilePicture {
         'Content-type': 'image',
       };
 
-      const { avatar } = await ctx.prisma.user.findUnique({
+      const { cover_picture } = await ctx.prisma.user.findUnique({
         where: {
           id: userId,
         },
         rejectOnNotFound: true,
       });
 
-      const previousFileName = avatar?.split('/')[
-        avatar?.split('/').length - 1
+      const previousFileName = cover_picture?.split('/')[
+        cover_picture?.split('/').length - 1
       ] as string;
 
       await minioService.replaceFile(
@@ -50,13 +50,13 @@ export class UploadProfilePicture {
         filename,
         userId,
         stream as Readable,
-        'profile_picture',
+        'cover_picture',
         metadata
       );
 
       const updatedUser = await ctx.prisma.user.update({
         data: {
-          avatar: `https://minio-dc-s3.digitalcopilote.re/ytask/profile_picture/${userId}/${filename}`,
+          cover_picture: `https://minio-dc-s3.digitalcopilote.re/ytask/cover_picture/${userId}/${filename}`,
         },
         where: {
           id: userId as string,
