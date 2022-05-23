@@ -2,10 +2,13 @@ import express from 'express';
 import cors from 'cors';
 import whitelist from './constants/cors.whitelist';
 import { createServer } from 'http';
+import helmet from 'helmet';
 
 const app = express();
 
 app.use(express.json());
+
+app.use(helmet());
 
 const whitelistedUrls = whitelist || [];
 

@@ -17,6 +17,13 @@ export class SearchResolver {
             contains: data.searchValue,
           },
         },
+        users: {
+          some: {
+            id: {
+              equals: ctx.user.id,
+            },
+          },
+        },
       },
     });
 
@@ -26,6 +33,9 @@ export class SearchResolver {
           title: {
             contains: data.searchValue,
           },
+        },
+        user_id: {
+          equals: ctx.user.id,
         },
       },
     });
