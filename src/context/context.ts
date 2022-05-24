@@ -2,7 +2,11 @@ import Cookies from 'cookies';
 import { Request, Response } from 'express';
 import { verify } from 'jsonwebtoken';
 import { PubSub } from 'graphql-subscriptions';
-import { GQLContext, WebsocketContext } from '../interfaces/index';
+import {
+  GQLContext,
+  TJWT_PAYLOAD,
+  WebsocketContext,
+} from '../interfaces/index';
 import { Context, SubscribeMessage } from 'graphql-ws';
 import prisma from '../../prisma/prismaClient';
 import { ExecutionArgs } from 'graphql';
@@ -24,7 +28,7 @@ export const webSocketContext = async (
   if (token) {
     const user = verify(token, process.env.JWT_SECRET as string, {
       ignoreExpiration: true,
-    });
+    }) as TJWT_PAYLOAD;
     if (typeof user === 'string') {
       throw new Error('User not logged in');
     }
@@ -52,7 +56,7 @@ export const graphQLContext = async ({
   if (token) {
     const user = verify(token, process.env.JWT_SECRET as string, {
       ignoreExpiration: true,
-    });
+    }) as TJWT_PAYLOAD;
 
     if (typeof user === 'string') {
       throw new Error('User not logged in');

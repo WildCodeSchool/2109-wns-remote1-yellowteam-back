@@ -16,7 +16,7 @@ import { WebsocketContext } from '../../../../src/interfaces';
 import { PubSub } from 'type-graphql';
 import { NotificationPayload } from '../../../../src/custom_resolvers/models/notification';
 import { send } from 'process';
-import { Status_Notification, Type_Notification } from '@prisma/client';
+import { Status_Notification, Type_Notification } from '.prisma/client';
 
 @TypeGraphQL.Resolver((_of) => Invitation)
 export class CreateInvitationResolver {

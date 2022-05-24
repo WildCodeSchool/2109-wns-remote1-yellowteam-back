@@ -2,7 +2,6 @@
 /* eslint-disable no-console */
 import bcrypt from 'bcryptjs';
 import { Arg, Ctx, Mutation, Resolver } from 'type-graphql';
-import { Request, Response } from 'express';
 import Cookies from 'cookies';
 import { sign } from 'jsonwebtoken';
 import { User } from '../../../generated/graphql/models/User';

@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import { graphqlUploadExpress } from 'graphql-upload';
 import createServer from './server';
 import app, { httpServer } from './app';
+import limiter from './security/rateLimit';
 
 dotenv.config();
 
@@ -17,6 +18,8 @@ const { PORT } = process.env;
   await server.start();
 
   app.use(graphqlUploadExpress());
+
+  app.use(limiter);
 
   server.applyMiddleware({
     app,
