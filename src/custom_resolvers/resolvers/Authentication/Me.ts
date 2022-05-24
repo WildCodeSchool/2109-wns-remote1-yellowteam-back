@@ -14,7 +14,6 @@ export class MeResolver {
     const cookies = new Cookies(ctx.req, ctx.res, {
       secure: true,
     });
-    console.log('header', ctx.req.headers);
     const token =
       cookies.get('token') || ctx.req.headers.authorization.split(' ')[1];
 

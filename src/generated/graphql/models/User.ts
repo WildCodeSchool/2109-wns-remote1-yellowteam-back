@@ -45,10 +45,7 @@ export class User {
   })
   cover_picture?: string | null;
 
-  @TypeGraphQL.Field(_type => String, {
-    nullable: false
-  })
-  password!: string;
+  password?: string;
 
   @TypeGraphQL.Field(_type => Boolean, {
     nullable: false

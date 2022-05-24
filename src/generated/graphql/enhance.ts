@@ -396,7 +396,7 @@ function applyTypeClassEnhanceConfig<
 }
 
 const modelsInfo = {
-  User: ["id", "first_name", "last_name", "email", "phone_number", "cover_picture", "password", "is_disabled", "avatar", "role", "created_at", "updated_at"],
+  User: ["id", "first_name", "last_name", "email", "phone_number", "cover_picture", "is_disabled", "avatar", "role", "created_at", "updated_at"],
   Project: ["id", "project_owner_id", "title", "description", "private", "is_disabled", "status_project", "total_time_spent", "start_date", "end_date", "due_date", "created_at", "updated_at"],
   Task: ["id", "title", "description", "private", "is_disabled", "status_task", "total_time_spent", "start_date", "end_date", "user_id", "project_id", "created_at", "updated_at"],
   Comment: ["id", "is_disabled", "content", "task_comment_user_id", "project_id", "task_id", "project_comment_user_id", "created_at", "updated_at"],

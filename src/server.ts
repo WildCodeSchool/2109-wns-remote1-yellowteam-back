@@ -6,9 +6,8 @@ import {
 import { buildSchema } from 'type-graphql';
 import { resolvers } from './generated/graphql';
 import customAuthChecker from './utils/customAuthChecker';
-import { Resolve } from './authConfig';
+import { Resolve } from './config/authConfig';
 import { useServer } from 'graphql-ws/lib/use/ws';
-
 import { WebSocketServer } from 'ws';
 import { graphQLContext, webSocketContext } from './context/context';
 import { httpServer } from './app';
