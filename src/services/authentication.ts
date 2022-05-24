@@ -62,7 +62,7 @@ export const signRefreshToken = (user: User): string => {
     },
     process.env.JWT_SECRET as string,
     {
-      expiresIn: '6d',
+      expiresIn: '1m',
     }
   );
   return token;
