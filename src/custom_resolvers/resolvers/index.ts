@@ -5,6 +5,11 @@ import * as SearchResolverImport from './Search/index';
 import * as TaskResolverImport from './Task/index';
 import * as UploadResolverImport from './Upload/index';
 import * as InvitationResolverImport from './Invitations/index';
+import * as ProjectResolverImport from './Project';
+
+const CustomProjectResolvers = Object.values(
+  ProjectResolverImport
+) as unknown as NonEmptyArray<Function>;
 
 const CustomInvitationResolvers = Object.values(
   InvitationResolverImport
@@ -32,4 +37,5 @@ export const customResolvers = [
   ...CustomTaskResolvers,
   ...CustomUploadResolvers,
   ...CustomInvitationResolvers,
+  ...CustomProjectResolvers,
 ] as unknown as NonEmptyArray<Function>;
