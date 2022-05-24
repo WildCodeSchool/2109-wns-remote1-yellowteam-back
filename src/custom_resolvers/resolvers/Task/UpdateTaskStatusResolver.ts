@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { ApolloError } from 'apollo-server-core';
 import { GQLContext } from 'src/interfaces';
 import { Resolver, Mutation, Ctx, Arg, Authorized } from 'type-graphql';
@@ -26,7 +27,7 @@ export class UpdateTaskStatusResolver {
         },
       })
       .users();
-    if (!projectUsers.some((user) => user.id === ctx.user.id)) {
+    if (!projectUsers.some((user) => user.id === ctx.user!.id)) {
       throw new ApolloError('You are not allowed to update this task');
     }
     if (task.status_task !== data.status) {

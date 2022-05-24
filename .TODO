@@ -1,0 +1,1 @@
+Create a resolver in order to accept projects invitation because we restricted updateProject operation with checkIfOwner middleware

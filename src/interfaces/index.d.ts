@@ -12,7 +12,7 @@ export interface GQLContext {
   req: Request;
   res: Response;
   prisma: PrismaClient;
-  user?: User;
+  user?: TJWT_PAYLOAD;
   pubsub: PubSub;
 }
 
@@ -23,6 +23,6 @@ export interface WebsocketContext {
   >;
   msg: SubscribeMessage;
   args: ExecutionArgs;
-  user?: User;
+  user?: TJWT_PAYLOAD;
   prisma: PrismaClient;
 }
