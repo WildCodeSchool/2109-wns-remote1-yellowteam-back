@@ -3,7 +3,7 @@
 import { sign } from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import Cookies from 'cookies';
-import { UserWithoutCountAndPassword } from 'src/custom_resolvers/models/register';
+import { UserWithoutCountAndPassword } from '../../src/custom_resolvers/Inputs/register';
 import { Context } from 'apollo-server-core';
 import { LoginInput } from '../custom_resolvers/Inputs/login';
 

@@ -1,6 +1,6 @@
+import { SearchInput } from '../../../../src/custom_resolvers/Inputs/searchInput';
 import { GQLContext } from 'src/interfaces';
 import { Resolver, Ctx, Arg, Query } from 'type-graphql';
-import { SearchInput } from '../../models/searchInput';
 import { SearchResult } from '../../models/searchResult';
 
 @Resolver()

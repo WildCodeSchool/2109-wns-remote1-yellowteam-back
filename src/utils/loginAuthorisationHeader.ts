@@ -2,7 +2,7 @@
 import { sign } from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import { Request, Response } from 'express';
-import { UserWithoutCountAndPassword } from 'src/custom_resolvers/models/register';
+import { UserWithoutCountAndPassword } from '@src/custom_resolvers/Inputs/register';
 import { LoginInput } from '../custom_resolvers/Inputs/login';
 import { GQLContext } from 'src/interfaces';
 
