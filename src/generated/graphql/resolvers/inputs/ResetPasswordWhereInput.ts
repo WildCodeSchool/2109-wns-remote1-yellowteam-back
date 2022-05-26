@@ -24,4 +24,9 @@ export class ResetPasswordWhereInput {
     nullable: true
   })
   NOT?: ResetPasswordWhereInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => StringFilter, {
+    nullable: true
+  })
+  id?: StringFilter | undefined;
 }

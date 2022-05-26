@@ -1,11 +1,12 @@
 import createMail from '../api/services/templates/mailTemplate';
 import nodemailer from 'nodemailer';
+import SMTPTransport from 'nodemailer/lib/smtp-transport';
 
 const sendEmail = async (
   email: string,
   subject: string,
   link: string,
-  callback: (succes: any) => Promise<void>
+  callback: (succes: SMTPTransport.SentMessageInfo) => Promise<void>
 ): Promise<void> => {
   try {
     const transporter = nodemailer.createTransport({

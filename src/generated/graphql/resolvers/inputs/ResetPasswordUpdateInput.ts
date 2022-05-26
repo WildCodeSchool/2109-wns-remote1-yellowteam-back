@@ -10,4 +10,8 @@ import { UserUpdateOneRequiredWithoutResetPasswordInput } from "../inputs/UserUp
   isAbstract: true
 })
 export class ResetPasswordUpdateInput {
+  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  id?: StringFieldUpdateOperationsInput | undefined;
 }

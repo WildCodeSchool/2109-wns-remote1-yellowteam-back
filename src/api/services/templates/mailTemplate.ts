@@ -156,25 +156,7 @@ const createMail = (username: string, email: string, link: string): string => {
     <div style="width: 100% !important;">
     <!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;"><!--<![endif]-->
     
-  <table style="font-family:'Lato',sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
-    <tbody>
-      <tr>
-        <td style="overflow-wrap:break-word;word-break:break-word;padding:25px 10px;font-family:'Lato',sans-serif;" align="left">
-          
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-    <tr>
-      <td style="padding-right: 0px;padding-left: 0px;" align="center">
-        
-        <img align="center" border="0" src="images/image-1.jpeg" alt="Image" title="Image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 29%;max-width: 168.2px;" width="168.2"/>
-        
-      </td>
-    </tr>
-  </table>
-  
-        </td>
-      </tr>
-    </tbody>
-  </table>
+
   
     <!--[if (!mso)&(!IE)]><!--></div><!--<![endif]-->
     </div>
@@ -206,7 +188,9 @@ const createMail = (username: string, email: string, link: string): string => {
     <tr>
       <td style="padding-right: 0px;padding-left: 0px;" align="center">
         
-        <img align="center" border="0" src="images/image-6.png" alt="Image" title="Image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 10%;max-width: 58px;" width="58"/>
+      <div style="line-height: 140%; text-align: left; word-wrap: break-word;">
+      <p style="font-size: 14px; line-height: 140%; text-align: center;"><span style="font-size: 28px; line-height: 39.2px; color: #ffffff; font-family: Lato, sans-serif;">Y TASK</span></p>
+    </div>
         
       </td>
     </tr>
@@ -330,8 +314,8 @@ const createMail = (username: string, email: string, link: string): string => {
           
     <div style="line-height: 140%; text-align: left; word-wrap: break-word;">
       <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 16px; line-height: 22.4px; color: #ecf0f1;">Contact</span></p>
-  <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 14px; line-height: 19.6px; color: #ecf0f1;">1912 &nbsp;Mcwhorter Road, FL 11223</span></p>
-  <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 14px; line-height: 19.6px; color: #ecf0f1;">+111 222 333 | Info@company.com</span></p>
+  <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 14px; line-height: 19.6px; color: #ecf0f1;">1912 &nbsp;1"12 rue de la pige, 64578 mont-en-besogne</span></p>
+  <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 14px; line-height: 19.6px; color: #ecf0f1;">+33 6 54 34 54 34 | ytask.wns@gmail.com</span></p>
     </div>
   
         </td>

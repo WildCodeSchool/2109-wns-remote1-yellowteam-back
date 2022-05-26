@@ -8,4 +8,8 @@ import { UserCreateNestedOneWithoutResetPasswordInput } from "../inputs/UserCrea
   isAbstract: true
 })
 export class ResetPasswordCreateInput {
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  id?: string | undefined;
 }

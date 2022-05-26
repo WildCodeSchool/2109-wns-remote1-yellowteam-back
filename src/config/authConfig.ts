@@ -28,6 +28,9 @@ const resolversEnhanceMap: ResolversEnhanceMap = {
   Project: new ProjectAuthConfig(),
   Task: new TaskAuthConfig(),
   User: new UserAuthConfig(),
+  ResetPassword: {
+    _all: [Authorized(Role.SUPER_ADMIN)],
+  },
 };
 
 const modelsEnhanceMap: ModelsEnhanceMap = {
@@ -59,6 +62,11 @@ const modelsEnhanceMap: ModelsEnhanceMap = {
   Project: {
     fields: {
       _all: unRestricted,
+    },
+  },
+  ResetPassword: {
+    fields: {
+      _all: [Authorized(Role.SUPER_ADMIN)],
     },
   },
 };

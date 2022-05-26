@@ -9,8 +9,15 @@ const resetPassword: Emailhandler['resetPassword'] = async (req, res) => {
   try {
     const user = decode(token) as JwtPayload;
 
-    // Le JWT contenu dans le lien de réinitialisation de mot de passe est crypté avec l'email de l'utilisateur et une clé secrète
-    const JWT_RESET_KEY = process.env.JWT_RESET_PASSWORD_SECRET + user.email;
+    const resetPasswordSession = await prismaClient.resetPassword.findUnique({
+      where: {
+        token,
+      },
+    });
+
+    if (!resetPasswordSession) {
+      return res.status(400).send('This token is invalid');
+    }
 
     verify(
       token,
@@ -35,9 +42,7 @@ const resetPassword: Emailhandler['resetPassword'] = async (req, res) => {
       },
     });
 
-    const { password, ...userWithoutPassword } = updatedUser;
-
-    return res.status(200).send({ ...userWithoutPassword });
+    return res.status(200).send('Password reset successfully');
   } catch (error) {
     console.log(error);
   }

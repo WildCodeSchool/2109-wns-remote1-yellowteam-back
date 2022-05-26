@@ -9,4 +9,8 @@ import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOpe
   isAbstract: true
 })
 export class ResetPasswordUpdateManyMutationInput {
+  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  id?: StringFieldUpdateOperationsInput | undefined;
 }

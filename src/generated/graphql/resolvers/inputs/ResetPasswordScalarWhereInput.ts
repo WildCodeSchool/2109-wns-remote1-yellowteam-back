@@ -23,4 +23,9 @@ export class ResetPasswordScalarWhereInput {
     nullable: true
   })
   NOT?: ResetPasswordScalarWhereInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => StringFilter, {
+    nullable: true
+  })
+  id?: StringFilter | undefined;
 }

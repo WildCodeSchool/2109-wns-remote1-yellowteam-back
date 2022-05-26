@@ -9,4 +9,8 @@ import { SortOrder } from "../../enums/SortOrder";
   isAbstract: true
 })
 export class ResetPasswordOrderByWithRelationInput {
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  id?: "asc" | "desc" | undefined;
 }

@@ -431,7 +431,7 @@ const modelsInfo = {
   File: ["id", "name", "path", "size", "type", "user_id", "project_id", "task_id", "is_disabled", "created_at", "updated_at"],
   Invitation: ["id", "status", "email", "project_id", "user_id", "created_at", "updated_at"],
   Notification: ["id", "is_disabled", "title", "content", "user_id", "type", "status", "reference_id", "sender_id", "created_at", "updated_at"],
-  ResetPassword: []
+  ResetPassword: ["id"]
 };
 
 type ModelNames = keyof typeof models;

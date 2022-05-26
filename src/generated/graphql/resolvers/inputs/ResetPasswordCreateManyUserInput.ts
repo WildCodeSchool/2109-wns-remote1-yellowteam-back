@@ -7,4 +7,8 @@ import { DecimalJSScalar } from "../../scalars";
   isAbstract: true
 })
 export class ResetPasswordCreateManyUserInput {
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  id?: string | undefined;
 }

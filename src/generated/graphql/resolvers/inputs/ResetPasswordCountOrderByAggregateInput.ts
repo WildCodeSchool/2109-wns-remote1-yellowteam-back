@@ -8,4 +8,8 @@ import { SortOrder } from "../../enums/SortOrder";
   isAbstract: true
 })
 export class ResetPasswordCountOrderByAggregateInput {
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  id?: "asc" | "desc" | undefined;
 }

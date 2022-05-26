@@ -23,4 +23,9 @@ export class ResetPasswordScalarWhereWithAggregatesInput {
     nullable: true
   })
   NOT?: ResetPasswordScalarWhereWithAggregatesInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => StringWithAggregatesFilter, {
+    nullable: true
+  })
+  id?: StringWithAggregatesFilter | undefined;
 }

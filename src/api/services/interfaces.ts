@@ -2,10 +2,14 @@
 import { RequestHandler } from 'express';
 
 export default interface ServiceHandler {
-  forgotPassword: RequestHandler<Record<string, never>, any, { email: string }>;
+  forgotPassword: RequestHandler<
+    Record<string, never>,
+    string,
+    { email: string }
+  >;
   resetPassword: RequestHandler<
     Record<string, never>,
-    any,
+    string,
     { password: string; confirm_password: string; token: string }
   >;
 }

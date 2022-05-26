@@ -145,7 +145,6 @@ model Notification {
 }
 
 model ResetPassword {
-  /// @TypeGraphQL.omit(output: true, input: true)
   id         String   @id @default(uuid())
   /// @TypeGraphQL.omit(output: true, input: true)
   user       User     @relation(fields: [user_id], references: [id])

@@ -8,7 +8,10 @@ import { User } from "../models/User";
   isAbstract: true
 })
 export class ResetPassword {
-  id?: string;
+  @TypeGraphQL.Field(_type => String, {
+    nullable: false
+  })
+  id!: string;
 
   user?: User;
 
