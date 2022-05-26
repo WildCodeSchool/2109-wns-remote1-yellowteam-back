@@ -4,6 +4,7 @@ export { InvitationScalarFieldEnum } from "./InvitationScalarFieldEnum";
 export { NotificationScalarFieldEnum } from "./NotificationScalarFieldEnum";
 export { ProjectScalarFieldEnum } from "./ProjectScalarFieldEnum";
 export { QueryMode } from "./QueryMode";
+export { ResetPasswordScalarFieldEnum } from "./ResetPasswordScalarFieldEnum";
 export { Role } from "./Role";
 export { SortOrder } from "./SortOrder";
 export { Status } from "./Status";

@@ -1,4 +1,4 @@
-import createMail from '../api/email/mailTemplate';
+import createMail from '../api/services/templates/mailTemplate';
 import nodemailer from 'nodemailer';
 
 const sendEmail = async (

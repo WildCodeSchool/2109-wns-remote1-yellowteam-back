@@ -10,6 +10,7 @@ import { FileListRelationFilter } from "../inputs/FileListRelationFilter";
 import { InvitationListRelationFilter } from "../inputs/InvitationListRelationFilter";
 import { NotificationListRelationFilter } from "../inputs/NotificationListRelationFilter";
 import { ProjectListRelationFilter } from "../inputs/ProjectListRelationFilter";
+import { ResetPasswordListRelationFilter } from "../inputs/ResetPasswordListRelationFilter";
 import { StringFilter } from "../inputs/StringFilter";
 import { StringNullableFilter } from "../inputs/StringNullableFilter";
 import { TaskListRelationFilter } from "../inputs/TaskListRelationFilter";
@@ -137,4 +138,9 @@ export class UserWhereInput {
     nullable: true
   })
   updated_at?: DateTimeFilter | undefined;
+
+  @TypeGraphQL.Field(_type => ResetPasswordListRelationFilter, {
+    nullable: true
+  })
+  ResetPassword?: ResetPasswordListRelationFilter | undefined;
 }

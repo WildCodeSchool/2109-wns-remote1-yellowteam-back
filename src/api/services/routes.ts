@@ -4,6 +4,6 @@ import controller from './controller';
 const router = Router();
 
 router.post('/forgotpassword', controller.forgotPassword);
-router.get('/resetpassword', controller.resetPassword);
+router.post('/resetpassword', controller.resetPassword);
 
 export default router;

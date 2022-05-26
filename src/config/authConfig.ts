@@ -56,11 +56,6 @@ const modelsEnhanceMap: ModelsEnhanceMap = {
       _all: unRestricted,
     },
   },
-  User: {
-    fields: {
-      _all: unRestricted,
-    },
-  },
   Project: {
     fields: {
       _all: unRestricted,

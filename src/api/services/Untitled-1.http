@@ -1,4 +1,4 @@
-POST http://localhost:4000/email/forgotpassword
+POST http://localhost:4000/services/forgotpassword
 Content-Type: application/json
 
 {

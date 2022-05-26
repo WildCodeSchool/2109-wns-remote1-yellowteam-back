@@ -14,7 +14,7 @@ const checkSelf = async (
   next: NextFn
 ): Promise<void> => {
   if (!context.user) {
-    throw new ApolloError('U have to be loged in');
+    throw new ApolloError('U have to be loged in to do this action');
   }
 
   if (context.user?.role.includes('SUPER_ADMIN' || 'ADMIN')) {
