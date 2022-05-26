@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { AddUserToProjectArgs } from '../../Args/addUserToProjectArgs';
-import { ApolloError } from 'apollo-server-core';
 import { GQLContext } from 'src/interfaces';
-import { Resolver, Mutation, Ctx, Arg, Authorized, Args } from 'type-graphql';
-import { Project, TaskWhereUniqueInput } from '../../../generated/graphql';
+import { Resolver, Mutation, Ctx, Authorized, Args } from 'type-graphql';
+import { Project } from '../../../generated/graphql';
 import { Task } from '../../../generated/graphql/models/Task';
 
 @Resolver()

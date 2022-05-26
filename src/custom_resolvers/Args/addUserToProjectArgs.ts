@@ -1,10 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {
-  Project,
-  ProjectWhereUniqueInput,
-  User,
-  UserWhereUniqueInput,
-} from '../../../src/generated/graphql';
+import { ProjectWhereUniqueInput } from '../../../src/generated/graphql';
 import { ArgsType, Field } from 'type-graphql';
 import { AddUserToProjectInput } from '../Inputs/addUserToProject';
 

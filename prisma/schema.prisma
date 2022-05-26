@@ -16,10 +16,10 @@ datasource db {
 }
 
 model User {
-  id                 String         @id @default(uuid())
+  id                 String          @id @default(uuid())
   first_name         String
   last_name          String
-  email              String         @unique
+  email              String          @unique
   phone_number       String?
   cover_picture      String?
   /// @TypeGraphQL.omit(output: true)
@@ -30,14 +30,15 @@ model User {
   projects           Project[]
   tasks              Task[]
   files              File[]
-  task_comments      Comment[]      @relation("task_comments")
-  project_comments   Comment[]      @relation("project_comments")
+  task_comments      Comment[]       @relation("task_comments")
+  project_comments   Comment[]       @relation("project_comments")
   invitations        Invitation[]
   notifications      Notification[]
-  owned_projects     Project[]      @relation("project_owner")
-  notifications_sent Notification[] @relation("notification_sender")
-  created_at         DateTime       @default(now())
-  updated_at         DateTime       @updatedAt
+  owned_projects     Project[]       @relation("project_owner")
+  notifications_sent Notification[]  @relation("notification_sender")
+  created_at         DateTime        @default(now())
+  updated_at         DateTime        @updatedAt
+  ResetPassword      ResetPassword[]
 }
 
 model Project {
@@ -141,6 +142,20 @@ model Notification {
   sender_id    String
   created_at   DateTime            @default(now())
   updated_at   DateTime            @updatedAt
+}
+
+model ResetPassword {
+  id         String   @id @default(uuid())
+  /// @TypeGraphQL.omit(output: true, input: true)
+  user       User     @relation(fields: [user_id], references: [id])
+  /// @TypeGraphQL.omit(output: true, input: true)
+  user_id    String
+  /// @TypeGraphQL.omit(output: true, input: true)
+  token      String   @unique
+  /// @TypeGraphQL.omit(output: true, input: true)
+  created_at DateTime @default(now())
+  /// @TypeGraphQL.omit(output: true, input: true)
+  updated_at DateTime @updatedAt
 }
 
 enum Status_Invitation {
