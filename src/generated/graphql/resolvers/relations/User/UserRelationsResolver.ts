@@ -4,6 +4,7 @@ import { File } from "../../../models/File";
 import { Invitation } from "../../../models/Invitation";
 import { Notification } from "../../../models/Notification";
 import { Project } from "../../../models/Project";
+import { ResetPassword } from "../../../models/ResetPassword";
 import { Task } from "../../../models/Task";
 import { User } from "../../../models/User";
 import { UserFilesArgs } from "./args/UserFilesArgs";
@@ -13,6 +14,7 @@ import { UserNotifications_sentArgs } from "./args/UserNotifications_sentArgs";
 import { UserOwned_projectsArgs } from "./args/UserOwned_projectsArgs";
 import { UserProject_commentsArgs } from "./args/UserProject_commentsArgs";
 import { UserProjectsArgs } from "./args/UserProjectsArgs";
+import { UserResetPasswordArgs } from "./args/UserResetPasswordArgs";
 import { UserTask_commentsArgs } from "./args/UserTask_commentsArgs";
 import { UserTasksArgs } from "./args/UserTasksArgs";
 import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
@@ -116,5 +118,16 @@ export class UserRelationsResolver {
         id: user.id,
       },
     }).notifications_sent(args);
+  }
+
+  @TypeGraphQL.FieldResolver(_type => [ResetPassword], {
+    nullable: false
+  })
+  async ResetPassword(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserResetPasswordArgs): Promise<ResetPassword[]> {
+    return getPrismaFromContext(ctx).user.findUnique({
+      where: {
+        id: user.id,
+      },
+    }).ResetPassword(args);
   }
 }

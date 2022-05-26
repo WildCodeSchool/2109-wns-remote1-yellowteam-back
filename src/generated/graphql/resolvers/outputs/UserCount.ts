@@ -51,4 +51,9 @@ export class UserCount {
     nullable: false
   })
   notifications_sent!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  ResetPassword!: number;
 }
