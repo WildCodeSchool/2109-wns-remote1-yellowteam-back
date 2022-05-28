@@ -45,6 +45,7 @@
     "graphql-scalars": "^1.13.6",
     "graphql-upload": "^12.0.0",
     "graphql-ws": "^5.8.1",
+    "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
     "luxon": "^2.1.1",
     "minio": "^7.0.27",

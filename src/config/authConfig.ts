@@ -1,10 +1,13 @@
 import { Role } from '@prisma/client';
+import { MinLength } from 'class-validator';
 import { Authorized } from 'type-graphql';
 import {
   ResolversEnhanceMap,
   applyResolversEnhanceMap,
   applyModelsEnhanceMap,
   ModelsEnhanceMap,
+  InputTypesEnhanceMap,
+  applyInputTypesEnhanceMap,
 } from '../generated/graphql/enhance';
 import CommentAuthConfig from './Resolvers/Comment';
 import FileAuthConfig from './Resolvers/Files';
@@ -71,7 +74,23 @@ const modelsEnhanceMap: ModelsEnhanceMap = {
   },
 };
 
+const inputsValidation: InputTypesEnhanceMap = {
+  TaskCreateInput: {
+    fields: {
+      description: [MinLength(10)],
+      title: [MinLength(5)],
+    },
+  },
+  ProjectCreateInput: {
+    fields: {
+      title: [MinLength(5)],
+      description: [MinLength(10)],
+    },
+  },
+};
+
 export const Resolve = (): void => {
   applyResolversEnhanceMap(resolversEnhanceMap);
   applyModelsEnhanceMap(modelsEnhanceMap);
+  applyInputTypesEnhanceMap(inputsValidation);
 };

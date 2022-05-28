@@ -3,6 +3,7 @@ import cors from 'cors';
 import whitelist from './constants/cors.whitelist';
 import { createServer } from 'http';
 import restApi from './api';
+import errorHandler from './middlewares/errorHandler';
 
 const app = express();
 
@@ -32,6 +33,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.use(restApi);
+
+app.use(errorHandler);
 
 app.get('/', (req, res) => res.status(200).send('Hello World'));
 
