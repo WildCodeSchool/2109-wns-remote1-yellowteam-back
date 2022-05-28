@@ -13,5 +13,6 @@ const limiter = rateLimit({
 
 router.post('/forgotpassword', limiter, controller.forgotPassword);
 router.post('/resetpassword', limiter, controller.resetPassword);
+router.post('/verifycaptcha', limiter, controller.verifyCaptcha);
 
 export default router;

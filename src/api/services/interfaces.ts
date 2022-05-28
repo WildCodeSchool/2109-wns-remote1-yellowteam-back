@@ -12,4 +12,9 @@ export default interface ServiceHandler {
     string,
     { password: string; confirm_password: string; token: string }
   >;
+  verifyCaptcha: RequestHandler<
+    Record<string, never>,
+    string,
+    { token: string }
+  >;
 }

@@ -8,7 +8,7 @@ class ProjectAuthConfig {
   projects = unRestricted;
   createProject = unRestricted;
   createManyProject = restricted;
-  deleteProject = restricted;
+  deleteProject = [UseMiddleware(checkIfOwner)];
   deleteManyProject = restricted;
   findFirstProject = unRestricted;
   groupByProject = restricted;
