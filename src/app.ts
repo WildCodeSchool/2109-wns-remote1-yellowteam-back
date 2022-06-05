@@ -4,6 +4,30 @@ import whitelist from './constants/cors.whitelist';
 import { createServer } from 'http';
 import restApi from './api';
 import errorHandler from './middlewares/errorHandler';
+import morgan from 'morgan';
+import fs from 'fs';
+import cron from 'node-cron';
+import minioClient from './services/minioClient';
+
+// cron is a sheduler who executes tasks at a specific time
+// here we are scheduling a task to send log files to our cloud and delete them from the api folder
+
+cron.schedule('0 0 * * *', () => {
+  console.log('It is midnight, time to clean the logs');
+  fs.readFile('access.txt', async (err, data) => {
+    const file = await minioClient.putObject(
+      'ytask',
+      `logs/access-${new Date(Date.now()).toISOString()}.txt`,
+      data,
+      {
+        'Content-type': 'text/plain',
+      }
+    );
+    if (file) {
+      fs.writeFileSync('access.txt', '');
+    }
+  });
+});
 
 const app = express();
 
@@ -31,6 +55,12 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+
+const accessLogStream = fs.createWriteStream('access.txt', {
+  flags: 'a',
+});
+
+app.use(morgan('combined', { stream: accessLogStream }));
 
 app.use(restApi);
 

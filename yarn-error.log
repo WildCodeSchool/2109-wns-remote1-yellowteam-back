@@ -1,30 +1,30 @@
 Arguments: 
-  /Users/julien/.nvm/versions/node/v16.6.2/bin/node /Users/julien/.nvm/versions/node/v16.6.2/bin/yarn add -D @types/file-metadata
+  /Users/julien/.nvm/versions/node/v14.17.6/bin/node /Users/julien/.nvm/versions/node/v14.17.6/bin/yarn add @types/winston-daily-rotate-file
 
 PATH: 
-  /Users/julien/.nvm/versions/node/v16.6.2/bin:/Library/Frameworks/Python.framework/Versions/3.10/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Users/julien/.nvm/versions/node/v16.6.2/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/opt/local/bin:/opt/local/sbin
+  /Users/julien/.nvm/versions/node/v14.17.6/bin:/Users/julien/.nvm/versions/node/v16.10.0/bin:/Library/Frameworks/Python.framework/Versions/3.10/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Users/julien/.nvm/versions/node/v16.10.0/bin:/Library/Frameworks/Python.framework/Versions/3.10/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/opt/local/bin:/opt/local/sbin
 
 Yarn version: 
   1.22.17
 
 Node version: 
-  16.6.2
+  14.17.6
 
 Platform: 
   darwin arm64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2ffile-metadata: Not found
-      at Request.params.callback [as _callback] (/Users/julien/.nvm/versions/node/v16.6.2/lib/node_modules/yarn/lib/cli.js:67029:18)
-      at Request.self.callback (/Users/julien/.nvm/versions/node/v16.6.2/lib/node_modules/yarn/lib/cli.js:140883:22)
-      at Request.emit (node:events:394:28)
-      at Request.<anonymous> (/Users/julien/.nvm/versions/node/v16.6.2/lib/node_modules/yarn/lib/cli.js:141855:10)
-      at Request.emit (node:events:394:28)
-      at IncomingMessage.<anonymous> (/Users/julien/.nvm/versions/node/v16.6.2/lib/node_modules/yarn/lib/cli.js:141777:12)
-      at Object.onceWrapper (node:events:513:28)
-      at IncomingMessage.emit (node:events:406:35)
-      at endReadableNT (node:internal/streams/readable:1331:12)
-      at processTicksAndRejections (node:internal/process/task_queues:83:21)
+  Error: https://registry.yarnpkg.com/@types%2fwinston-daily-rotate-file: Not found
+      at Request.params.callback [as _callback] (/Users/julien/.nvm/versions/node/v14.17.6/lib/node_modules/yarn/lib/cli.js:67029:18)
+      at Request.self.callback (/Users/julien/.nvm/versions/node/v14.17.6/lib/node_modules/yarn/lib/cli.js:140883:22)
+      at Request.emit (events.js:400:28)
+      at Request.<anonymous> (/Users/julien/.nvm/versions/node/v14.17.6/lib/node_modules/yarn/lib/cli.js:141855:10)
+      at Request.emit (events.js:400:28)
+      at IncomingMessage.<anonymous> (/Users/julien/.nvm/versions/node/v14.17.6/lib/node_modules/yarn/lib/cli.js:141777:12)
+      at Object.onceWrapper (events.js:519:28)
+      at IncomingMessage.emit (events.js:412:35)
+      at endReadableNT (internal/streams/readable.js:1317:12)
+      at processTicksAndRejections (internal/process/task_queues.js:82:21)
 
 npm manifest: 
   {
@@ -39,8 +39,8 @@ npm manifest:
       "fmt-lint": "yarn run prettify && yarn run lint",
       "start": "node ./dist/src/index.js",
       "seed": "npx prisma migrate reset && ts-node prisma/seed.ts",
-      "build": "npx prisma generate && npx prisma migrate deploy && tsc",
-      "deploy": "npm run build && npx prisma generate && npx prisma migrate deploy && node ./dist/src/index.js",
+      "build": "npx prisma generate && tsc",
+      "deploy": "npm run build && npx prisma migrate deploy && node ./dist/src/index.js",
       "deploytests": "npm run build && dotenv -e .env.test node ./dist/src/index.js",
       "test": "dotenv -e .env.test jest --watch && dotenv -e .env.test -- npx prisma migrate reset -f",
       "migrate:postgres": "dotenv -e .env.test -- npx prisma migrate dev --name postgres-init && dotenv -e .env -- npx prisma migrate dev --name postgres-init",
@@ -48,12 +48,17 @@ npm manifest:
       "reset:tests": "dotenv -e .env.test  npx prisma migrate reset -f",
       "studio:test": "dotenv -e .env.test -- npx prisma studio"
     },
+    "_moduleDirectories": [
+      "src"
+    ],
     "dependencies": {
       "@prisma/client": "3.11.0",
       "apollo-server": "^3.5.0",
       "apollo-server-core": "^3.5.0",
       "apollo-server-express": "^3.5.0",
+      "axios": "^0.27.2",
       "bcryptjs": "^2.4.3",
+      "body-parser": "^1.20.0",
       "class-validator": "^0.13.2",
       "cookies": "^0.8.0",
       "cors": "^2.8.5",
@@ -68,15 +73,19 @@ npm manifest:
       "graphql-fields": "^2.0.3",
       "graphql-scalars": "^1.13.6",
       "graphql-upload": "^12.0.0",
+      "graphql-ws": "^5.8.1",
+      "joi": "^17.6.0",
       "jsonwebtoken": "^8.5.1",
       "luxon": "^2.1.1",
       "minio": "^7.0.27",
+      "nodemailer": "^6.7.5",
       "prisma": "3.11.0",
       "reflect-metadata": "^0.1.13",
       "stream-promise": "^3.2.0",
       "ts-jest": "^27.0.7",
       "type-graphql": "^1.1.1",
-      "typegraphql-prisma": "^0.19.1"
+      "typegraphql-prisma": "^0.19.1",
+      "winston-daily-rotate-file": "^4.7.1"
     },
     "devDependencies": {
       "@types/bcrypt": "^5.0.0",
@@ -90,6 +99,8 @@ npm manifest:
       "@types/luxon": "^2.0.7",
       "@types/minio": "^7.0.13",
       "@types/node": "^16.11.6",
+      "@types/nodemailer": "^6.4.4",
+      "@types/ws": "^8.5.3",
       "@typescript-eslint/eslint-plugin": "^4.29.3",
       "@typescript-eslint/parser": "^4.29.3",
       "eslint": "^7.32.0",
@@ -104,7 +115,9 @@ npm manifest:
       "prettier": "^2.3.2",
       "ts-node": "^10.5.0",
       "ts-node-dev": "^1.1.8",
-      "typescript": "^4.4.4"
+      "tsconfig-paths": "^3.14.1",
+      "typescript": "^4.4.4",
+      "ws": "^8.5.0"
     },
     "lint-staged": {
       "*.{js,jsx,ts,tsx}": [
@@ -455,6 +468,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
     integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
   
+  "@colors/colors@1.5.0":
+    version "1.5.0"
+    resolved "https://registry.yarnpkg.com/@colors/colors/-/colors-1.5.0.tgz#bb504579c1cae923e6576a4f5da43d25f97bdbd9"
+    integrity sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==
+  
   "@cspotcode/source-map-consumer@0.8.0":
     version "0.8.0"
     resolved "https://registry.yarnpkg.com/@cspotcode/source-map-consumer/-/source-map-consumer-0.8.0.tgz#33bf4b7b39c178821606f669bbc447a6a629786b"
@@ -516,6 +534,18 @@ Lockfile:
     integrity sha512-Z1X4d4GCT81+8CSt6SgU4t1w1UAUsAIRb67mI90k/zAs+ArkB95iE3bWXuJCUmd1+r8DGGtmUNOArtd6wkt+OQ==
     dependencies:
       tslib "~2.3.0"
+  
+  "@hapi/hoek@^9.0.0":
+    version "9.3.0"
+    resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-9.3.0.tgz#8368869dcb735be2e7f5cb7647de78e167a251fb"
+    integrity sha512-/c6rf4UJlmHlC9b5BaNvzAcFv7HZ2QHaV0D4/HNlBdvFnvQq8RI4kYdhyPCl7Xj+oWvTWQ8ujhqS53LIgAe6KQ==
+  
+  "@hapi/topo@^5.0.0":
+    version "5.1.0"
+    resolved "https://registry.yarnpkg.com/@hapi/topo/-/topo-5.1.0.tgz#dc448e332c6c6e37a4dc02fd84ba8d44b9afb012"
+    integrity sha512-foQZKJig7Ob0BMAYBfcJk8d77QtOe7Wo4ox7ff1lQYoNNAb6jwcY1ncdoy2e9wQZzvNy7ODZCYJkK8kzmcAnAg==
+    dependencies:
+      "@hapi/hoek" "^9.0.0"
   
   "@humanwhocodes/config-array@^0.5.0":
     version "0.5.0"
@@ -956,6 +986,23 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
     integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
   
+  "@sideway/address@^4.1.3":
+    version "4.1.4"
+    resolved "https://registry.yarnpkg.com/@sideway/address/-/address-4.1.4.tgz#03dccebc6ea47fdc226f7d3d1ad512955d4783f0"
+    integrity sha512-7vwq+rOHVWjyXxVlR76Agnvhy8I9rpzjosTESvmhNeXOXdZZB15Fl+TI9x1SiHZH5Jv2wTGduSxFDIaq0m3DUw==
+    dependencies:
+      "@hapi/hoek" "^9.0.0"
+  
+  "@sideway/formula@^3.0.0":
+    version "3.0.0"
+    resolved "https://registry.yarnpkg.com/@sideway/formula/-/formula-3.0.0.tgz#fe158aee32e6bd5de85044be615bc08478a0a13c"
+    integrity sha512-vHe7wZ4NOXVfkoRb8T5otiENVlT7a3IAiw7H5M2+GO+9CDgcVUUsX1zalAztCmwyOr2RUTGJdgB+ZvSVqmdHmg==
+  
+  "@sideway/pinpoint@^2.0.0":
+    version "2.0.0"
+    resolved "https://registry.yarnpkg.com/@sideway/pinpoint/-/pinpoint-2.0.0.tgz#cff8ffadc372ad29fd3f78277aeb29e632cc70df"
+    integrity sha512-RNiOoTPkptFtSVzQevY/yWtZwf/RxyVnPy/OcA9HBM3MlGDnBEYL5B41H0MTn0Uec8Hi+2qUtTfG2WWZBmMejQ==
+  
   "@sinonjs/commons@^1.7.0":
     version "1.8.3"
     resolved "https://registry.yarnpkg.com/@sinonjs/commons/-/commons-1.8.3.tgz#3802ddd21a50a949b6721ddd72da36e67e7f1b2d"
@@ -1321,6 +1368,13 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/@types/node/-/node-16.11.29.tgz#2422b0bf46afb2568dc71df903afa36f56bab8ea"
     integrity sha512-9dDdonLyPJQJ/kdOlDxAah+bTI+u2ccF3k62FErhquDuggoCX6piWez7j7o6yNE+rP2IRcZVQ6Tw4N0P38+rWA==
   
+  "@types/nodemailer@^6.4.4":
+    version "6.4.4"
+    resolved "https://registry.yarnpkg.com/@types/nodemailer/-/nodemailer-6.4.4.tgz#c265f7e7a51df587597b3a49a023acaf0c741f4b"
+    integrity sha512-Ksw4t7iliXeYGvIQcSIgWQ5BLuC/mljIEbjf615svhZL10PE9t+ei8O9gDaD3FPCasUJn9KTLwz2JFJyiiyuqw==
+    dependencies:
+      "@types/node" "*"
+  
   "@types/normalize-package-data@^2.4.0":
     version "2.4.1"
     resolved "https://registry.yarnpkg.com/@types/normalize-package-data/-/normalize-package-data-2.4.1.tgz#d3357479a0fdfdd5907fe67e17e0a85c906e1301"
@@ -1378,6 +1432,13 @@ Lockfile:
     version "0.0.30"
     resolved "https://registry.yarnpkg.com/@types/strip-json-comments/-/strip-json-comments-0.0.30.tgz#9aa30c04db212a9a0649d6ae6fd50accc40748a1"
     integrity sha512-7NQmHra/JILCd1QqpSzl8+mJRc8ZHz3uDm8YV1Ks9IhK0epEiTw8aIErbvH9PI+6XbqhyIQy3462nEsn7UVzjQ==
+  
+  "@types/ws@^8.5.3":
+    version "8.5.3"
+    resolved "https://registry.yarnpkg.com/@types/ws/-/ws-8.5.3.tgz#7d25a1ffbecd3c4f2d35068d0b283c037003274d"
+    integrity sha512-6YOoWjruKj1uLf3INHH7D3qTXwFfEsg1kf3c0uDdSBJwfa/llkwIjrAGV7j7mVgGNbzTQ3HiHKKDXl6bJPD97w==
+    dependencies:
+      "@types/node" "*"
   
   "@types/yargs-parser@*":
     version "21.0.0"
@@ -1807,6 +1868,14 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/available-typed-arrays/-/available-typed-arrays-1.0.5.tgz#92f95616501069d07d10edb2fc37d3e1c65123b7"
     integrity sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==
   
+  axios@^0.27.2:
+    version "0.27.2"
+    resolved "https://registry.yarnpkg.com/axios/-/axios-0.27.2.tgz#207658cc8621606e586c85db4b41a750e756d972"
+    integrity sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==
+    dependencies:
+      follow-redirects "^1.14.9"
+      form-data "^4.0.0"
+  
   babel-jest@^27.5.1:
     version "27.5.1"
     resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-27.5.1.tgz#a1bf8d61928edfefd21da27eb86a695bfd691444"
@@ -1930,7 +1999,7 @@ Lockfile:
       raw-body "2.4.3"
       type-is "~1.6.18"
   
-  body-parser@^1.19.0:
+  body-parser@^1.19.0, body-parser@^1.20.0:
     version "1.20.0"
     resolved "https://registry.yarnpkg.com/body-parser/-/body-parser-1.20.0.tgz#3de69bd89011c11573d7bfee6a64f11b6bd27cc5"
     integrity sha512-DfJ+q6EPcGKZD1QWUjSpqp+Q7bDQTsQIF4zfUAtZ6qk+H/3/QRhg9CEp39ss+/T2vw0+HaidC0ecJj/DRLIaKg==
@@ -3252,6 +3321,11 @@ Lockfile:
     dependencies:
       bser "2.1.1"
   
+  fecha@^4.2.0:
+    version "4.2.3"
+    resolved "https://registry.yarnpkg.com/fecha/-/fecha-4.2.3.tgz#4d9ccdbc61e8629b259fdca67e65891448d569fd"
+    integrity sha512-OP2IUU6HeYKJi3i0z4A19kHMQoLVs4Hc+DPqqxI2h/DPZHTm/vjsfC6P0b4jCMy14XizLBqvndQ+UilD7707Jw==
+  
   file-entry-cache@^6.0.1:
     version "6.0.1"
     resolved "https://registry.yarnpkg.com/file-entry-cache/-/file-entry-cache-6.0.1.tgz#211b2dd9659cb0394b073e7323ac3c933d522027"
@@ -3265,6 +3339,13 @@ Lockfile:
     integrity sha512-H9KuAzAMasJrgENp9kuRIbXeYeRfEQEQ2woR2G8KJfCJ1vp/Ub2Qf9buDrA7HDIeuSR19IL1Ps8wU7KRfEK10g==
     dependencies:
       plist "^3.0.4"
+  
+  file-stream-rotator@^0.6.1:
+    version "0.6.1"
+    resolved "https://registry.yarnpkg.com/file-stream-rotator/-/file-stream-rotator-0.6.1.tgz#007019e735b262bb6c6f0197e58e5c87cb96cec3"
+    integrity sha512-u+dBid4PvZw17PmDeRcNOtCP9CCK/9lRN2w+r1xIS7yOL9JFrIBKTvrYsxT4P0pGtThYTn++QS5ChHaUov3+zQ==
+    dependencies:
+      moment "^2.29.1"
   
   fill-range@^7.0.1:
     version "7.0.1"
@@ -3338,6 +3419,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/flatted/-/flatted-3.2.5.tgz#76c8584f4fc843db64702a6bd04ab7a8bd666da3"
     integrity sha512-WIWGi2L3DyTUvUrwRKgGi9TwxQMUEqPOPQBVi71R96jZXJdFskXEmf54BoZaS1kknGODoIGASGEzBUYdyMCBJg==
   
+  follow-redirects@^1.14.9:
+    version "1.15.1"
+    resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.1.tgz#0ca6a452306c9b276e4d3127483e29575e207ad5"
+    integrity sha512-yLAMQs+k0b2m7cVxpS1VKJVvoz7SS9Td1zss3XRwXj+ZDH00RJgnuLx7E44wx02kQLrdM3aOOy+FpzS7+8OizA==
+  
   foreach@^2.0.5:
     version "2.0.5"
     resolved "https://registry.yarnpkg.com/foreach/-/foreach-2.0.5.tgz#0bee005018aeb260d0a3af3ae658dd0136ec1b99"
@@ -3347,6 +3433,15 @@ Lockfile:
     version "3.0.1"
     resolved "https://registry.yarnpkg.com/form-data/-/form-data-3.0.1.tgz#ebd53791b78356a99af9a300d4282c4d5eb9755f"
     integrity sha512-RHkBKtLWUVwd7SqRIvCZMEvAMoGUp0XU+seQiZejj0COz3RI3hWP4sCv3gZWWLjJTd7rGwcsF5eKZGii0r/hbg==
+    dependencies:
+      asynckit "^0.4.0"
+      combined-stream "^1.0.8"
+      mime-types "^2.1.12"
+  
+  form-data@^4.0.0:
+    version "4.0.0"
+    resolved "https://registry.yarnpkg.com/form-data/-/form-data-4.0.0.tgz#93919daeaf361ee529584b9b31664dc12c9fa452"
+    integrity sha512-ETEklSGi5t0QMZuiXoA/Q6vcnxcLQP5vdugSpuAyi6SVGi2clPPp+xgEhuMaHC+zGgn31Kd235W35f7Hykkaww==
     dependencies:
       asynckit "^0.4.0"
       combined-stream "^1.0.8"
@@ -3554,6 +3649,11 @@ Lockfile:
       http-errors "^1.8.0"
       isobject "^4.0.0"
       object-path "^0.11.5"
+  
+  graphql-ws@^5.8.1:
+    version "5.8.1"
+    resolved "https://registry.yarnpkg.com/graphql-ws/-/graphql-ws-5.8.1.tgz#daf72534b8a169a272e730fa4f3ce0e6d04e2883"
+    integrity sha512-UVf/fxlHultC1+12tX9ShTIipqQFNZ96g7N51RFQlk7MFPsDUUMCR3QXVEzHEd5xlTp16rs5vCyfBljvcPN3fA==
   
   "graphql@0.13.1 - 16":
     version "16.4.0"
@@ -4500,6 +4600,17 @@ Lockfile:
       import-local "^3.0.2"
       jest-cli "^27.5.1"
   
+  joi@^17.6.0:
+    version "17.6.0"
+    resolved "https://registry.yarnpkg.com/joi/-/joi-17.6.0.tgz#0bb54f2f006c09a96e75ce687957bd04290054b2"
+    integrity sha512-OX5dG6DTbcr/kbMFj0KGYxuew69HPcAE3K/sZpEV2nP6e/j/C0HV+HNiBPCASxdx5T7DMoa0s8UeHWMnb6n2zw==
+    dependencies:
+      "@hapi/hoek" "^9.0.0"
+      "@hapi/topo" "^5.0.0"
+      "@sideway/address" "^4.1.3"
+      "@sideway/formula" "^3.0.0"
+      "@sideway/pinpoint" "^2.0.0"
+  
   js-tokens@^4.0.0:
     version "4.0.0"
     resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
@@ -4831,6 +4942,17 @@ Lockfile:
       slice-ansi "^4.0.0"
       wrap-ansi "^6.2.0"
   
+  logform@^2.3.2:
+    version "2.4.0"
+    resolved "https://registry.yarnpkg.com/logform/-/logform-2.4.0.tgz#131651715a17d50f09c2a2c1a524ff1a4164bcfe"
+    integrity sha512-CPSJw4ftjf517EhXZGGvTHHkYobo7ZCc0kvwUoOYcjfR2UVrI66RHj8MCrfAdEitdmFqbu2BYdYs8FHHZSb6iw==
+    dependencies:
+      "@colors/colors" "1.5.0"
+      fecha "^4.2.0"
+      ms "^2.1.1"
+      safe-stable-stringify "^2.3.1"
+      triple-beam "^1.3.0"
+  
   loglevel@^1.6.8:
     version "1.8.0"
     resolved "https://registry.yarnpkg.com/loglevel/-/loglevel-1.8.0.tgz#e7ec73a57e1e7b419cb6c6ac06bf050b67356114"
@@ -5028,6 +5150,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
     integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
   
+  moment@^2.29.1:
+    version "2.29.3"
+    resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.3.tgz#edd47411c322413999f7a5940d526de183c031f3"
+    integrity sha512-c6YRvhEo//6T2Jz/vVtYzqBzwvPT95JBQ+smCytzf7c50oMZRsR/a4w88aD34I+/QVSfnoAnSBFPJHItlOMJVw==
+  
   ms@2.0.0:
     version "2.0.0"
     resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
@@ -5080,6 +5207,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-2.0.3.tgz#225ee7488e4a5e636da8da52854844f9d716ca96"
     integrity sha512-maHFz6OLqYxz+VQyCAtA3PTX4UP/53pa05fyDNc9CwjvJ0yEh6+xBwKsgCxMNhS8taUKBFYxfuiaD9U/55iFaw==
   
+  nodemailer@^6.7.5:
+    version "6.7.5"
+    resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-6.7.5.tgz#b30b1566f5fa2249f7bd49ced4c58bec6b25915e"
+    integrity sha512-6VtMpwhsrixq1HDYSBBHvW0GwiWawE75dS3oal48VqRhUvKJNnKnJo2RI/bCVQubj1vgrgscMNW4DHaD6xtMCg==
+  
   normalize-package-data@^2.5.0:
     version "2.5.0"
     resolved "https://registry.yarnpkg.com/normalize-package-data/-/normalize-package-data-2.5.0.tgz#e66db1838b200c1dfc233225d12cb36520e234a8"
@@ -5111,6 +5243,11 @@ Lockfile:
     version "4.1.1"
     resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
     integrity sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM=
+  
+  object-hash@^2.0.1:
+    version "2.2.0"
+    resolved "https://registry.yarnpkg.com/object-hash/-/object-hash-2.2.0.tgz#5ad518581eefc443bd763472b8ff2e9c2c0d54a5"
+    integrity sha512-gScRMn0bS5fH+IuwyIFgnh9zBdo4DV+6GhygmWM9HyNJSgS0hScp1f5vjtm7oIIOiT9trXrShAkLFSc2IqKNgw==
   
   object-inspect@^1.12.0, object-inspect@^1.9.0:
     version "1.12.0"
@@ -5775,6 +5912,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.2.tgz#991ec69d296e0313747d59bdfd2b745c35f8828d"
     integrity sha512-Gd2UZBJDkXlY7GbJxfsE8/nvKkUEU1G38c1siN6QP6a9PT9MmHB8GnpscSmMJSoF8LOIrt8ud/wPtojys4G6+g==
   
+  safe-stable-stringify@^2.3.1:
+    version "2.3.1"
+    resolved "https://registry.yarnpkg.com/safe-stable-stringify/-/safe-stable-stringify-2.3.1.tgz#ab67cbe1fe7d40603ca641c5e765cb942d04fc73"
+    integrity sha512-kYBSfT+troD9cDA85VDnHZ1rpHC50O0g1e6WlGHVCz/g+JS+9WKLj+XwFYyR8UbrZN8ll9HUpDAAddY58MGisg==
+  
   "safer-buffer@>= 2.1.2 < 3", safer-buffer@^2.1.0:
     version "2.1.2"
     resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
@@ -6310,6 +6452,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/tree-kill/-/tree-kill-1.2.2.tgz#4ca09a9092c88b73a7cdc5e8a01b507b0790a0cc"
     integrity sha512-L0Orpi8qGpRG//Nd+H90vFB+3iHnue1zSSGmNOOCh1GLJ7rUKVwV2HvijphGQS2UmhUZewS9VgvxYIdgr+fG1A==
   
+  triple-beam@^1.3.0:
+    version "1.3.0"
+    resolved "https://registry.yarnpkg.com/triple-beam/-/triple-beam-1.3.0.tgz#a595214c7298db8339eeeee083e4d10bd8cb8dd9"
+    integrity sha512-XrHUvV5HpdLmIj4uVMxHggLbFSZYIn7HEWsqePZcI50pco+MPqJ50wMGY794X7AOOhxOBAjbkqfAbEe/QMp2Lw==
+  
   ts-jest@^27.0.7:
     version "27.1.4"
     resolved "https://registry.yarnpkg.com/ts-jest/-/ts-jest-27.1.4.tgz#84d42cf0f4e7157a52e7c64b1492c46330943e00"
@@ -6748,6 +6895,25 @@ Lockfile:
     dependencies:
       isexe "^2.0.0"
   
+  winston-daily-rotate-file@^4.7.1:
+    version "4.7.1"
+    resolved "https://registry.yarnpkg.com/winston-daily-rotate-file/-/winston-daily-rotate-file-4.7.1.tgz#f60a643af87f8867f23170d8cd87dbe3603a625f"
+    integrity sha512-7LGPiYGBPNyGHLn9z33i96zx/bd71pjBn9tqQzO3I4Tayv94WPmBNwKC7CO1wPHdP9uvu+Md/1nr6VSH9h0iaA==
+    dependencies:
+      file-stream-rotator "^0.6.1"
+      object-hash "^2.0.1"
+      triple-beam "^1.3.0"
+      winston-transport "^4.4.0"
+  
+  winston-transport@^4.4.0:
+    version "4.5.0"
+    resolved "https://registry.yarnpkg.com/winston-transport/-/winston-transport-4.5.0.tgz#6e7b0dd04d393171ed5e4e4905db265f7ab384fa"
+    integrity sha512-YpZzcUzBedhlTAfJg6vJDlyEai/IFMIVcaEZZyl3UXIl4gmqRpU7AE89AHLkbzLUsv0NVmw7ts+iztqKxxPW1Q==
+    dependencies:
+      logform "^2.3.2"
+      readable-stream "^3.6.0"
+      triple-beam "^1.3.0"
+  
   word-wrap@^1.2.3, word-wrap@~1.2.3:
     version "1.2.3"
     resolved "https://registry.yarnpkg.com/word-wrap/-/word-wrap-1.2.3.tgz#610636f6b1f703891bd34771ccb17fb93b47079c"
@@ -6790,6 +6956,11 @@ Lockfile:
     version "7.5.7"
     resolved "https://registry.yarnpkg.com/ws/-/ws-7.5.7.tgz#9e0ac77ee50af70d58326ecff7e85eb3fa375e67"
     integrity sha512-KMvVuFzpKBuiIXW3E4u3mySRO2/mCHSyZDJQM5NQ9Q9KHWHWh0NHgfbRMLLrceUK5qAL4ytALJbpRMjixFZh8A==
+  
+  ws@^8.5.0:
+    version "8.5.0"
+    resolved "https://registry.yarnpkg.com/ws/-/ws-8.5.0.tgz#bfb4be96600757fe5382de12c670dab984a1ed4f"
+    integrity sha512-BWX0SWVgLPzYwF8lTzEy1egjhS4S4OEAHfsO8o65WOVsrnSRGaSiUaa9e0ggGlkMTtBlmOpEXiie9RUcBO86qg==
   
   xml-name-validator@^3.0.0:
     version "3.0.0"
