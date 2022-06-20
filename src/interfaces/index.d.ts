@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 
 import { PrismaClient } from '@prisma/client';
+import { Request, Response } from 'express';
 
 export type TJWT_PAYLOAD = {
   email: string;
