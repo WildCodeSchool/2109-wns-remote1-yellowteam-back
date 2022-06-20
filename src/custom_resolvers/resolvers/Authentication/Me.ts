@@ -15,7 +15,7 @@ export class MeResolver {
       secure: true,
     });
     const token =
-      cookies.get('token') || ctx.req.headers.authorization.split(' ')[1];
+      cookies.get('token') || ctx.req!.headers!.authorization!.split(' ')[1];
 
     if (!token) throw new Error('No token provided');
 
@@ -24,7 +24,7 @@ export class MeResolver {
       process.env.JWT_SECRET as string,
       function (err, decoded) {
         if (err) {
-          return console.log(decoded);
+          return console.log(err);
         }
       }
     );

@@ -6,9 +6,10 @@ import Cookies from 'cookies';
 import { UserWithoutCountAndPassword } from 'src/custom_resolvers/models/register';
 import { Context } from 'apollo-server-core';
 import { LoginInput } from '../custom_resolvers/Inputs/login';
+import { GQLContext } from '@src/interfaces';
 
 const loginJWTCookies = async (
-  ctx: Context<Record<string, any>>,
+  ctx: GQLContext,
   data: LoginInput
 ): Promise<UserWithoutCountAndPassword> => {
   const cookies = new Cookies(ctx.req, ctx.res, {

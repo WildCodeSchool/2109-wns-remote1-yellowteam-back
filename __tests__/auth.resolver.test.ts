@@ -79,7 +79,6 @@ describe('server start and return correct values from queries', () => {
         res: {} as unknown as Response,
       }
     );
-    console.log(OneUserResult);
     const user = await prismaClient.user.findUnique({
       where: {
         email: OneUserResult?.data?.register?.email,

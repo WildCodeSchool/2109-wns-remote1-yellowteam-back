@@ -36,7 +36,7 @@ export class UploadCoverPicture {
 
       const { cover_picture } = await ctx.prisma.user.findUnique({
         where: {
-          id: userId,
+          id: userId as string,
         },
         rejectOnNotFound: true,
       });
@@ -48,7 +48,7 @@ export class UploadCoverPicture {
       await minioService.replaceFile(
         previousFileName,
         filename,
-        userId,
+        userId as string,
         stream as Readable,
         'cover_picture',
         metadata
