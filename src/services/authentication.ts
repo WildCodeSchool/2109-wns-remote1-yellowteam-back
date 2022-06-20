@@ -89,5 +89,5 @@ export const setCookieToken = (
     sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
   });
 
-  ctx.res.setHeader('Access-Control-Allow-Credentials', 'true');
+  // ctx.res.setHeader('Access-Control-Allow-Credentials', 'true');
 };
