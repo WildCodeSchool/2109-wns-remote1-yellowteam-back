@@ -1,16 +1,22 @@
+/* eslint-disable no-useless-escape */
+import { IsAlpha, IsEmail, Matches } from 'class-validator';
 import { Field, InputType } from 'type-graphql';
 
 @InputType()
 export class RegisterInput {
-  @Field()
+  @Field({ nullable: false })
+  @IsAlpha()
   first_name: string;
 
-  @Field()
+  @Field({ nullable: false })
+  @IsAlpha()
   last_name: string;
 
-  @Field()
+  @Field({ nullable: false })
+  @IsEmail()
   email: string;
 
-  @Field()
+  @Field({ nullable: false })
+  @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/)
   password: string;
 }
