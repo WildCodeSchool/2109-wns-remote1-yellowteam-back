@@ -18,7 +18,7 @@
     "reset:postgres": "dotenv -e .env.test -- npx prisma migrate reset -f && dotenv -e .env -- npx prisma migrate reset -f",
     "reset:tests": "dotenv -e .env.test  npx prisma migrate reset -f",
     "studio:test": "dotenv -e .env.test -- npx prisma studio",
-    "heroku-postbuild": "npm run deploy"
+    "heroku-postbuild": "npm run build"
   },
   "_moduleDirectories": [
     "src"
