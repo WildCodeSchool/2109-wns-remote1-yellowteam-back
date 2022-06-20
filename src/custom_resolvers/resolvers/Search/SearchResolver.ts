@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { GQLContext } from 'src/interfaces';
 import { Resolver, Ctx, Arg, Query } from 'type-graphql';
 import { SearchInput } from '../../models/searchInput';
@@ -20,7 +21,7 @@ export class SearchResolver {
         users: {
           some: {
             id: {
-              equals: ctx.user.id,
+              equals: ctx.user!.id,
             },
           },
         },
@@ -35,7 +36,7 @@ export class SearchResolver {
           },
         },
         user_id: {
-          equals: ctx.user.id,
+          equals: ctx.user!.id,
         },
       },
     });
