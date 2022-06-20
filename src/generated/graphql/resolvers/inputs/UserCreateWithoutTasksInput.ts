@@ -10,6 +10,7 @@ import { NotificationCreateNestedManyWithoutSenderInput } from "../inputs/Notifi
 import { NotificationCreateNestedManyWithoutUserInput } from "../inputs/NotificationCreateNestedManyWithoutUserInput";
 import { ProjectCreateNestedManyWithoutOwnerInput } from "../inputs/ProjectCreateNestedManyWithoutOwnerInput";
 import { ProjectCreateNestedManyWithoutUsersInput } from "../inputs/ProjectCreateNestedManyWithoutUsersInput";
+import { ResetPasswordCreateNestedManyWithoutUserInput } from "../inputs/ResetPasswordCreateNestedManyWithoutUserInput";
 import { UserCreateroleInput } from "../inputs/UserCreateroleInput";
 
 @TypeGraphQL.InputType("UserCreateWithoutTasksInput", {
@@ -115,4 +116,9 @@ export class UserCreateWithoutTasksInput {
     nullable: true
   })
   updated_at?: Date | undefined;
+
+  @TypeGraphQL.Field(_type => ResetPasswordCreateNestedManyWithoutUserInput, {
+    nullable: true
+  })
+  ResetPassword?: ResetPasswordCreateNestedManyWithoutUserInput | undefined;
 }

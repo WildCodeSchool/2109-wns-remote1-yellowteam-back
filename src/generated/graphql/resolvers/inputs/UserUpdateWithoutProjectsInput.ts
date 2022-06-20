@@ -12,6 +12,7 @@ import { NotificationUpdateManyWithoutSenderInput } from "../inputs/Notification
 import { NotificationUpdateManyWithoutUserInput } from "../inputs/NotificationUpdateManyWithoutUserInput";
 import { NullableStringFieldUpdateOperationsInput } from "../inputs/NullableStringFieldUpdateOperationsInput";
 import { ProjectUpdateManyWithoutOwnerInput } from "../inputs/ProjectUpdateManyWithoutOwnerInput";
+import { ResetPasswordUpdateManyWithoutUserInput } from "../inputs/ResetPasswordUpdateManyWithoutUserInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 import { TaskUpdateManyWithoutUserInput } from "../inputs/TaskUpdateManyWithoutUserInput";
 import { UserUpdateroleInput } from "../inputs/UserUpdateroleInput";
@@ -119,4 +120,9 @@ export class UserUpdateWithoutProjectsInput {
     nullable: true
   })
   updated_at?: DateTimeFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => ResetPasswordUpdateManyWithoutUserInput, {
+    nullable: true
+  })
+  ResetPassword?: ResetPasswordUpdateManyWithoutUserInput | undefined;
 }

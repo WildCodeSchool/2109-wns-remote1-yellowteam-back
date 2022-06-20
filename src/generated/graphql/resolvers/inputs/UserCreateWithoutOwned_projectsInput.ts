@@ -9,6 +9,7 @@ import { InvitationCreateNestedManyWithoutUserInput } from "../inputs/Invitation
 import { NotificationCreateNestedManyWithoutSenderInput } from "../inputs/NotificationCreateNestedManyWithoutSenderInput";
 import { NotificationCreateNestedManyWithoutUserInput } from "../inputs/NotificationCreateNestedManyWithoutUserInput";
 import { ProjectCreateNestedManyWithoutUsersInput } from "../inputs/ProjectCreateNestedManyWithoutUsersInput";
+import { ResetPasswordCreateNestedManyWithoutUserInput } from "../inputs/ResetPasswordCreateNestedManyWithoutUserInput";
 import { TaskCreateNestedManyWithoutUserInput } from "../inputs/TaskCreateNestedManyWithoutUserInput";
 import { UserCreateroleInput } from "../inputs/UserCreateroleInput";
 
@@ -115,4 +116,9 @@ export class UserCreateWithoutOwned_projectsInput {
     nullable: true
   })
   updated_at?: Date | undefined;
+
+  @TypeGraphQL.Field(_type => ResetPasswordCreateNestedManyWithoutUserInput, {
+    nullable: true
+  })
+  ResetPassword?: ResetPasswordCreateNestedManyWithoutUserInput | undefined;
 }

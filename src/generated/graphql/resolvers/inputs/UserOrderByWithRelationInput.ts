@@ -7,6 +7,7 @@ import { FileOrderByRelationAggregateInput } from "../inputs/FileOrderByRelation
 import { InvitationOrderByRelationAggregateInput } from "../inputs/InvitationOrderByRelationAggregateInput";
 import { NotificationOrderByRelationAggregateInput } from "../inputs/NotificationOrderByRelationAggregateInput";
 import { ProjectOrderByRelationAggregateInput } from "../inputs/ProjectOrderByRelationAggregateInput";
+import { ResetPasswordOrderByRelationAggregateInput } from "../inputs/ResetPasswordOrderByRelationAggregateInput";
 import { TaskOrderByRelationAggregateInput } from "../inputs/TaskOrderByRelationAggregateInput";
 import { SortOrder } from "../../enums/SortOrder";
 
@@ -118,4 +119,9 @@ export class UserOrderByWithRelationInput {
     nullable: true
   })
   updated_at?: "asc" | "desc" | undefined;
+
+  @TypeGraphQL.Field(_type => ResetPasswordOrderByRelationAggregateInput, {
+    nullable: true
+  })
+  ResetPassword?: ResetPasswordOrderByRelationAggregateInput | undefined;
 }
