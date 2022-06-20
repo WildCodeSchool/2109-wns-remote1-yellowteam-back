@@ -40,7 +40,7 @@ app.use(
       process.env.NODE_ENV === 'production' ? undefined : false,
   })
 );
-=======
+
 app.use(express.static('public'));
 
 const whitelistedUrls = whitelist || [];

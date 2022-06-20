@@ -20,7 +20,7 @@ export class SearchResolver {
         users: {
           some: {
             id: {
-              equals: ctx.user.id,
+              equals: ctx.user!.id,
             },
           },
         },
@@ -35,7 +35,7 @@ export class SearchResolver {
           },
         },
         user_id: {
-          equals: ctx.user.id,
+          equals: ctx.user!.id,
         },
       },
     });
