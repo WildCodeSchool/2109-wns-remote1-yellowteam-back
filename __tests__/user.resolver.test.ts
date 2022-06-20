@@ -2,10 +2,10 @@
 /* eslint-disable no-console */
 import 'reflect-metadata';
 import faker from 'faker';
-import { Role } from '.prisma/client';
 import { ApolloServer } from 'apollo-server-express';
 import prismaClient from '../prisma/prismaClient';
 import createServer from '../src/server';
+import { Role } from '@prisma/client';
 
 const GET_USERS = `
 query getUsers{
@@ -57,17 +57,17 @@ describe('server start and return correct values from queries', () => {
       req: {
         headers: {
           'Set-cookies':
-            'token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmZyIiwiaWQiOiI4MDBlNDVmNC02NDgxLTQ1NDgtOTVmNC0xMDhlOTZlM2NiY2IiLCJyb2xlIjpbIkFETUlOIl0sImlhdCI6MTY0Mjc2MDcyMywiZXhwIjoxNjQyODQ3MTIzfQ.6dWQxbbXlG2p6gQ0tWfS4xx3BGTJGvfcRjNCoJNSLE0',
+            'token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRvZUBnbWFpbC5jb20iLCJpZCI6IjlhYWZkZGU3LTM0YjItNGZmNy04YTE4LWRiZmM5ZDRjZDg4MCIsInJvbGUiOlsiVVNFUiIsIlNVUEVSX0FETUlOIiwiTUFOQUdFUiIsIkFETUlOIl0sImZpcnN0X25hbWUiOiJKZXJyb2xkIiwibGFzdF9uYW1lIjoiSG9lZ2VyIiwiaWF0IjoxNjUwOTc1NDc3LCJleHAiOjE2NTEwNjE4Nzd9.ej9MfY2XoieUe2pwzsyS6G3RqK01puJ8vTVeSrmd8Kk',
           token:
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmZyIiwiaWQiOiI4MDBlNDVmNC02NDgxLTQ1NDgtOTVmNC0xMDhlOTZlM2NiY2IiLCJyb2xlIjpbIkFETUlOIl0sImlhdCI6MTY0Mjc2MDcyMywiZXhwIjoxNjQyODQ3MTIzfQ.6dWQxbbXlG2p6gQ0tWfS4xx3BGTJGvfcRjNCoJNSLE0',
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRvZUBnbWFpbC5jb20iLCJpZCI6IjlhYWZkZGU3LTM0YjItNGZmNy04YTE4LWRiZmM5ZDRjZDg4MCIsInJvbGUiOlsiVVNFUiIsIlNVUEVSX0FETUlOIiwiTUFOQUdFUiIsIkFETUlOIl0sImZpcnN0X25hbWUiOiJKZXJyb2xkIiwibGFzdF9uYW1lIjoiSG9lZ2VyIiwiaWF0IjoxNjUwOTc1NDc3LCJleHAiOjE2NTEwNjE4Nzd9.ej9MfY2XoieUe2pwzsyS6G3RqK01puJ8vTVeSrmd8Kk',
           cookies: {
             token:
-              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmZyIiwiaWQiOiI4MDBlNDVmNC02NDgxLTQ1NDgtOTVmNC0xMDhlOTZlM2NiY2IiLCJyb2xlIjpbIkFETUlOIl0sImlhdCI6MTY0Mjc2MDcyMywiZXhwIjoxNjQyODQ3MTIzfQ.6dWQxbbXlG2p6gQ0tWfS4xx3BGTJGvfcRjNCoJNSLE0',
+              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRvZUBnbWFpbC5jb20iLCJpZCI6IjlhYWZkZGU3LTM0YjItNGZmNy04YTE4LWRiZmM5ZDRjZDg4MCIsInJvbGUiOlsiVVNFUiIsIlNVUEVSX0FETUlOIiwiTUFOQUdFUiIsIkFETUlOIl0sImZpcnN0X25hbWUiOiJKZXJyb2xkIiwibGFzdF9uYW1lIjoiSG9lZ2VyIiwiaWF0IjoxNjUwOTc1NDc3LCJleHAiOjE2NTEwNjE4Nzd9.ej9MfY2XoieUe2pwzsyS6G3RqK01puJ8vTVeSrmd8Kk',
           },
         },
         cookies: {
           token:
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmZyIiwiaWQiOiI4MDBlNDVmNC02NDgxLTQ1NDgtOTVmNC0xMDhlOTZlM2NiY2IiLCJyb2xlIjpbIkFETUlOIl0sImlhdCI6MTY0Mjc2MDcyMywiZXhwIjoxNjQyODQ3MTIzfQ.6dWQxbbXlG2p6gQ0tWfS4xx3BGTJGvfcRjNCoJNSLE0',
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRvZUBnbWFpbC5jb20iLCJpZCI6IjlhYWZkZGU3LTM0YjItNGZmNy04YTE4LWRiZmM5ZDRjZDg4MCIsInJvbGUiOlsiVVNFUiIsIlNVUEVSX0FETUlOIiwiTUFOQUdFUiIsIkFETUlOIl0sImZpcnN0X25hbWUiOiJKZXJyb2xkIiwibGFzdF9uYW1lIjoiSG9lZ2VyIiwiaWF0IjoxNjUwOTc1NDc3LCJleHAiOjE2NTEwNjE4Nzd9.ej9MfY2XoieUe2pwzsyS6G3RqK01puJ8vTVeSrmd8Kk',
         },
       },
     };
@@ -83,7 +83,7 @@ describe('server start and return correct values from queries', () => {
     } catch (error) {
       console.log('prisma', error);
     }
-    // get all users from database
+    // retrieve all users from database and retr
     const allPrismaUsers = await prismaClient.user.findMany({
       select: {
         id: true,

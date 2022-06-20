@@ -1,0 +1,16 @@
+POST http://localhost:4000/services/forgotpassword
+Content-Type: application/json
+
+{
+    "email":"julien_abbadie@hotmail.fr"
+}
+
+###
+
+POST http://localhost:4000/services/resetpassword
+Content-Type: application/json
+
+{
+    "token":"dzqdzqd",
+    "password":"w31NUMZ6@001"
+}

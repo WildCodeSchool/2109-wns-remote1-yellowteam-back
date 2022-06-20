@@ -1,21 +1,20 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-console */
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { Arg, Ctx, Mutation, Resolver } from 'type-graphql';
-import { PrismaClient } from '@prisma/client';
-import { Request, Response } from 'express';
 import Cookies from 'cookies';
 import { sign } from 'jsonwebtoken';
 import { User } from '../../../generated/graphql/models/User';
 import { RegisterInput } from '../../Inputs/register';
 import { Role } from '../../../generated/graphql';
 import { UserWithoutCountAndPassword } from 'src/interfaces/user';
+import { GQLContext } from 'src/interfaces';
 
 @Resolver()
 export class RegisterResolver {
   @Mutation(() => User)
   async register(
-    @Ctx() ctx: { prisma: PrismaClient; req: Request; res: Response },
+    @Ctx() ctx: GQLContext,
     @Arg('data') data: RegisterInput
   ): Promise<UserWithoutCountAndPassword> {
     const hashedPassword = bcrypt.hashSync(data.password, 10);
@@ -31,7 +30,7 @@ export class RegisterResolver {
         email: data.email,
         password: hashedPassword,
         is_disabled: false,
-        role: [Role.ADMIN],
+        role: [Role.USER],
       },
     });
 

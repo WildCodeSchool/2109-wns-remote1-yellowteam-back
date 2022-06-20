@@ -7,6 +7,7 @@ import { File } from "../models/File";
 import { Invitation } from "../models/Invitation";
 import { Notification } from "../models/Notification";
 import { Project } from "../models/Project";
+import { ResetPassword } from "../models/ResetPassword";
 import { Task } from "../models/Task";
 import { Role } from "../enums/Role";
 import { UserCount } from "../resolvers/outputs/UserCount";
@@ -36,9 +37,16 @@ export class User {
   email!: string;
 
   @TypeGraphQL.Field(_type => String, {
-    nullable: false
+    nullable: true
   })
-  password!: string;
+  phone_number?: string | null;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  cover_picture?: string | null;
+
+  password?: string;
 
   @TypeGraphQL.Field(_type => Boolean, {
     nullable: false
@@ -82,6 +90,8 @@ export class User {
     nullable: false
   })
   updated_at!: Date;
+
+  ResetPassword?: ResetPassword[];
 
   @TypeGraphQL.Field(_type => UserCount, {
     nullable: true

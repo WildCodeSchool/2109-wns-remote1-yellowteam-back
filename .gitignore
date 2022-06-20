@@ -11,3 +11,6 @@ dist
 ./dist
 /dist
 
+/logs
+
+access.txt

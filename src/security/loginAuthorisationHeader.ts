@@ -1,13 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { sign } from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
-import { PrismaClient } from '@prisma/client';
-import { Request, Response } from 'express';
+import bcrypt from 'bcryptjs';
 import { UserWithoutCountAndPassword } from '../../src/interfaces/user';
 import { LoginInput } from '../../src/custom_resolvers/Inputs/login';
+import { GQLContext } from 'src/interfaces';
 
 const loginAuthorizationHeader = async (
-  ctx: { prisma: PrismaClient; req: Request; res: Response },
+  ctx: GQLContext,
   data: LoginInput
 ): Promise<UserWithoutCountAndPassword> => {
   const user = await ctx.prisma.user.findUnique({
@@ -19,7 +18,7 @@ const loginAuthorizationHeader = async (
   if (!user) throw new Error("User doesn't exist");
 
   if (!bcrypt.compareSync(data.password, user.password)) {
-    ctx.res.setHeader('x-Authorization', '');
+    ctx.res.setHeader('authorization', '');
     throw new Error('Invalid password');
   }
 
@@ -39,7 +38,7 @@ const loginAuthorizationHeader = async (
 
   const { password, ...userWithoutPassword } = user;
 
-  ctx.res.setHeader('x-Authorization', `Bearer ${token}`);
+  ctx.res.setHeader('authorization', `Bearer ${token}`);
   ctx.res.setHeader('Access-Control-Allow-Credentials', 'true');
 
   return userWithoutPassword;

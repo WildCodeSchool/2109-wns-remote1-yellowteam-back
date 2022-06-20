@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
-import { Role } from '@prisma/client';
 import faker from 'faker';
+import { Role } from '@prisma/client';
 
 const newManager = () => ({
   first_name: faker.name.findName(),

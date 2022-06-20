@@ -29,6 +29,16 @@ export class UserCreateManyInput {
   email!: string;
 
   @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  phone_number?: string | undefined;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  cover_picture?: string | undefined;
+
+  @TypeGraphQL.Field(_type => String, {
     nullable: false
   })
   password!: string;

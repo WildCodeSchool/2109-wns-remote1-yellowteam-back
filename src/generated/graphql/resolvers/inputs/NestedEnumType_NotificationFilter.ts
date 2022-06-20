@@ -11,17 +11,17 @@ export class NestedEnumType_NotificationFilter {
   @TypeGraphQL.Field(_type => Type_Notification, {
     nullable: true
   })
-  equals?: "PROJECT" | "TASK" | undefined;
+  equals?: "PROJECT" | "TASK" | "INVITATION" | undefined;
 
   @TypeGraphQL.Field(_type => [Type_Notification], {
     nullable: true
   })
-  in?: Array<"PROJECT" | "TASK"> | undefined;
+  in?: Array<"PROJECT" | "TASK" | "INVITATION"> | undefined;
 
   @TypeGraphQL.Field(_type => [Type_Notification], {
     nullable: true
   })
-  notIn?: Array<"PROJECT" | "TASK"> | undefined;
+  notIn?: Array<"PROJECT" | "TASK" | "INVITATION"> | undefined;
 
   @TypeGraphQL.Field(_type => NestedEnumType_NotificationFilter, {
     nullable: true

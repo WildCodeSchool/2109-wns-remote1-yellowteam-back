@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
+
 import { PrismaClient } from '@prisma/client';
 
 export type TJWT_PAYLOAD = {
@@ -11,7 +12,7 @@ export interface GQLContext {
   req: Request;
   res: Response;
   prisma: PrismaClient;
-  user?: User;
+  user?: TJWT_PAYLOAD;
   pubsub: PubSub;
 }
 
@@ -22,6 +23,6 @@ export interface WebsocketContext {
   >;
   msg: SubscribeMessage;
   args: ExecutionArgs;
-  user?: User;
+  user?: TJWT_PAYLOAD;
   prisma: PrismaClient;
 }

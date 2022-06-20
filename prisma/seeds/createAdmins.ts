@@ -1,6 +1,6 @@
-import bcrypt from 'bcrypt';
-import { Role } from '@prisma/client';
+import bcrypt from 'bcryptjs';
 import faker from 'faker';
+import { Role } from '@prisma/client';
 
 export const newAdmin = {
   first_name: process.env.ADMIN_NAME as string,

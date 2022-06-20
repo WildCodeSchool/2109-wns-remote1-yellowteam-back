@@ -2,22 +2,11 @@
 import { GraphQLUpload } from 'graphql-upload';
 import { Arg, Authorized, Ctx, Mutation, Resolver } from 'type-graphql';
 import { Stream, Readable } from 'stream';
-import * as Minio from 'minio';
 import { ApolloError } from 'apollo-server-core';
-import { Request } from 'express';
-import { PrismaClient } from '.prisma/client';
-import { File, Role } from '../generated/graphql';
-import getFileType from '../utils/getFileType';
-
-const { MINIO_USERNAME, MINIO_PASSWORD, MINIO_ENDPOINT } = process.env;
-
-const minioClient = new Minio.Client({
-  endPoint: MINIO_ENDPOINT as string,
-  port: 80,
-  useSSL: false,
-  accessKey: MINIO_USERNAME as string,
-  secretKey: MINIO_PASSWORD as string,
-});
+import { File, Role } from '../../../generated/graphql';
+import getFileType from '../../../utils/getFileType';
+import { GQLContext } from '../../../../src/interfaces';
+import { minioService } from '../../../../src/services/minioService';
 
 export interface Upload {
   filename: string;
@@ -33,7 +22,7 @@ export class UploadFile {
     nullable: false,
   })
   async uploadFile(
-    @Ctx() ctx: { prisma: PrismaClient; req: Request },
+    @Ctx() ctx: GQLContext,
     @Arg('file', () => GraphQLUpload)
     { createReadStream, filename }: Upload
   ): Promise<File> {
@@ -46,12 +35,7 @@ export class UploadFile {
     };
 
     try {
-      await minioClient.putObject(
-        'dcreport',
-        filename,
-        stream as Readable,
-        metadata
-      );
+      await minioService.putObject(filename, stream as Readable, metadata);
 
       const newFile = await ctx.prisma.file.create({
         data: {

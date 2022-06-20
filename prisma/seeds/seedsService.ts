@@ -1,15 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { DateTime } from 'luxon';
-import { Status_Notification } from '@prisma/client';
-import { Status } from '.prisma/client';
+import { Status, Status_Notification } from '@prisma/client';
 
 /* eslint-disable no-console */
-export const startDate = () => {
+export const startDate = (): DateTime => {
   const date = new Date(Date.now());
   const startDateGenerate = DateTime.fromJSDate(date);
   return startDateGenerate;
 };
 
-export const endDate = (start: DateTime) => {
+export const endDate = (start: DateTime): DateTime => {
   const endDateGenerate = start.plus({
     days: Math.floor(Math.random() * 30),
     month: Math.floor(Math.random() * 4),
@@ -17,7 +17,7 @@ export const endDate = (start: DateTime) => {
   return endDateGenerate;
 };
 
-export const dueDate = (end: DateTime) => {
+export const dueDate = (end: DateTime): DateTime => {
   const endDateGenerate = end.plus({
     month: Math.floor(Math.random() * 4),
     days: Math.floor(Math.random() * 30),
@@ -25,18 +25,18 @@ export const dueDate = (end: DateTime) => {
   return endDateGenerate;
 };
 
-export const randomStatus = () => {
+export const randomStatus = (): Status => {
   const status: Status[] = ['IN_PROGRESS', 'NOT_STARTED', 'FIHISHED'];
   return status[Math.floor(Math.random() * status.length)] as Status;
 };
-export const randomNotificationStatus = () => {
+export const randomNotificationStatus = (): Status_Notification => {
   const status: Status_Notification[] = ['READ', 'UNREAD'];
   return status[
     Math.floor(Math.random() * status.length)
   ] as Status_Notification;
 };
 
-export const randomize = (ressource: Array<any>) =>
+export const randomize = (ressource: Array<any>): number =>
   Math.floor(Math.random() * ressource.length);
 
 export const logGenerated = ({
@@ -45,4 +45,4 @@ export const logGenerated = ({
 }: {
   entity: any[];
   name: string;
-}) => console.log(`✅ Generated ${entity.length} ${name} ...`);
+}): void => console.log(`✅ Generated ${entity.length} ${name} ...`);

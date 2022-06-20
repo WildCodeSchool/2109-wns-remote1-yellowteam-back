@@ -3,9 +3,13 @@ import 'reflect-metadata';
 import dotenv from 'dotenv';
 import { graphqlUploadExpress } from 'graphql-upload';
 import createServer from './server';
-import app from './app';
+import app, { httpServer } from './app';
+import limiter from './security/rateLimit';
 
 dotenv.config();
+
+process.on('warning', (e) => console.warn(e.stack));
+
 const { PORT } = process.env;
 
 (async () => {
@@ -14,6 +18,8 @@ const { PORT } = process.env;
   await server.start();
 
   app.use(graphqlUploadExpress());
+
+  app.use(limiter);
 
   server.applyMiddleware({
     app,
@@ -28,7 +34,7 @@ const { PORT } = process.env;
   };
 
   await new Promise((resolve) =>
-    app.listen(PORT || 4000, () => {
+    httpServer.listen(PORT || 4000, () => {
       resolve(serverStartLogs());
     })
   );

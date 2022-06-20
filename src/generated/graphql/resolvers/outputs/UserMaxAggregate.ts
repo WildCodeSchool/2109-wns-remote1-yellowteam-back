@@ -30,6 +30,16 @@ export class UserMaxAggregate {
   @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
+  phone_number!: string | null;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  cover_picture!: string | null;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
   password!: string | null;
 
   @TypeGraphQL.Field(_type => Boolean, {
