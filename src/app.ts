@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import whitelist from './constants/cors.whitelist';
 import { createServer } from 'http';
+import helmet from 'helmet';
 import restApi from './api';
 import errorHandler from './middlewares/errorHandler';
 import morgan from 'morgan';
@@ -33,6 +34,13 @@ const app = express();
 
 app.use(express.json());
 
+app.use(
+  helmet({
+    contentSecurityPolicy:
+      process.env.NODE_ENV === 'production' ? undefined : false,
+  })
+);
+=======
 app.use(express.static('public'));
 
 const whitelistedUrls = whitelist || [];
