@@ -36,8 +36,8 @@ const loginAuthorizationHeader = async (
 
   const { password, ...userWithoutPassword } = user;
 
-  ctx.res.setHeader('x-Authorization', `Bearer ${token}`);
-  ctx.res.setHeader('Access-Control-Allow-Credentials', 'true');
+  // ctx.res.setHeader('x-Authorization', `Bearer ${token}`);
+  // ctx.res.setHeader('Access-Control-Allow-Credentials', 'true');
 
   return userWithoutPassword;
 };
