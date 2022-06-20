@@ -17,7 +17,8 @@
     "migrate:postgres": "dotenv -e .env.test -- npx prisma migrate dev --name postgres-init && dotenv -e .env -- npx prisma migrate dev --name postgres-init",
     "reset:postgres": "dotenv -e .env.test -- npx prisma migrate reset -f && dotenv -e .env -- npx prisma migrate reset -f",
     "reset:tests": "dotenv -e .env.test  npx prisma migrate reset -f",
-    "studio:test": "dotenv -e .env.test -- npx prisma studio"
+    "studio:test": "dotenv -e .env.test -- npx prisma studio",
+    "heroku-postbuild": "npm run deploy"
   },
   "_moduleDirectories": [
     "src"
