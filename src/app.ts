@@ -14,7 +14,6 @@ import minioClient from './services/minioClient';
 // here we are scheduling a task to send log files to our cloud and delete them from the api folder
 
 cron.schedule('0 0 * * *', () => {
-  console.log('It is midnight, time to clean the logs');
   fs.readFile('access.txt', async (err, data) => {
     const file = await minioClient.putObject(
       'ytask',

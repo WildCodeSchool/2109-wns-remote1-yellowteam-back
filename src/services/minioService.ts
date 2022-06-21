@@ -37,7 +37,6 @@ export const minioService = {
       config.bucket,
       `profile_picture/${userId}/${previousFileName}`,
       async () => {
-        console.log(`${previousFileName} removed`);
         await minioClient.putObject(
           config.bucket,
           `${folder}/${userId}/${fileName}`,
