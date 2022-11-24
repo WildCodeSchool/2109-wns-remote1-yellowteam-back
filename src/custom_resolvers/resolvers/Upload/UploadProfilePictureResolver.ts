@@ -56,7 +56,7 @@ export class UploadProfilePicture {
 
       const updatedUser = await ctx.prisma.user.update({
         data: {
-          avatar: `https://minio-dc-s3.digitalcopilote.re/ytask/profile_picture/${userId}/${filename}`,
+          avatar: `https://${process.env.MINIO_ENDPOINT}/ytask/profile_picture/${userId}/${filename}`,
         },
         where: {
           id: userId as string,
